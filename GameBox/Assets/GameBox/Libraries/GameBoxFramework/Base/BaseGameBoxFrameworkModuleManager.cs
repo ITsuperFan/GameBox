@@ -5,9 +5,8 @@
 * Website: www.0x69h.com
 */
 
-
-
 using System;
+using System.Collections.Generic;
 
 namespace GameBoxFramework
 {
@@ -16,6 +15,11 @@ namespace GameBoxFramework
     /// </summary>
     public abstract class BaseGameBoxFrameworkModuleManager : IModuleManager
     {
+
+        /// <summary>
+        /// 抽象数据结构类型
+        /// </summary>
+        protected abstract IListDataStructure IListDataStructure { get; set; }
         /// <summary>
         /// 游戏世界的流逝时间
         /// </summary>
@@ -68,5 +72,6 @@ namespace GameBoxFramework
         /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
         /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
         public abstract void Destroy(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime);
+
     }
 }

@@ -16,20 +16,6 @@ namespace GameBoxFramework
 	{
 
         /// <summary>
-        /// 获取第一个节点数据
-        /// </summary>
-        /// <typeparam name="T">节点数据类型</typeparam>
-        /// <returns>返回的节点实例</returns>
-        T GetFirstNode<T>();
-
-        /// <summary>
-        /// 获取最后一个节点数据
-        /// </summary>
-        /// <typeparam name="T">节点数据类型</typeparam>
-        /// <returns>返回的节点实例</returns>
-        T GetLastNode<T>();
-
-        /// <summary>
         /// 添加数据节点
         /// </summary>
         /// <typeparam name="T">数据节点类型</typeparam>
@@ -48,13 +34,9 @@ namespace GameBoxFramework
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t_Node"></param>
-        void Remove<T>(Func<T, bool> t_Handler);
+        void RemoveNode<T>(Func<T, bool> t_Handler);
 
-        /// <summary>
-        /// 排序该数据结构
-        /// </summary>
-        /// <returns></returns>
-        IDataStructure Sort();
+
 
 	}
 }

@@ -5,14 +5,15 @@
 * Website: www.0x69h.com
 */
 
+using System;
+
 namespace GameBoxFramework
 {
     /// <summary>
     /// GameBoxFramework基础模块
     /// </summary>
-    public abstract class BaseGameBoxFrameworkModule 
+    public abstract class BaseGameBoxFrameworkModule : IComparable<BaseGameBoxFrameworkModule>
 	{
-
 
         /// <summary>
         /// 模块的权值
@@ -44,6 +45,14 @@ namespace GameBoxFramework
         /// </summary>
         protected abstract void OnDestroy(IModuleManager t_IModuleManager);
 
-
+        /// <summary>
+        /// 比较接口
+        /// </summary>
+        /// <param name="other">其他的模块</param>
+        /// <returns>比较后的结果</returns>
+        public int CompareTo(BaseGameBoxFrameworkModule other)
+        {
+            return this.Weight - other.Weight; //自身模块的权重 - 需要进行比较的模块的权重        
+        }
     }
 }

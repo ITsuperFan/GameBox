@@ -30,12 +30,6 @@ namespace GameBoxFramework
         /// </summary>
 		float RealWorldElapsedTime { get; }
 
-        ///// <summary>
-        ///// 数据结构类型
-        ///// </summary>
-        //IDataStructure IDataStructure { protected set; }
-
-
         /// <summary>
         /// 模块管家初始化
         /// </summary>
