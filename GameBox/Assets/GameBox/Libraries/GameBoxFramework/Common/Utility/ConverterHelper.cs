@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+* Copyright (c) 2008-2017 Mr-Alan, Inc.
+* Mail: Mr.Alan.China@gmail.com 
+* Mail: Mr.Alan.China@outlook.com
+* Website: www.0x69h.com
+*/
+
+using System;
 using System.Text;
 
 namespace GameBoxFramework.Utility
@@ -29,7 +36,7 @@ namespace GameBoxFramework.Utility
         {
             if (ScreenDpi <= 0)
             {
-                throw new BaseGameBoxFrameworkException("You must set screen DPI first.");
+                throw new GameBoxFrameworkException("You must set screen DPI first.");
             }
 
             return INCHES_TO_CENTIMETERS * pixels / ScreenDpi;
@@ -44,7 +51,7 @@ namespace GameBoxFramework.Utility
         {
             if (ScreenDpi <= 0)
             {
-                throw new BaseGameBoxFrameworkException("You must set screen DPI first.");
+                throw new GameBoxFrameworkException("You must set screen DPI first.");
             }
 
             return CENTIMETERS_TO_INCHES * centimeters * ScreenDpi;
@@ -59,7 +66,7 @@ namespace GameBoxFramework.Utility
         {
             if (ScreenDpi <= 0)
             {
-                throw new BaseGameBoxFrameworkException("You must set screen DPI first.");
+                throw new GameBoxFrameworkException("You must set screen DPI first.");
             }
 
             return pixels / ScreenDpi;
@@ -74,7 +81,7 @@ namespace GameBoxFramework.Utility
         {
             if (ScreenDpi <= 0)
             {
-                throw new BaseGameBoxFrameworkException("You must set screen DPI first.");
+                throw new GameBoxFrameworkException("You must set screen DPI first.");
             }
 
             return inches * ScreenDpi;
@@ -120,7 +127,7 @@ namespace GameBoxFramework.Utility
         {
             if (bytes == null)
             {
-                throw new BaseGameBoxFrameworkException("Bytes is invalid.");
+                throw new GameBoxFrameworkException("Bytes is invalid.");
             }
 
             return Encoding.UTF8.GetString(bytes, 0, bytes.Length);

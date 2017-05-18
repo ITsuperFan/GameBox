@@ -1,4 +1,11 @@
-﻿using System.IO;
+﻿/*
+* Copyright (c) 2008-2017 Mr-Alan, Inc.
+* Mail: Mr.Alan.China@gmail.com 
+* Mail: Mr.Alan.China@outlook.com
+* Website: www.0x69h.com
+*/
+
+using System.IO;
 
 namespace GameBoxFramework.Utility
 {
@@ -63,7 +70,7 @@ namespace GameBoxFramework.Utility
         {
             if (string.IsNullOrEmpty(resourceName))
             {
-                throw new BaseGameBoxFrameworkException("Resource name is invalid.");
+                throw new GameBoxFrameworkException("Resource name is invalid.");
             }
 
             return string.Format("{0}.dat", resourceName);
@@ -79,7 +86,7 @@ namespace GameBoxFramework.Utility
         {
             if (string.IsNullOrEmpty(resourceName))
             {
-                throw new BaseGameBoxFrameworkException("Resource name is invalid.");
+                throw new GameBoxFrameworkException("Resource name is invalid.");
             }
 
             return string.Format("{0}.{1:x8}.dat", resourceName, hashCode);
@@ -94,7 +101,7 @@ namespace GameBoxFramework.Utility
         {
             if (string.IsNullOrEmpty(directoryName))
             {
-                throw new BaseGameBoxFrameworkException("Directory name is invalid.");
+                throw new GameBoxFrameworkException("Directory name is invalid.");
             }
 
             try

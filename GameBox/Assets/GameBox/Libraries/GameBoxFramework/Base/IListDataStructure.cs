@@ -8,7 +8,7 @@
 
 namespace GameBoxFramework
 {
-    public interface IListDataStructure : IDataStructure
+    public interface IListDataStructure<T> : IDataStructure<T>
     {
 
         /// <summary>
@@ -16,27 +16,29 @@ namespace GameBoxFramework
         /// </summary>
         /// <typeparam name="T">节点数据类型</typeparam>
         /// <returns>返回的节点实例</returns>
-        T GetFirstNode<T>();
+        T GetFirstNode();
 
         /// <summary>
         /// 获取链表的最后一个节点数据
         /// </summary>
         /// <typeparam name="T">节点数据类型</typeparam>
         /// <returns>返回的节点实例</returns>
-        T GetLastNode<T>();
+        T GetLastNode();
 
         /// <summary>
         /// 排序该数据结构
         /// </summary>
         /// <returns></returns>
-        IListDataStructure Sort();
+        IListDataStructure<T> Sort();
 
         /// <summary>
         /// 转换成节点类型数组
         /// </summary>
         /// <typeparam name="T">节点类型</typeparam>
         /// <returns>返回节点类型数组</returns>
-        T[] ToArray<T>();
+        T[] ToArray();
+
+
 
     }
 }

@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+* Copyright (c) 2008-2017 Mr-Alan, Inc.
+* Mail: Mr.Alan.China@gmail.com 
+* Mail: Mr.Alan.China@outlook.com
+* Website: www.0x69h.com
+*/
+
+using System;
 
 namespace GameBoxFramework.Utility
 {
@@ -39,7 +46,7 @@ namespace GameBoxFramework.Utility
             int codeLength = code.Length;
             if (code == null || codeLength <= 0)
             {
-                throw new BaseGameBoxFrameworkException("Code is invalid.");
+                throw new GameBoxFrameworkException("Code is invalid.");
             }
 
             int codeIndex = 0;

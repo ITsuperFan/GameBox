@@ -12,14 +12,14 @@ namespace GameBoxFramework
     /// <summary>
     /// 数据结构接口
     /// </summary>
-    public interface IDataStructure 
+    public interface IDataStructure<T>
 	{
 
         /// <summary>
         /// 添加数据节点
         /// </summary>
         /// <typeparam name="T">数据节点类型</typeparam>
-        void AddNode<T>(T t_Node);
+        void AddNode(T t_Node);
 
         /// <summary>
         /// 获取数据节点
@@ -27,14 +27,14 @@ namespace GameBoxFramework
         /// <typeparam name="T">数据节点类型</typeparam>
         /// <param name="t_Handler">查询委托</param>
         /// <returns>返回数据节点实例</returns>
-        T GetNode<T>(Func<T,bool> t_Handler);
+        T GetNode(Func<T,bool> t_Handler);
 
         /// <summary>
         /// 删除数据节点
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t_Node"></param>
-        void RemoveNode<T>(Func<T, bool> t_Handler);
+        void RemoveNode(Func<T, bool> t_Handler);
 
 
 

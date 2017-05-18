@@ -5,24 +5,21 @@
 * Website: www.0x69h.com
 */
 
-
-
-using System;
 using System.Runtime.Serialization;
 
 namespace GameBoxFramework
-{     
+{
 
-        /// <summary>
-        /// 游戏框架异常类。
-        /// </summary>
-        [System.Serializable]
-        public class BaseGameBoxFrameworkException : Exception
-        {
+    /// <summary>
+    /// 游戏框架异常类。
+    /// </summary>
+    [System.Serializable]
+        public class GameBoxFrameworkException : BaseException
+    {
             /// <summary>
             /// 初始化游戏框架异常类的新实例。
             /// </summary>
-            public BaseGameBoxFrameworkException() : base()
+            public GameBoxFrameworkException() : base()
             {
 
             }
@@ -31,7 +28,7 @@ namespace GameBoxFramework
             /// 使用指定错误消息初始化游戏框架异常类的新实例。
             /// </summary>
             /// <param name="message">描述错误的消息。</param>
-            public BaseGameBoxFrameworkException(string message)
+            public GameBoxFrameworkException(string message)
                 : base(message)
             {
 
@@ -42,7 +39,7 @@ namespace GameBoxFramework
             /// </summary>
             /// <param name="message">解释异常原因的错误消息。</param>
             /// <param name="innerException">导致当前异常的异常。如果 innerException 参数不为空引用，则在处理内部异常的 catch 块中引发当前异常。</param>
-            public BaseGameBoxFrameworkException(string message, System.Exception innerException)
+            public GameBoxFrameworkException(string message, System.Exception innerException)
                 : base(message, innerException)
             {
 
@@ -53,7 +50,7 @@ namespace GameBoxFramework
             /// </summary>
             /// <param name="info">存有有关所引发异常的序列化的对象数据。</param>
             /// <param name="context">包含有关源或目标的上下文信息。</param>
-            protected BaseGameBoxFrameworkException(SerializationInfo info, StreamingContext context)
+            protected GameBoxFrameworkException(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
 

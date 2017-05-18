@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿/*
+* Copyright (c) 2008-2017 Mr-Alan, Inc.
+* Mail: Mr.Alan.China@gmail.com 
+* Mail: Mr.Alan.China@outlook.com
+* Website: www.0x69h.com
+*/
+
+using System.Collections.Generic;
 
 namespace GameBoxFramework.Utility
 {
@@ -7,38 +14,38 @@ namespace GameBoxFramework.Utility
     /// </summary>
     public static class TypeHelper
     {
-        private readonly static string[] AssemblyNames = { "Assembly-CSharp" };
+        private readonly static string[] m_AssemblyNames = { "Assembly-CSharp" };
 
         /// <summary>
         /// 获取指定基类的所有子类的名称。
         /// </summary>
-        /// <param name="typeBase">基类类型。</param>
+        /// <param name="t_TypeBase">基类类型。</param>
         /// <returns>指定基类的所有子类的名称。</returns>
-        public static string[] GetTypeNames(System.Type typeBase)
+        public static string[] GetTypeNames(System.Type t_TypeBase)
         {
-            List<string> typeNames = new List<string>();
+            List<string> t_TypeNames = new List<string>();
 
-            foreach (string assemblyName in AssemblyNames)
+            foreach (string t_AssemblyName in m_AssemblyNames)
             {
-                System.Reflection.Assembly assembly = System.Reflection.Assembly.Load(assemblyName);
-                if (assembly == null)
+                System.Reflection.Assembly t_Assembly = System.Reflection.Assembly.Load(t_AssemblyName);
+                if (t_Assembly == null)
                 {
                     continue;
                 }
 
-                System.Type[] types = assembly.GetTypes();
-                foreach (System.Type type in types)
+                System.Type[] t_Types = t_Assembly.GetTypes();
+                foreach (System.Type t_Type in t_Types)
                 {
-                    if (type.IsClass && !type.IsAbstract && typeBase.IsAssignableFrom(type))
+                    if (t_Type.IsClass && !t_Type.IsAbstract && t_TypeBase.IsAssignableFrom(t_Type))
                     {
-                        typeNames.Add(type.FullName);
+                        t_TypeNames.Add(t_Type.FullName);
                     }
                 }
             }
 
-            typeNames.Sort();
+            t_TypeNames.Sort();
 
-            return typeNames.ToArray();
+            return t_TypeNames.ToArray();
         }
     }
 }

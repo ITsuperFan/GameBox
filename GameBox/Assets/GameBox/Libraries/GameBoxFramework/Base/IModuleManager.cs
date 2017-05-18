@@ -29,7 +29,6 @@ namespace GameBoxFramework
         /// 真实世界的流逝时间
         /// </summary>
 		float RealWorldElapsedTime { get; }
-
         /// <summary>
         /// 模块管家初始化
         /// </summary>

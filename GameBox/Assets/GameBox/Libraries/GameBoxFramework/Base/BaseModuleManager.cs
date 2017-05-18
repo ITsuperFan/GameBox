@@ -13,13 +13,12 @@ namespace GameBoxFramework
     /// <summary>
     /// 获取模块管家
     /// </summary>
-    public abstract class BaseGameBoxFrameworkModuleManager : IModuleManager
+    public abstract class BaseModuleManager : IModuleManager
     {
-
         /// <summary>
         /// 抽象数据结构类型
         /// </summary>
-        protected abstract IListDataStructure IListDataStructure { get; set; }
+        protected abstract IListDataStructure<BaseModule> IListDataStructure { get; set; }
         /// <summary>
         /// 游戏世界的流逝时间
         /// </summary>

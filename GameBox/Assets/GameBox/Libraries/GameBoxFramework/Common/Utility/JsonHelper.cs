@@ -1,4 +1,11 @@
-﻿namespace GameBoxFramework.Utility
+﻿/*
+* Copyright (c) 2008-2017 Mr-Alan, Inc.
+* Mail: Mr.Alan.China@gmail.com 
+* Mail: Mr.Alan.China@outlook.com
+* Website: www.0x69h.com
+*/
+
+namespace GameBoxFramework.Utility
 {
     /// <summary>
     /// JSON 相关的实用函数。
@@ -15,7 +22,7 @@
         {
             if (jsonHelper == null)
             {
-                throw new BaseGameBoxFrameworkException("JSON helper is invalid.");
+                throw new GameBoxFrameworkException("JSON helper is invalid.");
             }
 
             s_JsonHelper = jsonHelper;
@@ -30,7 +37,7 @@
         {
             if (s_JsonHelper == null)
             {
-                throw new BaseGameBoxFrameworkException("JSON helper is invalid.");
+                throw new GameBoxFrameworkException("JSON helper is invalid.");
             }
 
             return s_JsonHelper.ToJson(obj);
@@ -56,7 +63,7 @@
         {
             if (s_JsonHelper == null)
             {
-                throw new BaseGameBoxFrameworkException("JSON helper is invalid.");
+                throw new GameBoxFrameworkException("JSON helper is invalid.");
             }
 
             return s_JsonHelper.ToObject<T>(json);

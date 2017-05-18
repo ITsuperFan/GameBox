@@ -1,4 +1,11 @@
-﻿namespace GameBoxFramework.Utility
+﻿/*
+* Copyright (c) 2008-2017 Mr-Alan, Inc.
+* Mail: Mr.Alan.China@gmail.com 
+* Mail: Mr.Alan.China@outlook.com
+* Website: www.0x69h.com
+*/
+
+namespace GameBoxFramework.Utility
 {
     /// <summary>
     /// 压缩解压缩相关的实用函数。
@@ -15,7 +22,7 @@
         {
             if (zipHelper == null)
             {
-                throw new BaseGameBoxFrameworkException("Zip helper is invalid.");
+                throw new GameBoxFrameworkException("Zip helper is invalid.");
             }
 
             s_ZipHelper = zipHelper;
@@ -30,7 +37,7 @@
         {
             if (s_ZipHelper == null)
             {
-                throw new BaseGameBoxFrameworkException("Zip helper is invalid.");
+                throw new GameBoxFrameworkException("Zip helper is invalid.");
             }
 
             return s_ZipHelper.Compress(bytes);
@@ -45,7 +52,7 @@
         {
             if (s_ZipHelper == null)
             {
-                throw new BaseGameBoxFrameworkException("Zip helper is invalid.");
+                throw new GameBoxFrameworkException("Zip helper is invalid.");
             }
 
             return s_ZipHelper.Decompress(bytes);
