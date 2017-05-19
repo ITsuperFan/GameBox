@@ -6,10 +6,37 @@
 */
 
 
+using System;
+
 namespace GameBoxFramework
 {
-    public interface IListDataStructure<T> : IDataStructure<T>
+    public interface IListDataStructure<T>
     {
+        /// <summary>
+        /// 添加数据节点
+        /// </summary>
+        /// <typeparam name="T">数据节点类型</typeparam>
+        void AddNode(T t_Node);
+
+        /// <summary>
+        /// 获取数据节点
+        /// </summary>
+        /// <typeparam name="T">数据节点类型</typeparam>
+        /// <param name="t_Handler">查询委托</param>
+        /// <returns>返回数据节点实例</returns>
+        T GetNode(Func<T, bool> t_Handler);
+
+        /// <summary>
+        /// 删除数据节点
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t_Node"></param>
+        void RemoveNode(Func<T, bool> t_Handler);
+
+        /// <summary>
+        /// 清除所有的数据节点
+        /// </summary>
+        void Clear();
 
         /// <summary>
         /// 获取链表的第一个节点数据

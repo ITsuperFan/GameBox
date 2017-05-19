@@ -97,5 +97,13 @@ namespace GameBoxFramework
         {
             return m_SLinkedList.ToArray(); //转换成System.Array
         }
+
+        /// <summary>
+        /// 清除所有的数据节点
+        /// </summary>
+        public void Clear()
+        {
+            m_SLinkedList.Clear();
+        }
     }
 }
