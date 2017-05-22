@@ -12,8 +12,35 @@ namespace GameBoxFramework
     /// <summary>
     /// GameBoxFramework的模块管家
     /// </summary>
-    public sealed class GameBoxFrameworkModuleManager : BaseModuleManager
+    public sealed class GameBoxFrameworkModuleManager : BaseModuleManager, IModuleManager
     {
+        /// <summary>
+        /// 管理的模块数量
+        /// </summary>
+        public int ModulesCount
+        {
+            get
+            {
+                return IListDataStructure.NodeCount;
+            }
+        }
+        /// <summary>
+        /// 所有模块的名字数组
+        /// </summary>
+        public string[] ModuleNames
+        {
+            get
+            {
+                string[] t_ModuleNames = new string[ModulesCount];
+                int t_Index=0;
+                var t_ModuleArray = IListDataStructure.ToArray();
+                for (int i = 0; i < ModulesCount; i++)
+                {
+                    t_ModuleNames[t_Index++] = t_ModuleArray[i].GetType().Name;
+                }
+                return t_ModuleNames;
+            }
+        }
         /// <summary>
         /// 默认构造方法
         /// </summary>
@@ -27,13 +54,12 @@ namespace GameBoxFramework
         public GameBoxFrameworkModuleManager(IListDataStructure<BaseModule> t_IListDataStructure): base(t_IListDataStructure)
         {
         }
-
         /// <summary>
         /// 获取管理的模块
         /// </summary>
         /// <typeparam name="T">模块的类型</typeparam>
         /// <returns>返回指定模块实例</returns>
-        public override T GetModule<T>()
+        public  T GetModule<T>() where T:class
         {
             Type t_InterfaceType = typeof(T);
             if (!t_InterfaceType.IsInterface) //如果不是接口
@@ -71,6 +97,7 @@ namespace GameBoxFramework
                 t_TargetModule.Weight++; //该模块权值刷新
                 IListDataStructure.Sort(); //重新排序模块，已确保权值高的模块优先被搜索到，提高效率
             }
+            //return (T)Convert.ChangeType(t_TargetModule,typeof(T)); //将 BaseModlue 转换成 模块对应的接口
             return t_TargetModule as T;
         }
         /// <summary>
@@ -78,7 +105,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
         /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public override void Init(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Init(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的初始化工作
             GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
@@ -89,7 +116,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
         /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public override void Start(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Start(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的被启动的时候
             GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
@@ -107,7 +134,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
         /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public override void Update(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Update(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的被轮询的时候
             GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
@@ -125,7 +152,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
         /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public override void Stop(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Stop(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的被停止的时候
             GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
@@ -143,7 +170,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
         /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public override void Destroy(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Destroy(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的被销毁的时候
             GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;

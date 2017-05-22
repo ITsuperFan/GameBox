@@ -7,18 +7,19 @@
 
 using System;
 using GameBoxFramework.Algorithms;
+using GameBoxFramework;
 
-namespace GameBoxFramework
+namespace GameBox
 {
-    public sealed class GameBoxFrameworkSLinkedList : IListDataStructure<BaseModule>
+    public sealed class ComponentManagerSLinkedList : IListDataStructure<BaseGameBoxComponent>
     {
         /// <summary>
         /// 单链表实例
         /// </summary>
-        private readonly SLinkedList<BaseModule> m_SLinkedList = new SLinkedList<BaseModule>();
+        private readonly SLinkedList<BaseGameBoxComponent> m_SLinkedList = new SLinkedList<BaseGameBoxComponent>();
 
         /// <summary>
-        /// 节点的数量
+        /// 节点数量
         /// </summary>
         public int NodeCount
         {
@@ -33,7 +34,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <typeparam name="T">节点数据类型</typeparam>
         /// <returns>返回的节点实例</returns>
-        public BaseModule GetFirstNode()
+        public BaseGameBoxComponent GetFirstNode()
         {
             return m_SLinkedList.First;
         }
@@ -42,7 +43,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <typeparam name="T">节点数据类型</typeparam>
         /// <returns>返回的节点实例</returns>
-        public BaseModule GetLastNode()
+        public BaseGameBoxComponent GetLastNode()
         {
             return m_SLinkedList.Last;
         }
@@ -50,7 +51,7 @@ namespace GameBoxFramework
         /// 添加数据节点
         /// </summary>
         /// <typeparam name="T">数据节点类型</typeparam>
-        public void AddNode(BaseModule t_Node)
+        public void AddNode(BaseGameBoxComponent t_Node)
         {
             m_SLinkedList.Append(t_Node);
         }
@@ -60,7 +61,7 @@ namespace GameBoxFramework
         /// <typeparam name="T">数据节点类型</typeparam>
         /// <param name="t_Handler">查询委托</param>
         /// <returns>返回数据节点实例</returns>
-        public BaseModule GetNode(Func<BaseModule, bool> t_Handler)
+        public BaseGameBoxComponent GetNode(Func<BaseGameBoxComponent, bool> t_Handler)
         {
             var t_ToList = m_SLinkedList.ToList(); //转换成System.List
             for (int i = 0; i < t_ToList.Count; i++)
@@ -78,7 +79,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="t_Node"></param>
-        public void RemoveNode(Func<BaseModule, bool> t_Handler)
+        public void RemoveNode(Func<BaseGameBoxComponent, bool> t_Handler)
         {
             var t_ToList = m_SLinkedList.ToList(); //转换成System.List
             for (int i = 0; i < t_ToList.Count; i++)
@@ -94,7 +95,7 @@ namespace GameBoxFramework
         /// 排序该数据结构
         /// </summary>
         /// <returns></returns>
-        public IListDataStructure<BaseModule> Sort()
+        public IListDataStructure<BaseGameBoxComponent> Sort()
         {
             m_SLinkedList.SelectionSort(); //选择排序
             return this;
@@ -104,7 +105,7 @@ namespace GameBoxFramework
         /// </summary>
         /// <typeparam name="T">节点类型</typeparam>
         /// <returns>返回节点类型数组</returns>
-        public BaseModule[] ToArray()
+        public BaseGameBoxComponent[] ToArray()
         {
             return m_SLinkedList.ToArray(); //转换成System.Array
         }

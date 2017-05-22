@@ -17,6 +17,11 @@ namespace GameBoxFramework
     public interface IMapDataStructure<TKey,TValue>
     {
         /// <summary>
+        /// 映射表数量
+        /// </summary>
+        int Count { get; }
+
+        /// <summary>
         /// 添加映射
         /// </summary>
         /// <param name="t_TKey"></param>

@@ -20,13 +20,12 @@ namespace GameBoxFramework.Runtime.FSM
         /// <summary>
         /// 创建状态机
         /// </summary>
-        /// <param name="t_IFSMOwner">状态机的持有者</param>
         /// <param name="t_FSMName">状态机的名字</param>
         /// <param name="t_FSMStates">状态机的状态</param>
         /// <returns>创建出来的状态机实例</returns>
-        public FSM CreateFSM(IFSMOwner t_IFSMOwner, string t_FSMName, params FSMState[] t_FSMStates)
+        public FSM CreateFSM( string t_FSMName, params FSMState[] t_FSMStates)
         {
-            var t_FSM = new FSM(t_IFSMOwner, t_FSMName, t_FSMStates);
+            var t_FSM = new FSM(this, t_FSMName, t_FSMStates);
             IListDataStructure.AddNode(t_FSM);
             var t_FSMArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_FSMArray.Length; i++)

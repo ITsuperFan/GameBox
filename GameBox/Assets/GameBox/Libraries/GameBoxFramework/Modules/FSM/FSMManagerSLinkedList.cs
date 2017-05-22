@@ -18,6 +18,17 @@ namespace GameBoxFramework.Runtime.FSM
         private readonly SLinkedList<FSM> m_SLinkedList = new SLinkedList<FSM>();
 
         /// <summary>
+        /// 节点数量
+        /// </summary>
+        public int NodeCount
+        {
+            get
+            {
+                return m_SLinkedList.Count;
+            }
+        }
+
+        /// <summary>
         /// 获取链表的第一个节点数据
         /// </summary>
         /// <typeparam name="T">节点数据类型</typeparam>

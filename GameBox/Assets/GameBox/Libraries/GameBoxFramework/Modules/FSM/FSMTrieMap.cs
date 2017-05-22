@@ -20,6 +20,17 @@ namespace GameBoxFramework.Runtime.FSM
         private readonly TrieMap<TValue> m_TrieMap = new TrieMap<TValue>();
 
         /// <summary>
+        /// 映射表数量
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                return m_TrieMap.Count;
+            }
+        }
+
+        /// <summary>
         /// 添加
         /// </summary>
         /// <param name="t_TKey"></param>

@@ -13,6 +13,7 @@ namespace GameBoxFramework
 {
     public sealed class StateOne : FSMState
     {
+
         protected override void StateInit(IFSM t_FSMOwner) { }
         protected override void StateEnter(IFSM t_FSMOwner) { }
         protected override void StateLoop(IFSM t_FSMOwner) { UnityEngine.Debug.Log("Loop..."); }

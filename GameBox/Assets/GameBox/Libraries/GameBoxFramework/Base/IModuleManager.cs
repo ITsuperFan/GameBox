@@ -56,6 +56,6 @@ namespace GameBoxFramework
         /// </summary>
         /// <typeparam name="T">模块的类型</typeparam>
         /// <returns>返回指定模块实例</returns>
-        T GetModule<T>() where T : class;
+        T GetModule<T>() where T:class;
     }
 }

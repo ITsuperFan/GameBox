@@ -13,6 +13,11 @@ namespace GameBoxFramework
     public interface IListDataStructure<T>
     {
         /// <summary>
+        /// 节点的数量
+        /// </summary>
+        int NodeCount { get; }
+
+        /// <summary>
         /// 添加数据节点
         /// </summary>
         /// <typeparam name="T">数据节点类型</typeparam>

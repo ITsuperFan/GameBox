@@ -14,6 +14,22 @@ namespace GameBoxFramework.Runtime.FSM
     /// </summary>
     public abstract class FSMState : BaseFSMState
     {
+        /// <summary>
+        /// 默认构造方法
+        /// </summary>
+        public FSMState() : base()
+        {
+
+        }
+        /// <summary>
+        /// 初始化状态名字的构造方法
+        /// </summary>
+        /// <param name="t_StateName"></param>
+        public FSMState(string t_StateName) : base(t_StateName)
+        {
+
+        }
+
         //GBF层用的状态处理方法，GBF驱动
         protected internal override void OnStateInit(IFSM t_FSMOwner)
         {
