@@ -5,15 +5,15 @@
 * Website: www.0x69h.com
 */
 
-using System;
 
-namespace GameBoxFramework
+namespace GameBoxFramework.Runtime.FSM
 {
     /// <summary>
-    /// GBF的基础事件参数
+    /// 状态机的持有者接口
     /// </summary>
-    public abstract class BaseGameBoxFrameworkEventArgs : EventArgs
-    {
-       
+	public interface IFSMOwner
+	{
+
+
     }
 }

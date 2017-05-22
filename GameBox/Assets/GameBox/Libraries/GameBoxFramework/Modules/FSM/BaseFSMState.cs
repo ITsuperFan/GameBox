@@ -11,35 +11,71 @@ namespace GameBoxFramework.Runtime.FSM
     /// <summary>
     /// 状态抽象类
     /// </summary>
-    public abstract class BaseFSMState  
-	{
-        /// <summary>
-        /// 该状态总的流逝时间
-        /// </summary>
-        public abstract float StateTime { get; protected set; }
+    public abstract class BaseFSMState
+    {
         /// <summary>
         /// 构造方法
         /// </summary>
-        public BaseFSMState()
+        public BaseFSMState() : this(null)
         {
-            StateInit(); //状态的初始化
+
         }
+
+        /// <summary>
+        /// 初始化状态名字的构造方法
+        /// </summary>
+        /// <param name="t_StateName"></param>
+        public BaseFSMState(string t_StateName)
+        {
+            StateName = t_StateName ?? string.Empty;
+        }
+
+        /// <summary>
+        /// 状态名字
+        /// </summary>
+        protected internal readonly string StateName;
+
+        /// <summary>
+        /// 该状态总的流逝时间
+        /// </summary>
+        public  float StateTotalGameWorldTime { get; protected internal set; }
+
+        /// <summary>
+        /// 处于该状态的流逝时间
+        /// </summary>
+        public  float StateGameWorldTime { get; protected internal set; }
+
+        /// <summary>
+        /// 该状态总的流逝时间
+        /// </summary>
+        public  float StateTotalRealWorldTime { get; protected internal set; }
+
+        /// <summary>
+        /// 处于该状态的流逝时间
+        /// </summary>
+        public  float StateRealWorldTime { get; protected internal set; }
+
+
         /// <summary>
         /// 初始化状态
         /// </summary>
-        protected internal abstract void StateInit();
+        protected internal abstract void OnStateInit(IFSM t_FSMOwner);
         /// <summary>
         /// 进入状态
         /// </summary>
-        protected internal abstract void StateEnter();
+        protected internal abstract void OnStateEnter(IFSM t_FSMOwner);
         /// <summary>
         /// 轮训状态
         /// </summary>
-        protected internal abstract void StateLoop();
+        protected internal abstract void OnStateLoop(IFSM t_FSMOwner);
         /// <summary>
         /// 退出状态
         /// </summary>
-        protected internal abstract void StateExit();
+        protected internal abstract void OnStateExit(IFSM t_FSMOwner);
+        /// <summary>
+        /// 销毁状态
+        /// </summary>
+        protected internal abstract void OnStateDestroy(IFSM t_FSMOwner);
 
     }
 }

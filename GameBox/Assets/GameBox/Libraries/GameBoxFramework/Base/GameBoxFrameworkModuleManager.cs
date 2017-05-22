@@ -15,24 +15,19 @@ namespace GameBoxFramework
     public sealed class GameBoxFrameworkModuleManager : BaseModuleManager
     {
         /// <summary>
-        /// 数据结构类型
-        /// </summary>
-        protected override IListDataStructure<BaseModule> IListDataStructure { get; set; }
-        /// <summary>
         /// 默认构造方法
         /// </summary>
-        public GameBoxFrameworkModuleManager()
+        public GameBoxFrameworkModuleManager():base()
         {
-            IListDataStructure = new GameBoxFrameworkSLinkedList();
         }
         /// <summary>
         /// 初始化 IListDataStructure 接口的构造方法
         /// </summary>
         /// <param name="t_IListDataStructure"></param>
-        public GameBoxFrameworkModuleManager(IListDataStructure<BaseModule> t_IListDataStructure)
+        public GameBoxFrameworkModuleManager(IListDataStructure<BaseModule> t_IListDataStructure): base(t_IListDataStructure)
         {
-            IListDataStructure = t_IListDataStructure;
         }
+
         /// <summary>
         /// 获取管理的模块
         /// </summary>
@@ -86,8 +81,8 @@ namespace GameBoxFramework
         public override void Init(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的初始化工作
-            GameWorldElapsedTime = t_GameWorldElapsedTime;
-            RealWorldElapsedTime = t_RealWorldElapsedTime;
+            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
+            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
         }
         /// <summary>
         /// 模块管家启动
@@ -97,8 +92,8 @@ namespace GameBoxFramework
         public override void Start(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的被启动的时候
-            GameWorldElapsedTime = t_GameWorldElapsedTime;
-            RealWorldElapsedTime = t_RealWorldElapsedTime;
+            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
+            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
 
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)
@@ -115,8 +110,8 @@ namespace GameBoxFramework
         public override void Update(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的被轮询的时候
-            GameWorldElapsedTime = t_GameWorldElapsedTime;
-            RealWorldElapsedTime = t_RealWorldElapsedTime;
+            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
+            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
 
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)
@@ -133,8 +128,8 @@ namespace GameBoxFramework
         public override void Stop(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的被停止的时候
-            GameWorldElapsedTime = t_GameWorldElapsedTime;
-            RealWorldElapsedTime = t_RealWorldElapsedTime;
+            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
+            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
 
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)
@@ -151,8 +146,8 @@ namespace GameBoxFramework
         public override void Destroy(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
             //TODO: 模块管家的被销毁的时候
-            GameWorldElapsedTime = t_GameWorldElapsedTime;
-            RealWorldElapsedTime = t_RealWorldElapsedTime;
+            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
+            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
 
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)

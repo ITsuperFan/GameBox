@@ -18,15 +18,25 @@ namespace GameBoxFramework
         /// <summary>
         /// 抽象数据结构类型
         /// </summary>
-        protected abstract IListDataStructure<BaseModule> IListDataStructure { get; set; }
+        protected readonly IListDataStructure<BaseModule> IListDataStructure;
+
         /// <summary>
-        /// 游戏世界的流逝时间
+        /// 默认构造方法
         /// </summary>
-        public float GameWorldElapsedTime { get; protected set; }
+        public BaseModuleManager():this(new GameBoxFrameworkSLinkedList())
+        {
+        }
         /// <summary>
-        /// 真实世界的流逝时间
+        /// 初始化 IListDataStructure 接口的构造方法
         /// </summary>
-        public float RealWorldElapsedTime { get; protected set; }
+        /// <param name="t_IListDataStructure"></param>
+        public BaseModuleManager(IListDataStructure<BaseModule> t_IListDataStructure)
+        {
+            IListDataStructure = t_IListDataStructure;
+        }
+
+
+
         /// <summary>
         /// 管理的模块数量
         /// </summary>

@@ -22,14 +22,6 @@ namespace GameBoxFramework
         /// </summary>
         string[] ModuleNames { get; }
         /// <summary>
-        /// 游戏世界的流逝时间
-        /// </summary>
-        float GameWorldElapsedTime { get; }
-        /// <summary>
-        /// 真实世界的流逝时间
-        /// </summary>
-		float RealWorldElapsedTime { get; }
-        /// <summary>
         /// 模块管家初始化
         /// </summary>
         /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>

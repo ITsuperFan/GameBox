@@ -5,15 +5,12 @@
 * Website: www.0x69h.com
 */
 
-
 namespace GameBoxFramework.Runtime.FSM
 {
-    /// <summary>
-    /// 状态机的持有者
-    /// </summary>
-    public interface IFSMOwner  
-	{
-
-		
-	}
+    public sealed class FSMEventArgs : GameBoxFrameworkEventArgs
+    {
+        public IFSM IFSM;
+        public BaseFSMState LastState;
+        public BaseFSMState State;
+    }
 }
