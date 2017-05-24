@@ -31,14 +31,13 @@ namespace GameBoxFramework
         {
             get
             {
-                string[] t_ModuleNames = new string[ModulesCount];
-                int t_Index=0;
                 var t_ModuleArray = IListDataStructure.ToArray();
-                for (int i = 0; i < ModulesCount; i++)
+                string[] t_ModuleNames = new string[t_ModuleArray.Length];
+                for (int i = 0; i < t_ModuleArray.Length; i++)
                 {
-                    t_ModuleNames[t_Index++] = t_ModuleArray[i].GetType().Name;
+                    t_ModuleNames[i] = t_ModuleArray[i].GetType().Name;
                 }
-                return t_ModuleNames;
+                return 0 < t_ModuleArray.Length ? t_ModuleNames : null;
             }
         }
         /// <summary>

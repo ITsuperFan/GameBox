@@ -8,6 +8,7 @@
 
 
 using GameBoxFramework;
+using UnityEngine;
 
 namespace GameBox.Extension
 {
@@ -16,12 +17,21 @@ namespace GameBox.Extension
         /// <summary>
         /// 获取系统内置模块
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static T GetBuiltInModule<T>(this UnityEngine.GameObject t_GameObject) where T : class
+        /// <typeparam name="T">GameObject</typeparam>
+        /// <returns>BuiltInModule</returns>
+        public static T GetBuiltInModule<T>(this GameObject t_T) where T : class
         {
             return GameBoxEntry.GetBuiltInModule<T>();
         }
 
+        /// <summary>
+        /// 获取系统内置模块
+        /// </summary>
+        /// <typeparam name="T">Transform</typeparam>
+        /// <returns>BuiltInModule</returns>
+        public static T GetBuiltInModule<T>(this Transform t_T) where T : class
+        {
+            return t_T.gameObject.GetBuiltInModule<T>();
+        }
     }
 }

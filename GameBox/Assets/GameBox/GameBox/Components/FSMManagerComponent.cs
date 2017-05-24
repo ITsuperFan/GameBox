@@ -8,6 +8,7 @@
 
 
 using GameBoxFramework.Runtime.FSM;
+using GameBoxFramework;
 
 namespace GameBox.Runtime.Component
 {
@@ -17,10 +18,11 @@ namespace GameBox.Runtime.Component
         protected override void Awake()
         {
             base.Awake();
+
             m_IFSMManager = GameBoxEntry.GetBuiltInModule<IFSMManager>();
             if (null==m_IFSMManager)
             {
-                UnityEngine.Debug.Log("IFSMManager是无效的.");
+               throw new GameBoxFrameworkException("IFSMManager是无效的.");
             }
         }
 

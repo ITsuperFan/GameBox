@@ -17,6 +17,7 @@ namespace GameBoxFramework.Runtime.FSM
         /// 抽象数据结构类型
         /// </summary>
         private readonly IListDataStructure<FSM> IListDataStructure = new FSMManagerSLinkedList();
+
         /// <summary>
         /// 创建状态机
         /// </summary>
@@ -26,15 +27,11 @@ namespace GameBoxFramework.Runtime.FSM
         public FSM CreateFSM( string t_FSMName, params FSMState[] t_FSMStates)
         {
             var t_FSM = new FSM(this, t_FSMName, t_FSMStates);
+            t_FSM.IsRunning = true;
             IListDataStructure.AddNode(t_FSM);
-            var t_FSMArray = IListDataStructure.ToArray();
-            for (int i = 0; i < t_FSMArray.Length; i++)
-            {
-                if (null != t_FSMArray[i])
-                    t_FSMArray[i].IsRunning = true;
-            }
             return t_FSM;
         }
+
         /// <summary>
         /// 获取状态机
         /// </summary>
@@ -44,6 +41,7 @@ namespace GameBoxFramework.Runtime.FSM
         {
            return IListDataStructure.GetNode(fsm=>fsm.m_FSMName == t_FSMName);
         }
+
         /// <summary>
         /// 移除状态机
         /// </summary>
@@ -62,6 +60,7 @@ namespace GameBoxFramework.Runtime.FSM
         {
            
         }
+
         /// <summary>
         /// 模块被启动的时候调用
         /// </summary>
@@ -69,6 +68,7 @@ namespace GameBoxFramework.Runtime.FSM
         {
 
         }
+
         /// <summary>
         /// 模块被轮询的时候调用
         /// </summary>
@@ -79,8 +79,13 @@ namespace GameBoxFramework.Runtime.FSM
             {
                 if (null != t_FSMArray[i])
                     t_FSMArray[i].OnUpdate(this);
+
+               
             }
+           
+
         }
+
         /// <summary>
         /// 模块被停止的时候调用
         /// </summary>
@@ -93,6 +98,7 @@ namespace GameBoxFramework.Runtime.FSM
                     t_FSMArray[i].IsRunning = false;
             }
         }
+
         /// <summary>
         /// 模块被销毁前调用
         /// </summary>

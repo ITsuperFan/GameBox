@@ -116,5 +116,16 @@ namespace GameBoxFramework
         {
             m_SLinkedList.Clear();
         }
+
+        /// <summary>
+        /// 是否包含该节点
+        /// </summary>
+        /// <param name="t_Value"></param>
+        /// <returns></returns>
+        public bool Contains(BaseModule t_Value)
+        {
+            var t_ToList = m_SLinkedList.ToList(); //转换成System.List
+            return t_ToList.Contains(t_Value);
+        }
     }
 }

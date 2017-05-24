@@ -10,12 +10,12 @@ using System.Runtime.Serialization;
 namespace GameBoxFramework
 {
 
-    /// <summary>
+        /// <summary>
     /// 游戏框架异常类。
     /// </summary>
-    [System.Serializable]
+        [System.Serializable]
         public class GameBoxFrameworkException : BaseException
-    {
+        {
             /// <summary>
             /// 初始化游戏框架异常类的新实例。
             /// </summary>

@@ -13,6 +13,7 @@ namespace GameBox
 {
     public static class GameBoxEntry
     {
+
         /// <summary>
         /// 版本号
         /// </summary>
@@ -24,6 +25,11 @@ namespace GameBox
         public static readonly IModuleManager GameBoxModuleManager = new GameBoxFrameworkModuleManager();
 
         /// <summary>
+        /// 游戏扩展组件管家
+        /// </summary>
+        public static readonly IComponentManager GameBoxComponentManager = new GameBoxComponentManager();
+
+        /// <summary>
         /// 获取系统内置模块
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -33,9 +39,48 @@ namespace GameBox
             return GameBoxModuleManager.GetModule<T>();
         }
 
+        /// <summary>
+        /// 获取GameBox扩展组件
+        /// </summary>
+        /// <typeparam name="T">GameBox组件类型</typeparam>
+        /// <returns>返回指定组件类型的搜索第一个实例</returns>
+        public static T GetComponent<T>() where T : BaseGameBoxComponent
+        {
+            return GameBoxComponentManager.GetComponent<T>();
+        }
 
+        /// <summary>
+        /// 获取GameBox扩展组件数组
+        /// </summary>
+        /// <typeparam name="T">GameBox组件类型</typeparam>
+        /// <returns>返回指定组件类型的搜索所有实例</returns>
+        public static T[] GetComponents<T>() where T : BaseGameBoxComponent
+        {
+            return GameBoxComponentManager.GetComponents<T>();
+        }
+       
+        /// <summary>
+        /// 注册GameBox的组件
+        /// </summary>
+        /// <typeparam name="T">GameBox的组件类型</typeparam>
+        /// <returns>返回GamBox的组件</returns>
+        public static void RegisterComponent(BaseGameBoxComponent t_BaseGameBoxComponent)
+        {
+            GameBoxComponentManager.RegisterComponent(t_BaseGameBoxComponent);
+        }
 
-
+        /// <summary>
+        /// 销毁指定的所有GameBox的组件
+        /// </summary>
+        /// <typeparam name="T">GameBox的组件类型</typeparam>
+        /// <returns>返回GamBox的组件</returns>
+        public static void DestroyComponent(BaseGameBoxComponent t_BaseGameBoxComponent)
+        {
+            GameBoxComponentManager.DestroyComponent(t_BaseGameBoxComponent);
+        }
 
     }
+
+
+
 }

@@ -18,6 +18,13 @@ namespace GameBoxFramework
         int NodeCount { get; }
 
         /// <summary>
+        /// 是否包含该节点
+        /// </summary>
+        /// <param name="t_Value"></param>
+        /// <returns></returns>
+        bool Contains(T t_Value);
+
+        /// <summary>
         /// 添加数据节点
         /// </summary>
         /// <typeparam name="T">数据节点类型</typeparam>
@@ -37,6 +44,7 @@ namespace GameBoxFramework
         /// <typeparam name="T"></typeparam>
         /// <param name="t_Node"></param>
         void RemoveNode(Func<T, bool> t_Handler);
+
 
         /// <summary>
         /// 清除所有的数据节点

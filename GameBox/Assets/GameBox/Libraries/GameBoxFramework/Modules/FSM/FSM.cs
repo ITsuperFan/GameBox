@@ -52,11 +52,13 @@ namespace GameBoxFramework.Runtime.FSM
 
             protected internal set
             {
-                if (value == isRunning) return;
+                if (value == isRunning) return; //防止同一个方法被多次调用
+                isRunning = value;
                 if (value) //如果设置在运行调用OnStart方法
                     OnStart(t_IFSMOwner);
                 else //如果设置不在运行调用OnStart方法
                     OnStop(t_IFSMOwner);
+
             }
         }
 
@@ -211,10 +213,16 @@ namespace GameBoxFramework.Runtime.FSM
         {
             if (IsRunning)
             {
+                if (null == m_TempState) throw new GameBoxFrameworkException(string.Format("状态机 {0} 没有被赋予初始状态！",m_FSMName));
+
                 if (!m_TempState.Equals(State)) //如果当前的临时状态和当前状态不是处于一个状态，那么状态已经被更改了
                 {
-                    State.OnStateExit(this); //上一个状态 退出
-                    LastState = State;   //保存上一个状态
+                    if (null != State) //如果当前状态已经被初始化
+                    {
+                        State.OnStateExit(this); //上一个状态 退出
+                        LastState = State;   //保存上一个状态
+                    }
+
                     State = m_TempState; //更新当前状态
                     if (null != StateChangedEventHandler)
                         StateChangedEventHandler(new FSMEventArgs() { IFSM = this, LastState = LastState, State = State }); //事件通知
