@@ -5,10 +5,6 @@
 * Website: www.0x69h.com
 */
 
-
-
-using System;
-
 namespace GameBoxFramework.Runtime.FSM
 {
     public sealed class FSMManager : BaseModule, IFSMManager, IFSMOwner
@@ -24,10 +20,11 @@ namespace GameBoxFramework.Runtime.FSM
         /// <param name="t_FSMName">状态机的名字</param>
         /// <param name="t_FSMStates">状态机的状态</param>
         /// <returns>创建出来的状态机实例</returns>
-        public FSM CreateFSM( string t_FSMName, params FSMState[] t_FSMStates)
+        public IFSM CreateFSM( string t_FSMName, params FSMState[] t_FSMStates)
         {
             var t_FSM = new FSM(this, t_FSMName, t_FSMStates);
-            t_FSM.IsRunning = true;
+            t_FSM.OnInit(this);
+            t_FSM.OnStart(this);
             IListDataStructure.AddNode(t_FSM);
             return t_FSM;
         }
@@ -37,7 +34,7 @@ namespace GameBoxFramework.Runtime.FSM
         /// </summary>
         /// <param name="t_FSMName">状态机的名字</param>
         /// <returns>获取到的状态机实例</returns>
-        public FSM GetFSM(string t_FSMName)
+        public IFSM GetFSM(string t_FSMName)
         {
            return IListDataStructure.GetNode(fsm=>fsm.m_FSMName == t_FSMName);
         }
@@ -49,7 +46,9 @@ namespace GameBoxFramework.Runtime.FSM
         /// <returns>返回状态机管家接口</returns>
         public IFSMManager RemoveFSM(string t_FSMName)
         {
-            IListDataStructure.RemoveNode(fsm=>fsm.m_FSMName==t_FSMName);
+            var t_FSM =  IListDataStructure.GetNode(fsm => fsm.m_FSMName == t_FSMName);
+            t_FSM.OnDestroy(this);
+            IListDataStructure.RemoveNode(fsm => fsm.m_FSMName == t_FSMName);
             return this;
         }
 
@@ -58,6 +57,7 @@ namespace GameBoxFramework.Runtime.FSM
         /// </summary>
         protected internal override void OnInit(IModuleManager t_IModuleManager)
         {
+            //TODO:模块初始化时候的一些操作
            
         }
 
@@ -66,7 +66,14 @@ namespace GameBoxFramework.Runtime.FSM
         /// </summary>
         protected internal override void OnStart(IModuleManager t_IModuleManager)
         {
+            //TODO:模块启动时候的一些操作
 
+            var t_FSMArray = IListDataStructure.ToArray();
+            for (int i = 0; i < t_FSMArray.Length; i++)
+            {
+                if (null != t_FSMArray[i] && false == t_FSMArray[i].IsRunning) //如果该状态机的状态为不运行状态，那么去调用状态机的启动方法
+                    t_FSMArray[i].OnStart(this);
+            }
         }
 
         /// <summary>
@@ -79,11 +86,7 @@ namespace GameBoxFramework.Runtime.FSM
             {
                 if (null != t_FSMArray[i])
                     t_FSMArray[i].OnUpdate(this);
-
-               
             }
-           
-
         }
 
         /// <summary>
@@ -95,7 +98,7 @@ namespace GameBoxFramework.Runtime.FSM
             for (int i = 0; i < t_FSMArray.Length; i++)
             {
                 if (null != t_FSMArray[i])
-                    t_FSMArray[i].IsRunning = false;
+                    t_FSMArray[i].OnStop(this);
             }
         }
 
@@ -108,8 +111,10 @@ namespace GameBoxFramework.Runtime.FSM
             for (int i = 0; i < t_FSMArray.Length; i++)
             {
                 if (null != t_FSMArray[i])
-                    t_FSMArray[i].IsRunning = false;
+                    t_FSMArray[i].OnDestroy(this);
             }
         }
+
+
     }
 }

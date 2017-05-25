@@ -59,23 +59,23 @@ namespace GameBoxFramework.Runtime.FSM
         /// <summary>
         /// 初始化状态
         /// </summary>
-        protected internal abstract void OnStateInit(IFSM t_FSMOwner);
+        protected internal abstract void OnStateInit(IFSM t_StateOwner);
         /// <summary>
         /// 进入状态
         /// </summary>
-        protected internal abstract void OnStateEnter(IFSM t_FSMOwner);
+        protected internal abstract void OnStateEnter(IFSM t_StateOwner);
         /// <summary>
         /// 轮训状态
         /// </summary>
-        protected internal abstract void OnStateLoop(IFSM t_FSMOwner);
+        protected internal abstract void OnStateLoop(IFSM t_StateOwner);
         /// <summary>
         /// 退出状态
         /// </summary>
-        protected internal abstract void OnStateExit(IFSM t_FSMOwner);
+        protected internal abstract void OnStateExit(IFSM t_StateOwner);
         /// <summary>
         /// 销毁状态
         /// </summary>
-        protected internal abstract void OnStateDestroy(IFSM t_FSMOwner);
+        protected internal abstract void OnStateDestroy(IFSM t_StateOwner);
 
     }
 }

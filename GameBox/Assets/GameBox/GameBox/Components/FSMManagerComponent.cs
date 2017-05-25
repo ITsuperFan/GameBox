@@ -28,12 +28,12 @@ namespace GameBox.Runtime.Component
 
         #region 组件功能
 
-            public FSM CreateFSM(string t_FSMName, params FSMState[] t_FSMStates)
+            public IFSM CreateFSM(string t_FSMName, params FSMState[] t_FSMStates)
             {
                 return m_IFSMManager.CreateFSM(t_FSMName, t_FSMStates);
             }
 
-            public FSM GetFSM(string t_FSMName)
+            public IFSM GetFSM(string t_FSMName)
             {
                 return m_IFSMManager.GetFSM(t_FSMName);
             }

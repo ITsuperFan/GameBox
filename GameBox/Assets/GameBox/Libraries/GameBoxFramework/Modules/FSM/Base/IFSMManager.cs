@@ -20,14 +20,14 @@ namespace GameBoxFramework.Runtime.FSM
         /// <param name="t_FSMName">状态机的名字</param>
         /// <param name="t_FSMStates">状态机的状态</param>
         /// <returns>创建出来的状态机实例</returns>
-        FSM CreateFSM(string t_FSMName,params FSMState[] t_FSMStates);
+        IFSM CreateFSM(string t_FSMName,params FSMState[] t_FSMStates);
 
         /// <summary>
         /// 获取状态机
         /// </summary>
         /// <param name="t_FSMName">状态机的名字</param>
         /// <returns>获取到的状态机实例</returns>
-        FSM GetFSM(string t_FSMName);
+        IFSM GetFSM(string t_FSMName);
 
         /// <summary>
         /// 移除状态机

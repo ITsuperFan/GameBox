@@ -17,15 +17,19 @@ namespace Alan
     public class FSMDemo : MonoBehaviour 
 	{
         private FSMManagerComponent m_FSMManager;
-        private FSM m_FSM;
+        private IFSM m_IFSM;
 
         private void Start()
         {
-          //  yield return new WaitForSeconds(2f);
+            //  yield return new WaitForSeconds(2f);
 
-            m_FSMManager = GameBoxEntry.GetComponent<FSMManagerComponent>();
-            m_FSM = m_FSMManager.CreateFSM("Demo", new StateOne(),new StateTwo()); //创建一个状态机
-            m_FSM.ChangeState<StateOne>(); //初始状态
+            m_FSMManager = GameBoxEntry.GetComponent<FSMManagerComponent>(); //获取状态机管家组件
+            m_IFSM = m_FSMManager.CreateFSM("Demo"); //创建一个状态机
+            m_IFSM.AddState<StateOne>();
+            m_IFSM.AddState(typeof(StateTwo));
+            m_IFSM.AddCondition<ConditionOne>();
+            m_IFSM.AddCondition<ConditionTwo>();
+            m_IFSM.ChangeState<StateOne>(); //初始状态
 
         }
 
@@ -33,12 +37,17 @@ namespace Alan
         {
             if (GUILayout.Button("ChangeState StateOne"))
             {
-                m_FSM.ChangeState<StateOne>();
+                m_IFSM.ChangeState<StateOne>();
             }
 
             if (GUILayout.Button("ChangeState StateTwo"))
             {
-                m_FSM.ChangeState<StateTwo>();
+                m_IFSM.ChangeState<StateTwo>();
+            }
+
+            if (GUILayout.Button("Update Condition State"))
+            {
+                m_IFSM.GetCondition<ConditionTwo>().UpdateState<StateTwo>();
             }
         }
 

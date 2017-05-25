@@ -9,15 +9,15 @@
 
 using GameBoxFramework.Runtime.FSM;
 
-namespace GameBoxFramework
+namespace Alan
 {
     public sealed class StateOne : FSMState
     {
 
-        protected override void StateInit(IFSM t_FSMOwner) { UnityEngine.Debug.Log("StateOne Init..."); }
-        protected override void StateEnter(IFSM t_FSMOwner) { UnityEngine.Debug.Log("StateOne Enter..."); }
-        protected override void StateLoop(IFSM t_FSMOwner) { UnityEngine.Debug.Log("StateOne Loop..."); }
-        protected override void StateExit(IFSM t_FSMOwner) { UnityEngine.Debug.Log("StateOne Exit..."); }
-        protected override void StateDestroy(IFSM t_FSMOwner) { UnityEngine.Debug.Log("StateOne Destroy..."); }
+        protected override void StateInit(IFSM t_StateOwner) { UnityEngine.Debug.Log("StateOne Init..."); }
+        protected override void StateEnter(IFSM t_StateOwner) { UnityEngine.Debug.Log("StateOne Enter..."); }
+        protected override void StateLoop(IFSM t_StateOwner) { UnityEngine.Debug.Log("StateOne Loop..."); }
+        protected override void StateExit(IFSM t_StateOwner) { UnityEngine.Debug.Log("StateOne Exit..."); }
+        protected override void StateDestroy(IFSM t_StateOwner) { UnityEngine.Debug.Log("StateOne Destroy..."); }
     }
 }

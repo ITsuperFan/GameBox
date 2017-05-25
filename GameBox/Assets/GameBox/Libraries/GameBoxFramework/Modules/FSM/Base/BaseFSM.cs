@@ -26,26 +26,22 @@ namespace GameBoxFramework.Runtime.FSM
         public int Weight { get; protected internal set; }
 
         /// <summary>
-        /// 映射图类型接口
+        /// 状态映射图类型接口
         /// </summary>
-        protected readonly IMapDataStructure<string, BaseFSMState> IMapDataStructure;
+        protected readonly IMapDataStructure<string, BaseFSMState> IStateMapDataStructure;
 
         /// <summary>
-        /// 状态机是否运行变量
+        /// 条件映射图类型接口
         /// </summary>
-        protected bool isRunning;
+        protected readonly IMapDataStructure<string, BaseFSMCondition> IConditionMapDataStructure;
 
-        /// <summary>
-        /// 状态机运行属性
-        /// </summary>
-        public abstract bool IsRunning { get; protected internal set; }
         #endregion
 
         #region 构造方法
         /// <summary>
         /// 默认构造方法
         /// </summary>
-        public BaseFSM() : this(null,null, new FSMTrieMap<string, BaseFSMState>()) //默认数据结构类型为 FSMTrieMap<string,BaseFSMState>()
+        public BaseFSM() : this(null,null, new FSMTrieMap<string, BaseFSMState>(), new FSMTrieMap<string, BaseFSMCondition>()) //默认数据结构类型为 FSMTrieMap<string,BaseFSMState>()
         {
 
         }
@@ -55,10 +51,11 @@ namespace GameBoxFramework.Runtime.FSM
         /// </summary>
         /// <param name="t_FSMName"></param>
         /// <param name="t_IMapDataStructure"></param>
-        public BaseFSM(IFSMOwner t_IFSMOwner, string t_FSMName,  IMapDataStructure<string, BaseFSMState> t_IMapDataStructure)
+        public BaseFSM(IFSMOwner t_IFSMOwner, string t_FSMName,  IMapDataStructure<string, BaseFSMState> t_IStateMapDataStructure , IMapDataStructure<string, BaseFSMCondition> t_IConditionMapDataStructure)
         {
             m_FSMName = t_FSMName ?? string.Empty;
-            IMapDataStructure = t_IMapDataStructure;
+            IStateMapDataStructure = t_IStateMapDataStructure;
+            IConditionMapDataStructure = t_IConditionMapDataStructure;
             OnInit(t_IFSMOwner);
         }
         #endregion

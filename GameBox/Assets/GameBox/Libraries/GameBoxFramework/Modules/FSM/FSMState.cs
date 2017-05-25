@@ -5,7 +5,6 @@
 * Website: www.0x69h.com
 */
 
-using System;
 
 namespace GameBoxFramework.Runtime.FSM
 {
@@ -31,32 +30,32 @@ namespace GameBoxFramework.Runtime.FSM
         }
 
         //GBF层用的状态处理方法，GBF驱动
-        protected internal override void OnStateInit(IFSM t_FSMOwner)
+        protected internal override void OnStateInit(IFSM t_StateOwner)
         {
-            StateInit(t_FSMOwner);
+            StateInit(t_StateOwner);
         }
-        protected internal override void OnStateEnter(IFSM t_FSMOwner)
+        protected internal override void OnStateEnter(IFSM t_StateOwner)
         {
-            StateEnter(t_FSMOwner);
+            StateEnter(t_StateOwner);
         }
-        protected internal override void OnStateLoop(IFSM t_FSMOwner)
+        protected internal override void OnStateLoop(IFSM t_StateOwner)
         {
-            StateLoop(t_FSMOwner);
+            StateLoop(t_StateOwner);
         }
-        protected internal override void OnStateExit(IFSM t_FSMOwner)
+        protected internal override void OnStateExit(IFSM t_StateOwner)
         {
-            StateExit(t_FSMOwner);
+            StateExit(t_StateOwner);
         }
-        protected internal override void OnStateDestroy(IFSM t_FSMOwner)
+        protected internal override void OnStateDestroy(IFSM t_StateOwner)
         {
-            StateDestroy(t_FSMOwner);
+            StateDestroy(t_StateOwner);
         }
 
         //非GBF层用的状态处理方法
-        protected virtual void StateInit(IFSM t_FSMOwner) { }
-        protected virtual void StateEnter(IFSM t_FSMOwner) { }
-        protected virtual void StateLoop(IFSM t_FSMOwner) { }
-        protected virtual void StateExit(IFSM t_FSMOwner) { }
-        protected virtual void StateDestroy(IFSM t_FSMOwner) { }
+        protected virtual void StateInit(IFSM t_StateOwner) { }
+        protected virtual void StateEnter(IFSM t_StateOwner) { }
+        protected virtual void StateLoop(IFSM t_StateOwner) { }
+        protected virtual void StateExit(IFSM t_StateOwner) { }
+        protected virtual void StateDestroy(IFSM t_StateOwner) { }
     }
 }
