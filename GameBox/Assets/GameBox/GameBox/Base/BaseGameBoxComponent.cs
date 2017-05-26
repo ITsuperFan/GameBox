@@ -13,7 +13,7 @@ namespace GameBox
     /// <summary>
     /// GameBox基础组件
     /// </summary>
-	public class BaseGameBoxComponent : MonoBehaviour , IComparable<BaseGameBoxComponent>
+	public abstract class BaseGameBoxComponent : MonoBehaviour , IComparable<BaseGameBoxComponent>
     {
         /// <summary>
         /// 模块的权值
