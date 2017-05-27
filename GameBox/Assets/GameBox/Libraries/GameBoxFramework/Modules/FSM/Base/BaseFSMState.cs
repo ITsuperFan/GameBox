@@ -36,25 +36,29 @@ namespace GameBoxFramework.Runtime.FSM
         protected internal readonly string StateName;
 
         /// <summary>
-        /// 该状态总的流逝时间
+        /// 处于该状态总的游戏世界流逝时间
         /// </summary>
-        public  float StateTotalGameWorldTime { get; protected internal set; }
-
+        public  float StateStayTotalGameWorldTime { get; protected internal set; }
         /// <summary>
-        /// 处于该状态的流逝时间
+        /// 处于该状态的游戏世界流逝时间
         /// </summary>
-        public  float StateGameWorldTime { get; protected internal set; }
-
+        public float StateStayGameWorldTime { get; protected internal set; }
         /// <summary>
-        /// 该状态总的流逝时间
+        /// 处于该状态的每次轮询游戏世界流逝时间
         /// </summary>
-        public  float StateTotalRealWorldTime { get; protected internal set; }
-
+        public float StateLoopGameWorldTime { get; protected internal set; }
         /// <summary>
-        /// 处于该状态的流逝时间
+        /// 该状态总的真实世界流逝时间
         /// </summary>
-        public  float StateRealWorldTime { get; protected internal set; }
-
+        public  float StateStayTotalRealWorldTime { get; protected internal set; }
+        /// <summary>
+        /// 处于该状态的每次轮询真实世界流逝时间
+        /// </summary>
+        public float StateLoopRealWorldTime { get; protected internal set; }
+        /// <summary>
+        /// 处于该状态的真实世界流逝时间
+        /// </summary>
+        public float StateStayRealWorldTime { get; protected internal set; }
 
         /// <summary>
         /// 初始化状态

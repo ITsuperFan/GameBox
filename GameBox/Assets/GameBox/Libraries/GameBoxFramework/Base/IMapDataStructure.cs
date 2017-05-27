@@ -6,6 +6,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 
 namespace GameBoxFramework
 {
@@ -70,8 +71,20 @@ namespace GameBoxFramework
         /// <summary>
         /// 遍历改映射表
         /// </summary>
-        /// <param name="t_Handler"></param>
+        /// <param name="t_Handler">回调处理</param>
         void Foreach(Action<TKey,TValue> t_Handler);
+
+        /// <summary>
+        /// 转换成键值对数组
+        /// </summary>
+        /// <returns>键值对数组</returns>
+        KeyValuePair<TKey, TValue>[] ToArray();
+
+        /// <summary>
+        /// 获取可枚举数
+        /// </summary>
+        /// <returns>返回可枚举数实例</returns>
+        IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator();
     }
 
 }

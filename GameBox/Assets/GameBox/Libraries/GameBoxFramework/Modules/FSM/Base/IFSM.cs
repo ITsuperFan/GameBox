@@ -44,8 +44,20 @@ namespace GameBoxFramework.Runtime.FSM
         /// <summary>
         /// 更改状态机状态
         /// </summary>
+        /// <param name="t_BaseFSMState">更改的目标状态</param>
+        void ChangeState(BaseFSMState t_BaseFSMState);
+
+        /// <summary>
+        /// 更改状态机状态
+        /// </summary>
         /// <param name="t_StateType"></param>
         void ChangeState(Type t_StateType);
+
+        /// <summary>
+        /// 更改状态机状态
+        /// </summary>
+        /// <param name="t_StateName">状态的名字</param>
+        void ChangeState(string t_StateName);
 
         /// <summary>
         /// 添加状态
@@ -76,6 +88,33 @@ namespace GameBoxFramework.Runtime.FSM
         /// </summary>
         /// <param name="t_StateTypes">状态的抽象基类类型的Type类不定项数组</param>
         void AddState(params Type[] t_StateTypes);
+
+        /// <summary>
+        /// 获取状态
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>状态实例</returns>
+        T GetState<T>() where T : BaseFSMState;
+
+        /// <summary>
+        /// 获取状态
+        /// </summary>
+        /// <param name="t_Type">状态的Type类型</param>
+        /// <returns>状态的抽象基础状态的实例引用</returns>
+        BaseFSMState GetState(Type t_Type);
+
+        /// <summary>
+        /// 获取状态
+        /// </summary>
+        /// <param name="t_StateName">状态保存进状态机时名字</param>
+        /// <returns>状态的抽象基础状态的实例引用</returns>
+        BaseFSMState GetState(string t_StateName);
+
+        /// <summary>
+        /// 获取所有状态
+        /// </summary>
+        /// <returns>基础状态数组</returns>
+        BaseFSMState[] GetAllState();
 
         /// <summary>
         /// 更新现有的状态
@@ -157,6 +196,10 @@ namespace GameBoxFramework.Runtime.FSM
         /// <returns>状态机条件</returns>
         T GetCondition<T>() where T : BaseFSMCondition;
 
-
+        /// <summary>
+        /// 获取所有条件
+        /// </summary>
+        /// <returns>基础条件实例数组</returns>
+        BaseFSMCondition[] GetAllCondition();
     }
 }

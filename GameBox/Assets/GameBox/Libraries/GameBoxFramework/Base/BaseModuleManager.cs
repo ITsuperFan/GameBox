@@ -23,6 +23,7 @@ namespace GameBoxFramework
         public BaseModuleManager():this(new GameBoxFrameworkSLinkedList())
         {
         }
+
         /// <summary>
         /// 初始化 IListDataStructure 接口的构造方法
         /// </summary>

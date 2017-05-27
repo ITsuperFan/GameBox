@@ -9,6 +9,7 @@
 
 using GameBoxFramework.Algorithms;
 using System;
+using System.Collections.Generic;
 
 namespace GameBoxFramework.Runtime.FSM
 {
@@ -85,12 +86,36 @@ namespace GameBoxFramework.Runtime.FSM
         }
 
         /// <summary>
+        /// 获取可枚举数
+        /// </summary>
+        /// <returns>返回可枚举数实例</returns>
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        {
+            return  (IEnumerator<KeyValuePair<TKey, TValue>>)m_TrieMap.GetEnumerator();
+        }
+
+        /// <summary>
         /// 移除
         /// </summary>
         /// <param name="word"></param>
         public void Remove(TKey word)
         {
             m_TrieMap.Remove(word.ToString());
+        }
+
+        /// <summary>
+        /// 转换成键值对数组
+        /// </summary>
+        /// <returns>键值对数组</returns>
+        public KeyValuePair<TKey, TValue>[] ToArray()
+        {
+            KeyValuePair<TKey, TValue>[] t_KeyValuePair = new KeyValuePair<TKey, TValue>[m_TrieMap.Count];
+            int t_Index=0;
+            foreach (var item in m_TrieMap)
+            {
+                t_KeyValuePair[t_Index++] = new KeyValuePair<TKey, TValue>( (TKey)Convert.ChangeType(item.Key, typeof(TKey)) , item.Value);
+            }
+            return t_KeyValuePair;
         }
 
         /// <summary>
@@ -112,5 +137,8 @@ namespace GameBoxFramework.Runtime.FSM
         {
             m_TrieMap.UpdateWord(t_TKey.ToString(),t_TValue);
         }
+
+
+
     }
 }

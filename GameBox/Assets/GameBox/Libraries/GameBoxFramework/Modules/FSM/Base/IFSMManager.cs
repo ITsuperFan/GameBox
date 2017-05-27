@@ -6,6 +6,10 @@
 */
 
 
+
+
+using System.Collections.Generic;
+
 namespace GameBoxFramework.Runtime.FSM
 {
     /// <summary>
@@ -13,6 +17,7 @@ namespace GameBoxFramework.Runtime.FSM
     /// </summary>
 	public interface IFSMManager 
 	{
+
         /// <summary>
         /// 创建状态机
         /// </summary>
@@ -35,6 +40,7 @@ namespace GameBoxFramework.Runtime.FSM
         /// <param name="t_FSMName">状态机名字</param>
         /// <returns>返回状态机管家接口</returns>
         IFSMManager RemoveFSM(string t_FSMName);
+
 
     }
 }

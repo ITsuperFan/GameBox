@@ -5,7 +5,6 @@
 * Website: www.0x69h.com
 */
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameBox

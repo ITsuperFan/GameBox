@@ -6,6 +6,8 @@
 */
 
 
+using System;
+
 namespace GameBoxFramework.Runtime.Procedure
 {
     /// <summary>
@@ -19,23 +21,47 @@ namespace GameBoxFramework.Runtime.Procedure
         BaseProcedure CurrentProcedure { get; }
 
         /// <summary>
+        /// 启动的第一个流程
+        /// </summary>
+        BaseProcedure BootProcedure { get; set; }
+
+        /// <summary>
         /// 获取所有的流程
         /// </summary>
         BaseProcedure[] Procedures { get; }
 
-
         /// <summary>
-        /// 设置第一个启动的流程
+        /// 添加流程
         /// </summary>
-        /// <param name="t_BaseProcedure">流程实例</param>
-        void SetBootProcedure<T>() where T: BaseProcedure;
+        /// <typeparam name="T">流程类型</typeparam>
+        void AddProcedure<T>() where T : BaseProcedure;
 
         /// <summary>
         /// 添加流程
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        void AddProcedure<T>() where T : BaseProcedure;
+        /// <param name="t_ProcedureType">流程的Type类型</param>
+        void AddProcedure(Type t_ProcedureType);
 
+        /// <summary>
+        /// 获取流程
+        /// </summary>
+        /// <typeparam name="T">流程类型</typeparam>
+        /// <returns>流程实例</returns>
+        T GetProcedure<T>() where T : BaseProcedure;
+
+        /// <summary>
+        /// 获取流程
+        /// </summary>
+        /// <param name="t_ProcedureType">流程的Type类型</param>
+        /// <returns></returns>
+        BaseProcedure GetProcedure(Type t_ProcedureType);
+
+        /// <summary>
+        /// 移除流程
+        /// </summary>
+        /// <typeparam name="T">流程类型</typeparam>
         void RemoveProcedure<T>() where T : BaseProcedure;
-	}
+
+
+    }
 }

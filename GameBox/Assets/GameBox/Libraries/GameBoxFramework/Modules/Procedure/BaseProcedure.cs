@@ -7,6 +7,7 @@
 
 
 using GameBoxFramework.Runtime.FSM;
+using System;
 
 namespace GameBoxFramework.Runtime.Procedure
 {
@@ -16,12 +17,18 @@ namespace GameBoxFramework.Runtime.Procedure
 	public abstract class BaseProcedure : BaseFSMState
     {
         /// <summary>
+        /// 该流程的持有者
+        /// </summary>
+        private IFSM m_ProcedureOwner;
+
+        /// <summary>
         /// 默认构造方法
         /// </summary>
         public BaseProcedure() : base()
         {
 
         }
+
         /// <summary>
         /// 初始化状态名字的构造方法
         /// </summary>
@@ -31,9 +38,38 @@ namespace GameBoxFramework.Runtime.Procedure
 
         }
 
+        /// <summary>
+        /// 改变流程
+        /// </summary>
+        /// <typeparam name="T">流程的类型</typeparam>
+        public void ChangeProcedure<T>() where T : BaseProcedure
+        {
+            m_ProcedureOwner.ChangeState<T>();
+        }
+
+        /// <summary>
+        /// 改变流程
+        /// </summary>
+        /// <param name="t_ProcedureType">流程的Type类型</param>
+        public void ChangeProcedure(Type t_ProcedureType)
+        {
+            m_ProcedureOwner.ChangeState(t_ProcedureType);
+        }
+
+        /// <summary>
+        /// 更改状态机状态
+        /// </summary>
+        /// <param name="t_StateName">状态的名字</param>
+        public void ChangeProcedure(string t_ProcedureName)
+        {
+            m_ProcedureOwner.ChangeState(t_ProcedureName);
+        }
+
+
         //GBF层用的状态处理方法，GBF驱动
         protected internal override void OnStateInit(IFSM t_StateOwner)
         {
+            m_ProcedureOwner = t_StateOwner;
             ProcedureInit(t_StateOwner);
         }
         protected internal override void OnStateEnter(IFSM t_StateOwner)
@@ -54,11 +90,11 @@ namespace GameBoxFramework.Runtime.Procedure
         }
 
         //非GBF层用的状态处理方法
-        protected virtual void ProcedureInit(IFSM t_StateOwner) { }
-        protected virtual void ProcedureEnter(IFSM t_StateOwner) { }
-        protected virtual void ProcedureLoop(IFSM t_StateOwner) { }
-        protected virtual void ProcedureExit(IFSM t_StateOwner) { }
-        protected virtual void ProcedureDestroy(IFSM t_StateOwner) { }
+        protected abstract void ProcedureInit(IFSM t_ProcedureOwner);
+        protected abstract void ProcedureEnter(IFSM t_ProcedureOwner);
+        protected abstract void ProcedureLoop(IFSM t_ProcedureOwner);
+        protected abstract void ProcedureExit(IFSM t_ProcedureOwner);
+        protected abstract void ProcedureDestroy(IFSM t_ProcedureOwner);
 
     }
 }

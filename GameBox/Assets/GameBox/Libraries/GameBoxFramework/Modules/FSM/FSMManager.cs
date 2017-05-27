@@ -5,8 +5,13 @@
 * Website: www.0x69h.com
 */
 
+using System.Collections.Generic;
+
 namespace GameBoxFramework.Runtime.FSM
 {
+    /// <summary>
+    /// 状态机模块
+    /// </summary>
     public sealed class FSMManager : BaseModule, IFSMManager, IFSMOwner
     {
         /// <summary>
@@ -46,6 +51,15 @@ namespace GameBoxFramework.Runtime.FSM
         /// <returns>返回状态机管家接口</returns>
         public IFSMManager RemoveFSM(string t_FSMName)
         {
+            ////防止内建模块的状态机服务被关闭
+            //for (int i = 0; i < BuiltInFSMList.Length; i++)
+            //{
+            //    if (t_FSMName==BuiltInFSMList[i])
+            //    {
+            //        return this;
+            //    }
+            //} 
+
             var t_FSM =  IListDataStructure.GetNode(fsm => fsm.m_FSMName == t_FSMName);
             t_FSM.OnDestroy(this);
             IListDataStructure.RemoveNode(fsm => fsm.m_FSMName == t_FSMName);

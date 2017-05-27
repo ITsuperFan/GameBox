@@ -6,8 +6,6 @@
 */
 
 using System;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace GameBoxFramework.Runtime.FSM
 {
@@ -96,6 +94,35 @@ namespace GameBoxFramework.Runtime.FSM
                 });
         }
         /// <summary>
+        /// 更改状态机状态
+        /// </summary>
+        /// <param name="t_BaseFSMState">更改的目标状态</param>
+        public void ChangeState(BaseFSMState t_BaseFSMState)
+        {
+            if (IsRunning)
+                IStateMapDataStructure.Foreach((key, value) => {
+                    if (value.Equals(t_BaseFSMState))
+                    {
+                        m_TempState = value;
+                    }
+                });
+        }
+        /// <summary>
+        /// 更改状态机状态
+        /// </summary>
+        /// <param name="t_StateName">状态的名字</param>
+        public void ChangeState(string t_StateName)
+        {
+            if (IsRunning)
+                IStateMapDataStructure.Foreach((key, value) => {
+                    if (key== t_StateName)
+                    {
+                        m_TempState = value;
+                    }
+                });
+        }
+
+        /// <summary>
         /// 移除状态
         /// </summary>
         /// <param name="t_FSMName"></param>
@@ -121,7 +148,6 @@ namespace GameBoxFramework.Runtime.FSM
                 {
                     IStateMapDataStructure.Remove(key);
                     value.OnStateDestroy(this);
-                    return;
                 }
             });
         }
@@ -136,11 +162,9 @@ namespace GameBoxFramework.Runtime.FSM
                 {
                     IStateMapDataStructure.Remove(key);
                     value.OnStateDestroy(this);
-                    return;
                 }
             });
         }
-
         /// <summary>
         /// 移除状态
         /// </summary>
@@ -153,7 +177,6 @@ namespace GameBoxFramework.Runtime.FSM
                     RemoveState(t_StateTypes[i]);
                 }
         }
-
         /// <summary>
         /// 添加状态
         /// </summary>
@@ -189,7 +212,6 @@ namespace GameBoxFramework.Runtime.FSM
             //    AddState(FormatterServices.GetSafeUninitializedObject(t_StateType) as BaseFSMState);
             //}
         }
-
         /// <summary>
         /// 添加状态
         /// </summary>
@@ -202,16 +224,19 @@ namespace GameBoxFramework.Runtime.FSM
                AddState(t_StateTypes[i]);
             }
         }
-
         /// <summary>
         /// 添加状态
         /// </summary>
         /// <param name="t_StateType">状态的抽象基类类型</param>
         public void AddState(BaseFSMState t_BaseFSMState)
         {
+            if(null==t_BaseFSMState)
+                throw new GameBoxFrameworkException(string.Format("添加的状态不能为空!"));
+
             if (!string.IsNullOrEmpty(t_BaseFSMState.StateName))
             {
-                if (IStateMapDataStructure.ContainsKey(t_BaseFSMState.StateName)) throw new GameBoxFrameworkException(string.Format("状态'{0}'已经存在!", t_BaseFSMState.GetType().Name));
+                if (IStateMapDataStructure.ContainsKey(t_BaseFSMState.StateName))
+                        throw new GameBoxFrameworkException(string.Format("状态'{0}'已经存在!", t_BaseFSMState.GetType().Name));
                 IStateMapDataStructure.Add(t_BaseFSMState.StateName, t_BaseFSMState);
             }
             else
@@ -235,13 +260,73 @@ namespace GameBoxFramework.Runtime.FSM
             }
         }
         /// <summary>
+        /// 获取状态
+        /// </summary>
+        /// <typeparam name="T">状态的类型</typeparam>
+        /// <returns>状态的实例</returns>
+        public T GetState<T>() where T : BaseFSMState
+        {
+            var t_Array = IStateMapDataStructure.ToArray();
+            for (int i = 0; i < t_Array.Length; i++)
+            {
+                if (t_Array[i].Value is T)
+                {
+                    return t_Array[i].Value as T;
+                }
+            }
+            return null;
+        }
+        /// <summary>
+        /// 获取所有状态
+        /// </summary>
+        /// <returns>基础状态数组</returns>
+        public BaseFSMState[] GetAllState()
+        {
+            BaseFSMState[] t_BaseFSMStates = new BaseFSMState[IStateMapDataStructure.Count];
+            var t_StateMaps = IStateMapDataStructure.ToArray();
+            for (int i = 0; i < t_StateMaps.Length; i++)
+            {
+                t_BaseFSMStates[i] = t_StateMaps[i].Value;
+            }
+            return t_BaseFSMStates;
+        }
+        /// <summary>
         /// 更新现有的状态
         /// </summary>
         /// <param name="t_FSMStateName">要更新的现有状态的键索引</param>
         /// <param name="t_BaseFSMState">要替换的状态实例</param>
         public void UpdateState(string t_FSMStateName, BaseFSMState t_BaseFSMState)
         {
-            IStateMapDataStructure.Update(t_FSMStateName, t_BaseFSMState);
+            if(IStateMapDataStructure.ContainsKey(t_FSMStateName))
+                IStateMapDataStructure.Update(t_FSMStateName, t_BaseFSMState);
+        }
+        /// <summary>
+        /// 获取状态
+        /// </summary>
+        /// <param name="t_Type">状态的Type类型</param>
+        /// <returns>状态的抽象基础状态的实例引用</returns>
+        public BaseFSMState GetState(Type t_Type)
+        {
+            var t_Array = IStateMapDataStructure.ToArray();
+            for (int i = 0; i < t_Array.Length; i++)
+            {
+                if (t_Array[i].Value.GetType() == t_Type)
+                {
+                    return t_Array[i].Value as BaseFSMState;
+                }
+            }
+            return null;
+        }
+        /// <summary>
+        /// 获取状态
+        /// </summary>
+        /// <param name="t_StateName">状态保存进状态机时名字</param>
+        /// <returns>状态的抽象基础状态的实例引用</returns>
+        public BaseFSMState GetState(string t_StateName)
+        {
+            BaseFSMState t_BaseFSMState;
+            IStateMapDataStructure.TryGetValue(t_StateName, out t_BaseFSMState);
+            return t_BaseFSMState;
         }
         /// <summary>
         /// 添加状态机条件
@@ -301,7 +386,6 @@ namespace GameBoxFramework.Runtime.FSM
                 {
                     IStateMapDataStructure.Remove(key);
                     value.OnConditionDestroy(this);
-                    return;
                 }
             });
         }
@@ -316,7 +400,6 @@ namespace GameBoxFramework.Runtime.FSM
                 {
                     IConditionMapDataStructure.Remove(key);
                     value.OnConditionDestroy(this);
-                    return;
                 }
             });
         }
@@ -344,6 +427,23 @@ namespace GameBoxFramework.Runtime.FSM
             IConditionMapDataStructure.TryGetValue(typeof(T).Name, out t_Condition);
             return t_Condition as T;
         }
+
+        /// <summary>
+        /// 获取所有条件
+        /// </summary>
+        /// <returns>基础条件实例数组</returns>
+        public BaseFSMCondition[] GetAllCondition()
+        {
+            BaseFSMCondition[] t_BaseConditions = new BaseFSMCondition[IConditionMapDataStructure.Count];
+            var t_ConditionMaps = IConditionMapDataStructure.ToArray();
+            for (int i = 0; i < t_ConditionMaps.Length; i++)
+            {
+                t_BaseConditions[i] = t_ConditionMaps[i].Value;
+            }
+            return t_BaseConditions;
+        }
+
+
         /// <summary>
         /// 轮询更新状态
         /// </summary>
@@ -356,21 +456,30 @@ namespace GameBoxFramework.Runtime.FSM
                 if (null != State) //如果当前状态已经被初始化
                 {
                     State.OnStateExit(this); //上一个状态 退出
+                    State.StateStayRealWorldTime = 0; //清0时间
+                    State.StateStayGameWorldTime = 0;//清0时间
+
                     LastState = State;   //保存上一个状态
                 }
 
                 State = m_TempState; //更新当前状态
                 if (null != StateChangedEventHandler)
                     StateChangedEventHandler(new FSMEventArgs() { IFSM = this, LastState = LastState, State = State }); //事件通知
+
                 State.OnStateEnter(this); //当前状态 进入
+                
             }
             else
             {
                 State.OnStateLoop(this); //当前状态 轮询
-                State.StateTotalGameWorldTime += GameBoxFrameworkTime.RealWorldElapsedTime; //状态的游戏世界总的流逝时间
-                State.StateTotalRealWorldTime += GameBoxFrameworkTime.RealWorldElapsedTime; //状态的真实世界总的流逝时间
-                State.StateGameWorldTime = GameBoxFrameworkTime.RealWorldElapsedTime; //状态的游戏世界流逝时间
-                State.StateRealWorldTime = GameBoxFrameworkTime.RealWorldElapsedTime; //状态的真实世界流逝时间
+                State.StateStayTotalGameWorldTime += GameBoxFrameworkTime.GameWorldElapsedTime; //状态的游戏世界总的流逝时间
+                State.StateLoopGameWorldTime = GameBoxFrameworkTime.GameWorldElapsedTime; //状态的游戏世界总的流逝时间
+                State.StateStayGameWorldTime += GameBoxFrameworkTime.GameWorldElapsedTime; //状态从进入开始到现在的游戏世界总的流逝时间，退出后会被重置为0
+
+                State.StateStayTotalRealWorldTime += GameBoxFrameworkTime.RealWorldElapsedTime; //状态的真实世界流逝时间
+                State.StateLoopRealWorldTime = GameBoxFrameworkTime.RealWorldElapsedTime; //状态的真实世界流逝时间
+                State.StateStayRealWorldTime += GameBoxFrameworkTime.RealWorldElapsedTime; //状态从进入开始到现在的游戏世界总的流逝时间，退出后会被重置为0
+
             }
         }
         /// <summary>
@@ -472,7 +581,6 @@ namespace GameBoxFramework.Runtime.FSM
         {
             return this.Weight - other.Weight; //自身的权重 - 需要进行比较的权重        
         }
-
 
 
         #endregion
