@@ -5,7 +5,7 @@
 * Website: www.0x69h.com
 */
 
-namespace GameBox.Runtime.Component
+namespace GameBoxFramework.Runtime.Event
 {
     /// <summary>
     /// 有效事件的执行返回结果类

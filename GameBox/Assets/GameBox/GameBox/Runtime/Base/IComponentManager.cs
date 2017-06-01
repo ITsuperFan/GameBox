@@ -4,12 +4,23 @@
 * Mail: Mr.Alan.China@outlook.com
 * Website: www.0x69h.com
 */
-
+using System;
 
 namespace GameBox
 {
 	public interface IComponentManager
-    {  
+    {
+        /// <summary>
+        /// 组件被注册事件
+        /// </summary>
+        event Action<ComponentRegisteredEventArgs> ComponentRegisteredEventHandler;
+
+        /// <summary>
+        /// 组件被销毁事件
+        /// </summary>
+        event Action<ComponentDestroyedEventArgs> ComponentDestroyedEventHandler;
+
+
         /// <summary>
         /// 管理的模块数量
         /// </summary>

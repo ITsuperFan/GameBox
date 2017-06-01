@@ -11,8 +11,8 @@ using GameBoxFramework;
 using GameBoxFramework.Runtime.Procedure;
 using UnityEngine;
 
-namespace GameBox
-{
+namespace GameBox.Runtime.Component
+{ 
     /// <summary>
     /// 流程管家组件
     /// </summary>

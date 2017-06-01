@@ -8,12 +8,22 @@
 
 using GameBoxFramework;
 using System.Collections.Generic;
-
+using System;
 
 namespace GameBox
 {
     public sealed class GameBoxComponentManager : BaseComponentManager, IComponentManager
     {
+
+        /// <summary>
+        /// 组件被注册事件
+        /// </summary>
+        public event Action<ComponentRegisteredEventArgs> ComponentRegisteredEventHandler;
+        /// <summary>
+        /// 组件被销毁事件
+        /// </summary>
+        public event Action<ComponentDestroyedEventArgs> ComponentDestroyedEventHandler;
+
         /// <summary>
         /// 管理的模块数量
         /// </summary>
@@ -50,6 +60,7 @@ namespace GameBox
 
         }
 
+
         /// <summary>
         /// 获取GameBox的组件
         /// </summary>
@@ -69,7 +80,7 @@ namespace GameBox
         }
 
         /// <summary>
-        /// 注册GameBox的组件
+        /// 获取注册GameBox的组件数组
         /// </summary>
         /// <typeparam name="T">GameBox的组件类型</typeparam>
         /// <returns>返回GamBox的组件</returns>
@@ -95,9 +106,17 @@ namespace GameBox
         /// <returns>返回GamBox的组件</returns>
         public void RegisterComponent(BaseGameBoxComponent t_BaseGameBoxComponent)
         {
-            if(!IListDataStructure.Contains(t_BaseGameBoxComponent))
+            if (!IListDataStructure.Contains(t_BaseGameBoxComponent))
+            {
+                if (null!=ComponentRegisteredEventHandler)
+                {
+                    ComponentRegisteredEventHandler(new ComponentRegisteredEventArgs() { GameBoxComponent = t_BaseGameBoxComponent });
+                }
                 IListDataStructure.AddNode(t_BaseGameBoxComponent);
+            }
+                
         }
+
         /// <summary>
         /// 销毁指定的所有GameBox的组件
         /// </summary>
@@ -106,9 +125,16 @@ namespace GameBox
         public  void DestroyComponent(BaseGameBoxComponent t_BaseGameBoxComponent)
         {
             if (!IListDataStructure.Contains(t_BaseGameBoxComponent))
-                IListDataStructure.RemoveNode(component=>component.Equals(t_BaseGameBoxComponent));
+            {
+                if (null != ComponentDestroyedEventHandler)
+                {
+                    ComponentDestroyedEventHandler(new ComponentDestroyedEventArgs() { GameBoxComponent = t_BaseGameBoxComponent });
+                }
+                IListDataStructure.RemoveNode(component => component.Equals(t_BaseGameBoxComponent));
+            }
             
         }
+
         /// <summary>
         /// 销毁指定的GameBox的组件
         /// </summary>

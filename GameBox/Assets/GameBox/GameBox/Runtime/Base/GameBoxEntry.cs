@@ -8,11 +8,21 @@
 
 
 using GameBoxFramework;
+using System;
 
 namespace GameBox
 {
     public static class GameBoxEntry
     {
+        /// <summary>
+        /// 静态构造方法
+        /// </summary>
+        static GameBoxEntry()
+        {
+            GameBoxComponentManager.ComponentRegisteredEventHandler += e => { if (null != ComponentRegisteredEventHandler) ComponentRegisteredEventHandler(e); };
+            GameBoxComponentManager.ComponentDestroyedEventHandler += e => { if (null != ComponentDestroyedEventHandler) ComponentDestroyedEventHandler(e); };
+        }
+
 
         /// <summary>
         /// 版本号
@@ -28,6 +38,19 @@ namespace GameBox
         /// 游戏扩展组件管家
         /// </summary>
         public static readonly IComponentManager GameBoxComponentManager = new GameBoxComponentManager();
+
+
+        /// <summary>
+        /// 组件被注册事件
+        /// </summary>
+        public static event Action<ComponentRegisteredEventArgs> ComponentRegisteredEventHandler;
+
+        /// <summary>
+        /// 组件被销毁事件
+        /// </summary>
+        public static event Action<ComponentDestroyedEventArgs> ComponentDestroyedEventHandler;
+
+
 
         /// <summary>
         /// 获取系统内置模块
@@ -65,7 +88,7 @@ namespace GameBox
         /// <typeparam name="T">GameBox的组件类型</typeparam>
         /// <returns>返回GamBox的组件</returns>
         public static void RegisterComponent(BaseGameBoxComponent t_BaseGameBoxComponent)
-        {
+        {         
             GameBoxComponentManager.RegisterComponent(t_BaseGameBoxComponent);
         }
 
