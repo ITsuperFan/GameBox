@@ -18,7 +18,7 @@ namespace GameBoxFramework.Utility
             T[] t_NewArray = new T[t_EndIndex- t_StartIndex];
             if (null != t_Array)
             {
-                if (t_Array.Length > t_StartIndex && t_Array.Length > t_EndIndex)
+                if (t_Array.Length > t_StartIndex && t_Array.Length >= t_EndIndex)
                 {
                     for (int i = 0; i < t_NewArray.Length; i++)
                     {
@@ -29,14 +29,15 @@ namespace GameBoxFramework.Utility
                 else
                 {
                     //数组输入的长度不对，已经超越了原有的长度
-                    return null;
+                    throw new GameBoxFrameworkException("数组输入的长度不对，已经超越了原有的长度!");
                 }
 
             }
             else
             {
                 //数组为空
-                return null;
+                throw new GameBoxFrameworkException("数组为空!");
+
             }
         }
 
@@ -58,6 +59,27 @@ namespace GameBoxFramework.Utility
             return t_NewArray;
 
         }
+
+
+        public static T[] MergeArray<T>(params T[][] t_Params)
+        {
+            int t_TLength = 0;
+            for (int i = 0; i < t_Params.Length; i++)
+            {
+                t_TLength += t_Params[i].Length;
+            }
+            T[] t_TargetArray =new T[t_TLength];
+            int t_Index = 0;
+            for (int i = 0; i < t_Params.Length; i++)
+            {
+                for (int j = 0; j < t_Params[i].Length; j++)
+                {
+                    t_TargetArray[t_Index++] = t_Params[i][j];
+                }
+            }
+            return t_TargetArray;
+        }
+
 
     }
 

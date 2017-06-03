@@ -5,12 +5,15 @@
 * Website: www.0x69h.com
 */
 
+using GameBoxFramework.Utility;
 using UnityEngine;
 
 
 
 namespace Alan
 {
+
+
     public class Create3D : MonoBehaviour 
 	{
 
@@ -22,9 +25,6 @@ namespace Alan
 
         public Vector3 C;
         public Vector3 O1;
-
-
-
 
 
 
@@ -42,68 +42,51 @@ namespace Alan
         private Mesh m_Mesh;
         private void Awake()
         {
+            var lineVecs1 = PipeRenderHelper.MakeVector3Circle(Vector2.zero, 200f, 100);  /*PipeRenderHelper.ArcVertex3(Vector2.zero, 150f, new Vector2(-150f, 0), new Vector2(150f, 0), 100); //大*/
+            var lineVecs2 = PipeRenderHelper.MakeVector3Circle(Vector2.zero, 100f, 100); /*PipeRenderHelper.ArcVertex3(Vector2.zero, 100f, new Vector2(-100f, 0), new Vector2(100f, 0), 100); //小*/
+
+            for (int i = 0; i < lineVecs2.Length; i++)
+            {
+                Debug.Log(lineVecs2[i]);
+            }
+
+            var lineVecs3 = PipeRenderHelper.DepthVertices(lineVecs1, 100f); //大 内
+            var lineVecs4= PipeRenderHelper.DepthVertices(lineVecs2, 100); //小 内
+
+
+            var mergeVecs5 = ArrayHelper.MergeArray<Vector3>(lineVecs1,lineVecs2,lineVecs3,lineVecs4);
+
+
             m_MeshFilter = gameObject.AddComponent<MeshFilter>();
             m_MeshRendere = gameObject.AddComponent<MeshRenderer>();
-
-
-
-           var Vecs =  PipeRenderHelper.ArcVertex3(Vector2.zero,150f,new Vector2(-150f, 0),new Vector2(150f, 0),100);
-
-            for (int i = 0; i < Vecs.Length; i++)
-            {
-                GameObject go = GameObject.CreatePrimitive( PrimitiveType.Cube );
-                go.name = i.ToString();
-                go.transform.position = new Vector3(Vecs[i].x,Vecs[i].y,0);
-            }
-
-            var Vecs1 = PipeRenderHelper.ArcVertex3(Vector2.zero, 100f, new Vector2(-100f, 0), new Vector2(100f, 0), 100);
-
-            for (int i = 0; i < Vecs1.Length; i++)
-            {
-                GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                go.name = i.ToString();
-                go.transform.position = new Vector3(Vecs1[i].x, Vecs1[i].y, 0);
-            }
-
-
             m_Mesh = m_MeshFilter.mesh;
-            m_Mesh.vertices = GameBoxFramework.Utility.ArrayHelper.MergeArray<Vector3>(Vecs,0,Vecs.Length,Vecs1,0,Vecs1.Length);
+            m_Mesh.vertices = mergeVecs5;
             m_UV = new Vector2[m_Mesh.vertexCount];
             m_Mesh.uv = m_UV;
-            m_TriangleArray = new int[(Vecs.Length+Vecs1.Length - 2)*3];
+            Material t_Material = new Material(Shader.Find(@"Diffuse"));
+            t_Material.mainTexture = m_Texture;
+            m_MeshRendere.materials = new Material[] { t_Material };
 
-            int t_Index=0;
-            
-            for (int i = 0; i < m_Mesh.vertexCount; i++)
-            {
-                if (i < (m_Mesh.vertexCount / 2 - 1)) //如果在第一层
-                {
-                    m_TriangleArray[t_Index++] = i;
-                    m_TriangleArray[t_Index++] = m_Mesh.vertexCount / 2 + i+1;
-                    m_TriangleArray[t_Index++] = m_Mesh.vertexCount / 2 + i;
-                }
-                else if (i > m_Mesh.vertexCount / 2) //如果在第二层
-                {
-                    m_TriangleArray[t_Index++] = i;
-                    m_TriangleArray[t_Index++] = i-m_Mesh.vertexCount / 2 -1 ;
-                    m_TriangleArray[t_Index++] = i-m_Mesh.vertexCount / 2;
-                }
-            }
+            int[] t_TriangleSegment1 = PipeRenderHelper.SurfaceTriangleSegment(m_Mesh.vertices, lineVecs1.Length,1,2,false);
+            int[] t_TriangleSegment2 = PipeRenderHelper.SurfaceTriangleSegment(m_Mesh.vertices, lineVecs1.Length,1,3,true);
+            int[] t_TriangleSegment3 = PipeRenderHelper.SurfaceTriangleSegment(m_Mesh.vertices, lineVecs1.Length,2,4,false);
+            int[] t_TriangleSegment4 = PipeRenderHelper.SurfaceTriangleSegment(m_Mesh.vertices, lineVecs1.Length,3,4,true);
 
-        }
+            m_TriangleArray = ArrayHelper.MergeArray<int>(t_TriangleSegment1, t_TriangleSegment2, t_TriangleSegment3, t_TriangleSegment4);
 
-        private void Update()
-        {
+
             m_Mesh.triangles = m_TriangleArray;
             m_Mesh.RecalculateNormals();
 
 
-            Material t_Material = new Material(Shader.Find(@"Diffuse"));
+        }
 
-            t_Material.mainTexture = m_Texture;
 
-            m_MeshRendere.materials = new Material[] { t_Material };
 
+
+        private void Update()
+        {
+           
 
 
             //------------------计算模块
