@@ -42,8 +42,8 @@ namespace Alan
         private Mesh m_Mesh;
         private void Awake()
         {
-            var lineVecs1 = PipeRenderHelper.MakeVector3Circle(Vector2.zero, 200f, 100);  /*PipeRenderHelper.ArcVertex3(Vector2.zero, 150f, new Vector2(-150f, 0), new Vector2(150f, 0), 100); //大*/
-            var lineVecs2 = PipeRenderHelper.MakeVector3Circle(Vector2.zero, 100f, 100); /*PipeRenderHelper.ArcVertex3(Vector2.zero, 100f, new Vector2(-100f, 0), new Vector2(100f, 0), 100); //小*/
+            var lineVecs1 = PipeRenderHelper.ArcVertex3(Vector2.zero, 150f, new Vector2(-150f, 0), new Vector2(150f, 0), 100); //大
+            var lineVecs2 = PipeRenderHelper.ArcVertex3(Vector2.zero, 100f, new Vector2(-100f, 0), new Vector2(100f, 0), 100); //小
 
             for (int i = 0; i < lineVecs2.Length; i++)
             {
