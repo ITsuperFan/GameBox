@@ -10,10 +10,10 @@ using System;
 namespace GameBoxFramework
 {
     /// <summary>
-    /// GBF的基础事件参数
+    /// 基础特性
     /// </summary>
-    public abstract class GameBoxFrameworkEventArgs : BaseEventArgs
+    public class BaseAttribute:Attribute
     {
-       
+
     }
 }

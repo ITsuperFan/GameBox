@@ -7,7 +7,7 @@
 
 namespace GameBoxFramework.Runtime.FSM
 {
-    public sealed class FSMEventArgs : GameBoxFrameworkEventArgs
+    public sealed class FSMEventArgs : BaseEventArgs
     {
         public IFSM IFSM;
         public BaseFSMState LastState;

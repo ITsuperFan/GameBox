@@ -13,7 +13,6 @@ namespace Alan
 {
 	public class ActiveEventHandler 
 	{
-
         [ActiveEvent("有效事件方法名")]
         public static void ActiveEventDemoHandler(GameObject t_GO,Image t_Img,Text t_Text)
         {

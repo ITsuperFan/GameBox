@@ -10,10 +10,10 @@ using System;
 namespace GameBoxFramework.Runtime.Event
 {
     /// <summary>
-    /// 有效事件标签
+    /// 有效事件特性
     /// </summary>
     [AttributeUsage(AttributeTargets.Class|AttributeTargets.Method, AllowMultiple = false)]
-    public class ActiveEventAttribute : Attribute
+    public class ActiveEventAttribute : BaseAttribute
     {
         public string EventName { get; set; }
 

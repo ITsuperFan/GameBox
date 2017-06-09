@@ -14,6 +14,9 @@ namespace GameBoxFramework
     /// </summary>
     public abstract class BaseEventArgs : EventArgs
     {
-       
+        /// <summary>
+        /// 空参数
+        /// </summary>
+        public new static readonly BaseEventArgs Empty = EventArgs.Empty as BaseEventArgs;
     }
 }
