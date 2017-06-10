@@ -5,9 +5,7 @@
 * Website: www.0x69h.com
 */
 
-using GameBox.Runtime.Component;
 using GameBoxFramework;
-using GameBoxFramework.Runtime.EventPool;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +13,8 @@ using UnityEngine.EventSystems;
 
 namespace GameBox.Runtime.Component
 {
+    using GameBoxFramework.Runtime.EventPool;
+
     /// <summary>
     /// UIEventComponent组件
     /// </summary>
@@ -22,17 +22,29 @@ namespace GameBox.Runtime.Component
 	{
         [SerializeField]
         private UIEventArgs m_UIEventData = new UIEventArgs();
-
         /// <summary>
         /// 实时更新的数据
         /// </summary>
         public UIEventArgs UIEventData { get { return m_UIEventData; }}
+        [SerializeField]
+        private bool hoverOnceControl; //悬停控制
+        [SerializeField] 
+        private bool clickOnceControl; //点击控制
+        [SerializeField] 
+        private bool dragOnceControl; //滑动处理
 
-        /// <summary>
-        /// UI被点击事件
-        /// </summary>
-        public event Action<GameObject, UIEventArgs> OnClickEventHandler;
+        public event EventHandler OnEnterEventHandler; //悬停事件
+        public event EventHandler OnHoverEventHandler; //悬停事件
+        public event EventHandler OnExitEventHandler; //按下后抬起事件
 
+        public event EventHandler OnDownEventHandler; //按下事件
+        public event EventHandler OnPressEventHandler; //按住事件
+        public event EventHandler OnClickEventHandler; //点击事件
+        public event EventHandler OnUpEventHandler; //抬起事件
+
+        public event EventHandler OnBeginDragEventHandler; //开始滑动事件
+        public event EventHandler OnDragEventHandler; //滑动事件
+        public event EventHandler OnEndDragEventHandler; //结束滑动事件
 
 
         /// <summary>
@@ -49,12 +61,19 @@ namespace GameBox.Runtime.Component
                 throw new GameBoxFrameworkException("IEventPoolManager是无效的！");
             }
 
+            RegisterUIEventTopic(); //注册UI事件主题
 
-
+            OnEnterEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("EnterEvent", o,e); }; //悬停事件
+            OnHoverEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("HoverEvent", o, e); }; //悬停事件
+            OnExitEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("ExitEvent", o, e); }; //按下后抬起事件
+            OnDownEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("DownEvent", o, e); }; //按下事件
+            OnPressEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("PressEvent", o, e); }; //按住事件
+            OnClickEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("ClickEvent", o, e); }; //点击事件
+            OnUpEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("UpEvent", o, e); }; //抬起事件
+            OnBeginDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("BeginDragEvent", o, e); }; //开始滑动事件
+            OnDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("DragEvent", o, e); }; //滑动事件
+            OnEndDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("EndDragEvent", o, e); }; //结束滑动事件
         }
-
-
-
 
         /// <summary>
         /// 更新UIEventData 
@@ -63,8 +82,7 @@ namespace GameBox.Runtime.Component
         /// <param name="resultAppendList"></param>
         public void UpdateUIEventData(GameBoxGraphicRaycaster t_Raycaster, PointerEventData t_EventData, List<RaycastResult> t_ResultAppendList)
         {
-
-
+            #region 更新事件参数
             UIEventData.pointerEnter = t_EventData.pointerEnter;
             UIEventData.pointerPress = t_EventData.pointerPress;
             UIEventData.rawPointerPress = t_EventData.rawPointerPress;
@@ -76,33 +94,135 @@ namespace GameBox.Runtime.Component
             UIEventData.lastPress = t_EventData.lastPress;
             UIEventData.selectedObject = t_EventData.selectedObject;
             UIEventData.eligibleForClick = t_EventData.eligibleForClick;
+            UIEventData.dragging = t_EventData.dragging;
+            UIEventData.useDragThreshold = t_EventData.useDragThreshold;
             UIEventData.enterEventCamera = t_EventData.enterEventCamera;
             UIEventData.pressEventCamera = t_EventData.pressEventCamera;
             UIEventData.position = t_EventData.position;
             UIEventData.pressPosition = t_EventData.pressPosition;
             UIEventData.clickTime = t_EventData.clickTime;
+            #endregion
 
-
-            if (null!= t_EventData.pointerPress)
+            #region 悬停处理
+            if (null == t_EventData.pointerPress && null != t_EventData.pointerEnter && !hoverOnceControl) //悬停进入处理
             {
+                Debug.Log("悬停进入");
+                if (null!= OnEnterEventHandler)
+                {
+                    OnEnterEventHandler(t_EventData.pointerPress, UIEventData);
+                }
+                UIEventData.lastEnter = t_EventData.pointerEnter;
+                hoverOnceControl = true;
+            }
+
+            if (null == t_EventData.pointerPress && null != t_EventData.pointerEnter) //悬停停留处理
+            {
+                Debug.Log("悬停停留");
+                if (null != OnHoverEventHandler)
+                {
+                    OnHoverEventHandler(t_EventData.pointerPress, UIEventData);
+                }
+            }
+
+            if (null == t_EventData.pointerPress && null == t_EventData.pointerEnter && hoverOnceControl) //悬停移出处理
+            {
+                Debug.Log("悬停移出");
+                if (null != OnExitEventHandler)
+                {
+                    OnExitEventHandler(UIEventData.lastEnter, UIEventData);
+                }
+                hoverOnceControl = false;
+            }
+
+            #endregion
+
+            #region 按键处理
+            if (null != t_EventData.pointerPress && !clickOnceControl) //按下和点击处理
+            {
+                Debug.Log("按下");
+                if (null != OnDownEventHandler)
+                {
+                    OnDownEventHandler(t_EventData.pointerPress, UIEventData);
+                }
+                Debug.Log("点击");
                 if (null != OnClickEventHandler)
                 {
                     OnClickEventHandler(t_EventData.pointerPress, UIEventData);
                 }
+                clickOnceControl = true;
             }
 
+            if (null != t_EventData.pointerPress) //按住处理
+            {
+                Debug.Log("按住");
+                if (null != OnPressEventHandler)
+                {
+                    OnPressEventHandler(t_EventData.pointerPress, UIEventData);
+                }
+            }
 
+            if (null != t_EventData.lastPress && clickOnceControl) //抬起处理
+            {
+                Debug.Log("抬起");
+                if (null != OnUpEventHandler)
+                {
+                    OnUpEventHandler(t_EventData.lastPress, UIEventData);
+                }
+                clickOnceControl = false;
+            }
+            #endregion
 
+            #region 滑动处理
+            if (null != t_EventData.pointerDrag && !dragOnceControl) //开始滑动处理
+            {
+                Debug.Log("开始滑动处理");
+                if (null != OnBeginDragEventHandler)
+                {
+                    OnBeginDragEventHandler(t_EventData.pointerDrag, UIEventData);
+                }
+                UIEventData.lastDrag = t_EventData.pointerDrag;
+                dragOnceControl = true;
+            }
 
+            if (null != t_EventData.pointerDrag) //滑动中处理
+            {
+                Debug.Log("滑动中处理");
+                if (null != OnDragEventHandler)
+                {
+                    OnDragEventHandler(t_EventData.pointerDrag, UIEventData);
+                }
+            }
 
-
-
-
+            if (null == t_EventData.pointerDrag && dragOnceControl) //结束滑动处理
+            {
+                Debug.Log("结束滑动处理");
+                if (null != OnEndDragEventHandler)
+                {
+                    OnEndDragEventHandler(UIEventData.lastDrag, UIEventData);
+                }
+                dragOnceControl = false;
+            }
+            #endregion
 
         }
 
+        /// <summary>
+        /// 注册UI事件主题
+        /// </summary>
+        private void RegisterUIEventTopic()
+        {
 
-
+            m_IEventPoolManager.CreateEventTopic("EnterEvent");
+            m_IEventPoolManager.CreateEventTopic("HoverEvent");
+            m_IEventPoolManager.CreateEventTopic("ExitEvent");
+            m_IEventPoolManager.CreateEventTopic("DownEvent");
+            m_IEventPoolManager.CreateEventTopic("ClickEvent");
+            m_IEventPoolManager.CreateEventTopic("PressEvent");
+            m_IEventPoolManager.CreateEventTopic("UpEvent");
+            m_IEventPoolManager.CreateEventTopic("BeginDragEvent");
+            m_IEventPoolManager.CreateEventTopic("DragEvent");
+            m_IEventPoolManager.CreateEventTopic("EndDragEvent");
+        }
 
 
 

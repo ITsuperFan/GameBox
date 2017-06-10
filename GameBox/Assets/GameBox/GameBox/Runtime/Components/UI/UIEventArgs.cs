@@ -20,6 +20,8 @@ namespace GameBox.Runtime.Component
         public GameObject pointerPress;
         public GameObject rawPointerPress;
         public GameObject lastPress;
+        public GameObject lastEnter;
+        public GameObject lastDrag;
         public GameObject pointerDrag;
         public GameObject selectedObject;
         public Camera enterEventCamera;
@@ -31,7 +33,8 @@ namespace GameBox.Runtime.Component
         public float clickTime;
         public bool isPointerMoving;
         public bool isScrolling;
+        public bool dragging;
         public bool eligibleForClick;
-
+        public bool useDragThreshold;
     }
 }

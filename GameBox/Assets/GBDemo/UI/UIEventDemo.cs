@@ -15,23 +15,21 @@ namespace Alan
     public class UIEventDemo : MonoBehaviour
 	{
 
-        private void Awake()
+        private void Start()
         {
-            GameBoxEntry.GetComponent<UIEventComponent>().OnClickEventHandler += UIEventDemo_OnClickEventHandler;
-           
-
+            GameBoxEntry.GetComponent<EventBrokerComponent>().Register(this);
         }
 
-
-        private void UIEventDemo_OnClickEventHandler(GameObject arg1, UIEventArgs arg2)
+        [EventSubscription("EnterEvent")]
+        private void UIEventDemo_OnClickEventHandler(object arg1, UIEventArgs arg2)
         {
-            Debug.Log(arg1.name);
+            Debug.Log(arg1);
         }
 
         private void Update()
         {
 
-           // Debug.Log(EventSystem.current.currentSelectedGameObject+"   "+ EventSystem.current);
+                // Debug.Log(EventSystem.current.currentSelectedGameObject+"   "+ EventSystem.current);
 
         }
 

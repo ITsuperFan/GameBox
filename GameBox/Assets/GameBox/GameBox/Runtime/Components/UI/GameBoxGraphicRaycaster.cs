@@ -22,9 +22,10 @@ namespace GameBox.Runtime.Component
         private UIEventComponent m_UIEventComponent;
 
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
+
             UIEventComponent[] t_UIEventComponents = GameBoxEntry.GetComponents<UIEventComponent>();
             if (null== t_UIEventComponents)
             {
