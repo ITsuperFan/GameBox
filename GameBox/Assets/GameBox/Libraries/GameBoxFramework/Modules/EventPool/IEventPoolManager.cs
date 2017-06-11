@@ -14,6 +14,12 @@ namespace GameBoxFramework.Runtime.EventPool
     /// </summary>
     public interface IEventPoolManager  
 	{
+        /// <summary>
+        /// 是否存在主题
+        /// </summary>
+        /// <param name="t_TopicName">主题名字</param>
+        /// <returns></returns>
+        bool HasTopic(string t_TopicName);
 
         /// <summary>
         /// 创建一个事件主题

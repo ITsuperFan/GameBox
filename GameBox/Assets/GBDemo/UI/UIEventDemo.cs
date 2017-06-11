@@ -9,6 +9,7 @@ using GameBox;
 using GameBox.Runtime.Component;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Alan
 {
@@ -17,13 +18,27 @@ namespace Alan
 
         private void Start()
         {
-            GameBoxEntry.GetComponent<EventBrokerComponent>().Register(this);
+            GameBoxEntry.GetComponent<UIEventComponent>().Register(this);
         }
 
-        [EventSubscription("EnterEvent")]
-        private void UIEventDemo_OnClickEventHandler(object arg1, UIEventArgs arg2)
+        [UIEvent( UIEventType.ClickEvent,"Button_Alan")]
+        private void UIEventDemo_OnClickEventHandler1(object arg1, UIEventArgs arg2)
         {
-            Debug.Log(arg1);
+            Debug.Log("private:  " + arg1);
+            (arg1 as GameObject).GetComponent<Graphic>().color = Color.green;
+
+        }
+
+        [UIEvent(UIEventType.DragEvent)]
+        public void UIEventDemo_OnClickEventHandler2(object arg1, UIEventArgs arg2)
+        {
+            Debug.Log("public:  " + arg1);
+        }
+
+        //[UIEvent(UIEventType.PressEvent)]
+        protected void UIEventDemo_OnClickEventHandler3(object arg1, UIEventArgs arg2)
+        {
+            Debug.Log("protected:  " + arg1);
         }
 
         private void Update()

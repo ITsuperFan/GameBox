@@ -5,10 +5,9 @@
 * Website: www.0x69h.com
 */
 
-
-
 using GameBoxFramework;
 using GameBoxFramework.Runtime.EventPool;
+using System.Reflection;
 
 namespace GameBox.Runtime.Component
 {
@@ -55,7 +54,7 @@ namespace GameBox.Runtime.Component
                
             }
 
-            var t_Methods = t_Type.GetMethods();
+            var t_Methods = t_Type.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             for (int i = 0; i < t_Methods.Length; i++)
             {
                 var t_CustomAttributes = t_Methods[i].GetCustomAttributes(false);
@@ -82,8 +81,6 @@ namespace GameBox.Runtime.Component
             return m_IEventPoolManager.CreateEventTopic(t_EventTopicName, t_IsMainThread);
         }
 
-
-
         /// <summary>
         /// 获取一个事件主题
         /// </summary>
@@ -102,10 +99,6 @@ namespace GameBox.Runtime.Component
         {
             m_IEventPoolManager.RemoveEventTopic(t_EventTopicName);
         }
-
-
-
-
 
         /// <summary>
         /// 发布一个线程安全的主题
@@ -139,7 +132,6 @@ namespace GameBox.Runtime.Component
         {
             m_IEventPoolManager.PublishTopicSmart(t_EventTopicName, t_Sender, t_EventArgs);
         }
-
 
     }
 }

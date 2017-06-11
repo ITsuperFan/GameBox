@@ -14,6 +14,7 @@ using UnityEngine.EventSystems;
 namespace GameBox.Runtime.Component
 {
     using GameBoxFramework.Runtime.EventPool;
+    using System.Reflection;
 
     /// <summary>
     /// UIEventComponent组件
@@ -63,16 +64,7 @@ namespace GameBox.Runtime.Component
 
             RegisterUIEventTopic(); //注册UI事件主题
 
-            OnEnterEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("EnterEvent", o,e); }; //悬停事件
-            OnHoverEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("HoverEvent", o, e); }; //悬停事件
-            OnExitEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("ExitEvent", o, e); }; //按下后抬起事件
-            OnDownEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("DownEvent", o, e); }; //按下事件
-            OnPressEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("PressEvent", o, e); }; //按住事件
-            OnClickEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("ClickEvent", o, e); }; //点击事件
-            OnUpEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("UpEvent", o, e); }; //抬起事件
-            OnBeginDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("BeginDragEvent", o, e); }; //开始滑动事件
-            OnDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("DragEvent", o, e); }; //滑动事件
-            OnEndDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("EndDragEvent", o, e); }; //结束滑动事件
+
         }
 
         /// <summary>
@@ -106,10 +98,10 @@ namespace GameBox.Runtime.Component
             #region 悬停处理
             if (null == t_EventData.pointerPress && null != t_EventData.pointerEnter && !hoverOnceControl) //悬停进入处理
             {
-                Debug.Log("悬停进入");
+                //Debug.Log("悬停进入");
                 if (null!= OnEnterEventHandler)
                 {
-                    OnEnterEventHandler(t_EventData.pointerPress, UIEventData);
+                    OnEnterEventHandler(t_EventData.pointerEnter, UIEventData);
                 }
                 UIEventData.lastEnter = t_EventData.pointerEnter;
                 hoverOnceControl = true;
@@ -117,16 +109,16 @@ namespace GameBox.Runtime.Component
 
             if (null == t_EventData.pointerPress && null != t_EventData.pointerEnter) //悬停停留处理
             {
-                Debug.Log("悬停停留");
+                //Debug.Log("悬停停留");
                 if (null != OnHoverEventHandler)
                 {
-                    OnHoverEventHandler(t_EventData.pointerPress, UIEventData);
+                    OnHoverEventHandler(t_EventData.pointerEnter, UIEventData);
                 }
             }
 
             if (null == t_EventData.pointerPress && null == t_EventData.pointerEnter && hoverOnceControl) //悬停移出处理
             {
-                Debug.Log("悬停移出");
+                //Debug.Log("悬停移出");
                 if (null != OnExitEventHandler)
                 {
                     OnExitEventHandler(UIEventData.lastEnter, UIEventData);
@@ -139,12 +131,12 @@ namespace GameBox.Runtime.Component
             #region 按键处理
             if (null != t_EventData.pointerPress && !clickOnceControl) //按下和点击处理
             {
-                Debug.Log("按下");
+                //Debug.Log("按下");
                 if (null != OnDownEventHandler)
                 {
                     OnDownEventHandler(t_EventData.pointerPress, UIEventData);
                 }
-                Debug.Log("点击");
+                //Debug.Log("点击");
                 if (null != OnClickEventHandler)
                 {
                     OnClickEventHandler(t_EventData.pointerPress, UIEventData);
@@ -154,7 +146,7 @@ namespace GameBox.Runtime.Component
 
             if (null != t_EventData.pointerPress) //按住处理
             {
-                Debug.Log("按住");
+                //Debug.Log("按住");
                 if (null != OnPressEventHandler)
                 {
                     OnPressEventHandler(t_EventData.pointerPress, UIEventData);
@@ -163,7 +155,7 @@ namespace GameBox.Runtime.Component
 
             if (null != t_EventData.lastPress && clickOnceControl) //抬起处理
             {
-                Debug.Log("抬起");
+                //Debug.Log("抬起");
                 if (null != OnUpEventHandler)
                 {
                     OnUpEventHandler(t_EventData.lastPress, UIEventData);
@@ -175,7 +167,7 @@ namespace GameBox.Runtime.Component
             #region 滑动处理
             if (null != t_EventData.pointerDrag && !dragOnceControl) //开始滑动处理
             {
-                Debug.Log("开始滑动处理");
+                //Debug.Log("开始滑动处理");
                 if (null != OnBeginDragEventHandler)
                 {
                     OnBeginDragEventHandler(t_EventData.pointerDrag, UIEventData);
@@ -186,7 +178,7 @@ namespace GameBox.Runtime.Component
 
             if (null != t_EventData.pointerDrag) //滑动中处理
             {
-                Debug.Log("滑动中处理");
+                //Debug.Log("滑动中处理");
                 if (null != OnDragEventHandler)
                 {
                     OnDragEventHandler(t_EventData.pointerDrag, UIEventData);
@@ -195,7 +187,7 @@ namespace GameBox.Runtime.Component
 
             if (null == t_EventData.pointerDrag && dragOnceControl) //结束滑动处理
             {
-                Debug.Log("结束滑动处理");
+                //Debug.Log("结束滑动处理");
                 if (null != OnEndDragEventHandler)
                 {
                     OnEndDragEventHandler(UIEventData.lastDrag, UIEventData);
@@ -212,18 +204,62 @@ namespace GameBox.Runtime.Component
         private void RegisterUIEventTopic()
         {
 
-            m_IEventPoolManager.CreateEventTopic("EnterEvent");
-            m_IEventPoolManager.CreateEventTopic("HoverEvent");
-            m_IEventPoolManager.CreateEventTopic("ExitEvent");
-            m_IEventPoolManager.CreateEventTopic("DownEvent");
-            m_IEventPoolManager.CreateEventTopic("ClickEvent");
-            m_IEventPoolManager.CreateEventTopic("PressEvent");
-            m_IEventPoolManager.CreateEventTopic("UpEvent");
-            m_IEventPoolManager.CreateEventTopic("BeginDragEvent");
-            m_IEventPoolManager.CreateEventTopic("DragEvent");
-            m_IEventPoolManager.CreateEventTopic("EndDragEvent");
+            m_IEventPoolManager.CreateEventTopic("EnterEvent"); //创建EnterEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("HoverEvent");//创建HoverEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("ExitEvent");//创建ExitEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("DownEvent");//创建DownEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("ClickEvent");//创建ClickEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("PressEvent");//创建PressEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("UpEvent");//创建UpEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("BeginDragEvent");//创建BeginDragEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("DragEvent");//创建DragEvent广播主题
+            m_IEventPoolManager.CreateEventTopic("EndDragEvent");//创建EndDragEvent广播主题
+
+
+            OnEnterEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("EnterEvent", o, e); var t_TargetName = "EnterEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //悬停事件
+            OnHoverEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("HoverEvent", o, e); var t_TargetName = "HoverEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //悬停事件
+            OnExitEventHandler += (o, e) => {  m_IEventPoolManager.PublishTopicNow("ExitEvent", o, e);   var t_TargetName = "ExitEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //按下后抬起事件
+            OnDownEventHandler += (o, e) => {  m_IEventPoolManager.PublishTopicNow("DownEvent", o, e);   var t_TargetName = "DownEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //按下事件
+            OnPressEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("PressEvent", o, e); var t_TargetName = "PressEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //按住事件
+            OnClickEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("ClickEvent", o, e); var t_TargetName = "ClickEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //点击事件
+            OnUpEventHandler += (o, e) => {    m_IEventPoolManager.PublishTopicNow("UpEvent", o, e);       var t_TargetName = "UpEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //抬起事件
+            OnBeginDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("BeginDragEvent", o, e); var t_TargetName = "BeginDragEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //开始滑动事件
+            OnDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("DragEvent", o, e); var t_TargetName = "DragEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //滑动事件
+            OnEndDragEventHandler += (o, e) => { m_IEventPoolManager.PublishTopicNow("EndDragEvent", o, e); var t_TargetName = "EndDragEvent" + (o as GameObject).name; if (m_IEventPoolManager.HasTopic(t_TargetName)) { m_IEventPoolManager.PublishTopicNow(t_TargetName, o, e); } }; //结束滑动事件
+
         }
 
+        /// <summary>
+        /// 注册事件经纪人所管辖的发布者或者订阅者
+        /// </summary>
+        /// <param name="t_Target"></param>
+        public void Register(object t_Target)
+        {
+            var t_Type = t_Target.GetType();
+
+            var t_Methods = t_Type.GetMethods(BindingFlags.Instance |BindingFlags.NonPublic | BindingFlags.Public);
+            for (int i = 0; i < t_Methods.Length; i++)
+            {
+                var t_CustomAttributes = t_Methods[i].GetCustomAttributes(false);
+                for (int j = 0; j < t_CustomAttributes.Length; j++)
+                {
+                    if (t_CustomAttributes[j] is UIEventAttribute)//订阅者
+                    {
+                        var t_UIEventAttribute = t_CustomAttributes[j] as UIEventAttribute;
+                        var t_TargetTopicName = t_UIEventAttribute.UIEventTopicName + (t_UIEventAttribute.UIWidgetName??string.Empty);
+                        if (m_IEventPoolManager.HasTopic(t_TargetTopicName))
+                        {
+                            m_IEventPoolManager.GetEventTopic(t_TargetTopicName).AddSubscriber(DelegateHelper.CreateDelegate(t_Methods[i], t_Target)); //添加订阅者
+                        }
+                        else
+                        {
+                            m_IEventPoolManager.CreateEventTopic(t_TargetTopicName).AddSubscriber(DelegateHelper.CreateDelegate(t_Methods[i], t_Target)); //添加订阅者
+                        }
+                    }
+                }
+            }
+
+        }
 
 
     }

@@ -20,6 +20,20 @@ namespace GameBoxFramework.Runtime.EventPool
         /// </summary>
         private readonly IListDataStructure<IEventTopic> IListDataStructure = new EventPoolManagerSLinkedList();
 
+
+
+
+        /// <summary>
+        /// 是否存在主题
+        /// </summary>
+        /// <param name="t_TopicName">主题名字</param>
+        /// <returns></returns>
+        public bool HasTopic(string t_TopicName)
+        {
+            return null != GetEventTopic(t_TopicName);
+        }
+
+
         /// <summary>
         /// 创建一个事件主题
         /// </summary>
