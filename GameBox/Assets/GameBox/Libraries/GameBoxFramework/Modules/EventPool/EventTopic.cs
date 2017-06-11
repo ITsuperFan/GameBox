@@ -25,6 +25,7 @@ namespace GameBoxFramework.Runtime.EventPool
         {
             EventTopicName = t_EventTopicName;        
         }
+
         /// <summary>
         /// 构造方法
         /// </summary>
@@ -176,7 +177,6 @@ namespace GameBoxFramework.Runtime.EventPool
                 m_EventTopicQueue.Dequeue();
             }
         }
-
 
         /// <summary>
         /// 比较接口
