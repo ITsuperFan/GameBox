@@ -21,7 +21,13 @@ namespace Alan
             GameBoxEntry.GetComponent<UIEventComponent>().Register(this);
         }
 
-        [UIEvent( UIEventType.ClickEvent,"Button_Alan")]
+        [UIEvent(UIEventType.ClickEvent)]
+        private void UIEventDemo_OnClickEventHandler0(GameObject arg1, UIEventArgs arg2)
+        {
+            Debug.Log("所有的按钮名字:  " + arg1.name);
+        }
+
+        [UIEvent( UIEventType.ClickEvent,"Scene1_Canvas1_Button_Alan")]
         private void UIEventDemo_OnClickEventHandler1(object arg1, UIEventArgs arg2)
         {
             Debug.Log("private:  " + arg1);

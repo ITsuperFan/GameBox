@@ -62,8 +62,15 @@ namespace GameBox.Runtime.Component
                 {
                     if (t_CustomAttributes[j] is EventSubscriptionAttribute)//订阅者
                     {
-                        var t_IEventTopic = GetEventTopic((t_CustomAttributes[j] as EventSubscriptionAttribute).EventTopicName); //获取主题
-                        t_IEventTopic.AddSubscriber(DelegateHelper.CreateDelegate(t_Methods[i], t_Target)); //添加订阅者
+                        var t_TargetTopicName = (t_CustomAttributes[j] as EventSubscriptionAttribute).EventTopicName;
+                        if (m_IEventPoolManager.HasTopic(t_TargetTopicName))
+                        {
+                            m_IEventPoolManager.GetEventTopic(t_TargetTopicName).AddSubscriber(DelegateHelper.CreateDelegate(t_Methods[i], t_Target)); //添加订阅者
+                        }
+                        else
+                        {
+                            m_IEventPoolManager.CreateEventTopic(t_TargetTopicName).AddSubscriber(DelegateHelper.CreateDelegate(t_Methods[i], t_Target)); //添加订阅者
+                        }
                         //UnityEngine.Debug.Log("EventSubscriptionAtrribute: " + (t_CustomAttributes[j] is EventSubscriptionAttribute));
                     }
                 }
