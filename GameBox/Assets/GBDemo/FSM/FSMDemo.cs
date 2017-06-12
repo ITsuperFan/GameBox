@@ -16,14 +16,14 @@ namespace Alan
 {
     public class FSMDemo : MonoBehaviour 
 	{
-        private FSMManagerComponent m_FSMManager;
+        private FSMComponent m_FSMManager;
         private IFSM m_IFSM;
 
         private void Start()
         {
             //  yield return new WaitForSeconds(2f);
 
-            m_FSMManager = GameBoxEntry.GetComponent<FSMManagerComponent>(); //获取状态机管家组件
+            m_FSMManager = GameBoxEntry.GetComponent<FSMComponent>(); //获取状态机管家组件
             m_IFSM = m_FSMManager.CreateFSM("Demo"); //创建一个状态机
             m_IFSM.AddState<StateOne>();
             m_IFSM.AddState(typeof(StateTwo));

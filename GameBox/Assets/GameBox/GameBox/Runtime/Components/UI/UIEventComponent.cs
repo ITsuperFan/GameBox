@@ -19,6 +19,8 @@ namespace GameBox.Runtime.Component
     /// <summary>
     /// UIEventComponent组件
     /// </summary>
+    [DisallowMultipleComponent]
+    [AddComponentMenu("GameBox/UIEvent")]
     public sealed class UIEventComponent : BaseGameBoxComponent 
 	{
         [SerializeField]

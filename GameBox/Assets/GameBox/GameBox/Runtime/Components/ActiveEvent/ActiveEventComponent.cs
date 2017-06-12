@@ -15,7 +15,7 @@ namespace GameBox.Runtime.Component
     /// <summary>
     /// 有效事件管家
     /// </summary>
-    public sealed class ActiveEventManagerComponent : BaseGameBoxComponent
+    public sealed class ActiveEventComponent : BaseGameBoxComponent
     {
         private IActiveEventManager m_ActiveEventManager  = null;
 

@@ -8,12 +8,15 @@
 using GameBoxFramework;
 using GameBoxFramework.Runtime.EventPool;
 using System.Reflection;
+using UnityEngine;
 
 namespace GameBox.Runtime.Component
 {
     /// <summary>
     /// EventBroker组件
     /// </summary>
+    [DisallowMultipleComponent]
+    [AddComponentMenu("GameBox/EventBroker")]
     public sealed class EventBrokerComponent : BaseGameBoxComponent
     {
         /// <summary>

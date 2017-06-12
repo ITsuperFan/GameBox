@@ -22,7 +22,7 @@ namespace GameBoxFramework
         {
             m_Button.onClick.AddListener(()=> {
 
-                GameBoxEntry.GetComponent<ActiveEventManagerComponent>().CallActiveEvent("有效事件方法名",m_Button.gameObject,m_Button.GetComponent<Image>(), m_Button.GetComponentInChildren<Text>());
+                GameBoxEntry.GetComponent<ActiveEventComponent>().CallActiveEvent("有效事件方法名",m_Button.gameObject,m_Button.GetComponent<Image>(), m_Button.GetComponentInChildren<Text>());
 
             });
 

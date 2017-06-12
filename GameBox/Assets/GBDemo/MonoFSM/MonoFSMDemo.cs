@@ -31,7 +31,7 @@ namespace Alan
         private void Start()
         {
 
-            m_IMonoFSM =   GameBoxEntry.GetComponent<MonoFSMManagerComponent>().CreateMonoFSM<MonoFSMDemoState>(this);
+            m_IMonoFSM =   GameBoxEntry.GetComponent<MonoFSMComponent>().CreateMonoFSM<MonoFSMDemoState>(this);
 
         }
 

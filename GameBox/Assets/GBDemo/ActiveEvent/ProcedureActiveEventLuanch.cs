@@ -28,7 +28,7 @@ namespace Alan
         protected override void ProcedureInit(IFSM t_StateOwner)
         {
             UnityEngine.Debug.Log("ProcedureActiveEventLuanch ProcedureInit");
-            GameBoxEntry.GetComponent<ActiveEventManagerComponent>().LoadActiveEventAssembly(typeof(ActiveEventHandler)); //装载有效事件程序集
+            GameBoxEntry.GetComponent<ActiveEventComponent>().LoadActiveEventAssembly(typeof(ActiveEventHandler)); //装载有效事件程序集
         }
 
         protected override void ProcedureEnter(IFSM t_StateOwner)

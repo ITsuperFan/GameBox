@@ -9,10 +9,16 @@
 
 using GameBoxFramework.Runtime.FSM;
 using GameBoxFramework;
+using UnityEngine;
 
 namespace GameBox.Runtime.Component
 {
-	public sealed class FSMManagerComponent : BaseGameBoxComponent
+    /// <summary>
+    /// 状态机组件
+    /// </summary>
+    [DisallowMultipleComponent]
+    [AddComponentMenu("GameBox/FSM")]
+    public sealed class FSMComponent : BaseGameBoxComponent
 	{
         private IFSMManager m_IFSMManager = null;
         protected override void Awake()

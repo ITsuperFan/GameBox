@@ -8,8 +8,8 @@ using GameBox.Runtime.Component;
 
 namespace GameBox.Editor
 {
-    [CustomEditor(typeof(ProcedureManagerComponent))]
-    internal sealed class ProcedureModuleNodeEditor : BaseGameBoxEditor
+    [CustomEditor(typeof(ProcedureComponent))]
+    internal sealed class ProcedureComponentEditor : BaseGameBoxEditor
     {
         private SerializedProperty m_AvailableProcedureTypeNames = null; //对应ProcedureManagerComponent里面的m_AvailableProcedureTypeNames属性
         private SerializedProperty m_BootProcedureTypeName = null;//对应ProcedureManagerComponent里面的m_EntranceProcedureTypeName属性
@@ -24,7 +24,7 @@ namespace GameBox.Editor
 
             serializedObject.Update(); //更新被序列化的对象上的数据
 
-            ProcedureManagerComponent t = (ProcedureManagerComponent)target;
+            ProcedureComponent t = (ProcedureComponent)target;
 
             if (string.IsNullOrEmpty(m_BootProcedureTypeName.stringValue))
             {

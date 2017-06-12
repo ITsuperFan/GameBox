@@ -15,7 +15,9 @@ namespace GameBox.Runtime.Component
     /// <summary>
     /// Mono状态机组件
     /// </summary>
-	public sealed class MonoFSMManagerComponent : BaseGameBoxComponent
+    [DisallowMultipleComponent]
+    [AddComponentMenu("GameBox/Mono FSM")]
+    public sealed class MonoFSMComponent : BaseGameBoxComponent
     {
         /// <summary>
         /// 创建MonoFSM状态机
