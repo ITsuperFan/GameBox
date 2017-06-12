@@ -7,8 +7,8 @@
 
 using GameBox;
 using GameBox.Runtime.Component;
-using GameBoxFramework.Runtime.FSM;
-using GameBoxFramework.Runtime.Procedure;
+using GameBoxFramework.FSM;
+using GameBoxFramework.Procedure;
 
 
 namespace Alan

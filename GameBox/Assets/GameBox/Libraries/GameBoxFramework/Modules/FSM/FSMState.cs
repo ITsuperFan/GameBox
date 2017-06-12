@@ -6,7 +6,7 @@
 */
 
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     /// <summary>
     /// GBF层的状态抽象基类

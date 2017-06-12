@@ -7,7 +7,7 @@
 
 
 
-using GameBoxFramework.Runtime.FSM;
+using GameBoxFramework.FSM;
 
 namespace Alan
 {

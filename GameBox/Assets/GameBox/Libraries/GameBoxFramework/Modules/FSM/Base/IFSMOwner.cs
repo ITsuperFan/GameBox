@@ -6,7 +6,7 @@
 */
 
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     /// <summary>
     /// 状态机的持有者接口

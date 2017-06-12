@@ -6,7 +6,7 @@
 */
 
 using UnityEngine;
-using GameBoxFramework.Runtime.FSM;
+using GameBoxFramework.FSM;
 using GameBoxFramework;
 using GameBox;
 using GameBox.Runtime.Component;

@@ -6,7 +6,7 @@
 */
 
 
-namespace GameBoxFramework.Runtime.EventPool
+namespace GameBoxFramework.EventPool
 {
 
     /// <summary>

@@ -17,7 +17,7 @@ namespace GameBoxFramework.ObjectPool
         /// 内部对象。
         /// </summary>
         /// <typeparam name="T">对象类型。</typeparam>
-        private sealed class Object<T> where T : ObjectBase
+        private sealed class Object<T> where T : BaseObject
         {
             private readonly T m_Object;
             private int m_SpawnCount;

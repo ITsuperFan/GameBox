@@ -5,12 +5,10 @@
 * Website: www.0x69h.com
 */
 
-using GameBoxFramework.Runtime.EventPool;
+using GameBox;
 using GameBox.Runtime.Component;
 using GameBoxFramework;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using GameBox;
 
 namespace Alan
 {

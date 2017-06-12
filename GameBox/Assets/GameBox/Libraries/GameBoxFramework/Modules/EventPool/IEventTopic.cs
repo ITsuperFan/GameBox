@@ -9,7 +9,7 @@
 
 using System;
 
-namespace GameBoxFramework.Runtime.EventPool
+namespace GameBoxFramework.EventPool
 {
     /// <summary>
     /// 事件主题接口

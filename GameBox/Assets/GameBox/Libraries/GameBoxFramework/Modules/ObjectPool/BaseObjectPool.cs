@@ -12,14 +12,14 @@ namespace GameBoxFramework.ObjectPool
     /// <summary>
     /// 对象池基类。
     /// </summary>
-    public abstract class ObjectPoolBase
+    public abstract class BaseObjectPool
     {
         private readonly string m_Name;
 
         /// <summary>
         /// 初始化对象池基类的新实例。
         /// </summary>
-        public ObjectPoolBase()
+        public BaseObjectPool()
             : this(null)
         {
 
@@ -29,7 +29,7 @@ namespace GameBoxFramework.ObjectPool
         /// 初始化对象池基类的新实例。
         /// </summary>
         /// <param name="name">对象池名称。</param>
-        public ObjectPoolBase(string name)
+        public BaseObjectPool(string name)
         {
             m_Name = name ?? string.Empty;
         }

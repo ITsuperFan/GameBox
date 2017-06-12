@@ -7,7 +7,7 @@
 
 using System;
 
-namespace GameBoxFramework.Runtime.Event
+namespace GameBoxFramework.Event
 {
     /// <summary>
     /// 有效事件特性

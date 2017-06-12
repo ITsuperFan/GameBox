@@ -6,10 +6,10 @@
 */
 
 
-using GameBoxFramework.Runtime.FSM;
+using GameBoxFramework.FSM;
 using System;
 
-namespace GameBoxFramework.Runtime.Procedure
+namespace GameBoxFramework.Procedure
 {
     /// <summary>
     /// 抽象流程基类

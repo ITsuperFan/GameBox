@@ -5,8 +5,8 @@
 * Website: www.0x69h.com
 */
 
-using GameBoxFramework.Runtime.FSM;
-using GameBoxFramework.Runtime.Procedure;
+using GameBoxFramework.FSM;
+using GameBoxFramework.Procedure;
 
 
 namespace GameBoxFramework

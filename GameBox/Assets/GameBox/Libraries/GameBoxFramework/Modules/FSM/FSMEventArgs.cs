@@ -5,7 +5,7 @@
 * Website: www.0x69h.com
 */
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     public sealed class FSMEventArgs : BaseEventArgs
     {

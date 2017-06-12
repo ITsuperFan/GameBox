@@ -7,7 +7,7 @@
 
 
 
-namespace GameBoxFramework.Runtime.EventPool
+namespace GameBoxFramework.EventPool
 {
     /// <summary>
     /// 事件池管家

@@ -8,7 +8,7 @@
 
 using System;
 
-namespace GameBoxFramework.Runtime.Procedure
+namespace GameBoxFramework.Procedure
 {
     /// <summary>
     /// 流程模块接口

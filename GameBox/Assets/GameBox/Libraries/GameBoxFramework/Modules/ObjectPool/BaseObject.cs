@@ -12,7 +12,7 @@ namespace GameBoxFramework.ObjectPool
     /// <summary>
     /// 对象基类。
     /// </summary>
-    public abstract class ObjectBase
+    public abstract class BaseObject
     {
         private readonly string m_Name;
         private readonly object m_Target;
@@ -24,7 +24,7 @@ namespace GameBoxFramework.ObjectPool
         /// 初始化对象的新实例。
         /// </summary>
         /// <param name="target">对象。</param>
-        public ObjectBase(object target)
+        public BaseObject(object target)
             : this(null, target, false, 0)
         {
 
@@ -35,7 +35,7 @@ namespace GameBoxFramework.ObjectPool
         /// </summary>
         /// <param name="name">对象名称。</param>
         /// <param name="target">对象。</param>
-        public ObjectBase(string name, object target)
+        public BaseObject(string name, object target)
             : this(name, target, false, 0)
         {
 
@@ -47,7 +47,7 @@ namespace GameBoxFramework.ObjectPool
         /// <param name="name">对象名称。</param>
         /// <param name="target">对象。</param>
         /// <param name="locked">对象是否被加锁。</param>
-        public ObjectBase(string name, object target, bool locked)
+        public BaseObject(string name, object target, bool locked)
             : this(name, target, locked, 0)
         {
 
@@ -59,7 +59,7 @@ namespace GameBoxFramework.ObjectPool
         /// <param name="name">对象名称。</param>
         /// <param name="target">对象。</param>
         /// <param name="priority">对象的优先级。</param>
-        public ObjectBase(string name, object target, int priority)
+        public BaseObject(string name, object target, int priority)
             : this(name, target, false, priority)
         {
 
@@ -72,7 +72,7 @@ namespace GameBoxFramework.ObjectPool
         /// <param name="target">对象。</param>
         /// <param name="locked">对象是否被加锁。</param>
         /// <param name="priority">对象的优先级。</param>
-        public ObjectBase(string name, object target, bool locked, int priority)
+        public BaseObject(string name, object target, bool locked, int priority)
         {
             if (target == null)
             {

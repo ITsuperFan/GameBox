@@ -9,7 +9,7 @@
 
 using System.Collections.Generic;
 
-namespace GameBoxFramework.Runtime.EventPool
+namespace GameBoxFramework.EventPool
 {
 
 

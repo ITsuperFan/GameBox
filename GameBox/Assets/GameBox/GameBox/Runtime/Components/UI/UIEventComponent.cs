@@ -13,7 +13,7 @@ using UnityEngine.EventSystems;
 
 namespace GameBox.Runtime.Component
 {
-    using GameBoxFramework.Runtime.EventPool;
+    using GameBoxFramework.EventPool;
     using System.Reflection;
 
     /// <summary>

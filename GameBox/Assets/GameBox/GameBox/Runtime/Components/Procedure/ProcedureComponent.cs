@@ -8,7 +8,7 @@
 
 using System;
 using GameBoxFramework;
-using GameBoxFramework.Runtime.Procedure;
+using GameBoxFramework.Procedure;
 using UnityEngine;
 
 namespace GameBox.Runtime.Component

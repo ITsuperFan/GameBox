@@ -70,7 +70,7 @@ namespace GameBoxFramework
                 throw new GameBoxFrameworkException(string.Format("{0} 不是系统内建的模块.", t_InterfaceType.FullName));
             }
             var t_NamespaceSplits = t_InterfaceType.Namespace.Split('.');
-            string t_ModuleName = string.Format("{0}.{1}.{2}", "GameBoxFramework.Runtime", t_NamespaceSplits[t_NamespaceSplits.Length - 1], t_InterfaceType.Name.Substring(1));
+            string t_ModuleName = string.Format("{0}.{1}.{2}", "GameBoxFramework", t_NamespaceSplits[t_NamespaceSplits.Length - 1], t_InterfaceType.Name.Substring(1));
             Type t_ModuleType = Type.GetType(t_ModuleName);
             if (t_ModuleType == null) //如果存在这个内建模块类型
             {

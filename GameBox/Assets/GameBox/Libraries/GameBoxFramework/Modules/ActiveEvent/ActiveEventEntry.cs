@@ -7,7 +7,7 @@
 
 using System.Reflection;
 
-namespace GameBoxFramework.Runtime.Event
+namespace GameBoxFramework.Event
 {
     /// <summary>
     /// 有效事件条目类型

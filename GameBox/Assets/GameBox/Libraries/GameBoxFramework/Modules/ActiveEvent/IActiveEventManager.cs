@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace GameBoxFramework.Runtime.Event
+namespace GameBoxFramework.Event
 {
     /// <summary>
     /// 有效事件模块接口

@@ -11,7 +11,7 @@ using GameBoxFramework.Algorithms;
 using System;
 using System.Collections.Generic;
 
-namespace GameBoxFramework.Runtime.Event
+namespace GameBoxFramework.Event
 {
     /// <summary>
     /// 有效事件数据据结构

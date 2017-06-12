@@ -11,7 +11,7 @@ using GameBoxFramework.Algorithms;
 using System;
 using System.Collections.Generic;
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     public sealed class FSMTrieMap<TKey, TValue> : IMapDataStructure<TKey, TValue>
     {

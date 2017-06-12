@@ -8,7 +8,7 @@
 using System;
 using GameBoxFramework.Algorithms;
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     public sealed class FSMManagerSLinkedList : IListDataStructure<FSM>
     {

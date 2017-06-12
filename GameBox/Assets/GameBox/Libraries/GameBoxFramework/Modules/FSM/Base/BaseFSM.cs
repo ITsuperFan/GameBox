@@ -7,7 +7,7 @@
 
 using System;
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     /// <summary>
     /// 状态机抽象基类

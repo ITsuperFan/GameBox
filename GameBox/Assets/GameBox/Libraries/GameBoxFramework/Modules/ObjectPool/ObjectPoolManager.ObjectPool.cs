@@ -17,7 +17,7 @@ namespace GameBoxFramework.ObjectPool
         /// 对象池。
         /// </summary>
         /// <typeparam name="T">对象类型。</typeparam>
-        private sealed class ObjectPool<T> : ObjectPoolBase, IObjectPool<T> where T : ObjectBase
+        private sealed class ObjectPool<T> : BaseObjectPool, IObjectPool<T> where T : BaseObject
         {
             private readonly LinkedList<Object<T>> m_Objects;
             private readonly bool m_AllowMultiSpawn;
@@ -425,7 +425,7 @@ namespace GameBoxFramework.ObjectPool
                     return;
                 }
 
-                foreach (ObjectBase toReleaseObject in toReleaseObjects)
+                foreach (BaseObject toReleaseObject in toReleaseObjects)
                 {
                     if (toReleaseObject == null)
                     {

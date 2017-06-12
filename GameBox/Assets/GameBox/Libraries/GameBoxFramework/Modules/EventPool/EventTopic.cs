@@ -10,7 +10,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace GameBoxFramework.Runtime.EventPool
+namespace GameBoxFramework.EventPool
 {
     /// <summary>
     /// 事件主题

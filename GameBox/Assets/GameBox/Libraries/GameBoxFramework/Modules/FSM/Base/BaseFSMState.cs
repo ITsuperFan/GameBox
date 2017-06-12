@@ -6,7 +6,7 @@
 */
 
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     /// <summary>
     /// 状态抽象类

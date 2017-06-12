@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace GameBoxFramework.Runtime.Event
+namespace GameBoxFramework.Event
 {
     /// <summary>
     /// 有效事件模块实现类

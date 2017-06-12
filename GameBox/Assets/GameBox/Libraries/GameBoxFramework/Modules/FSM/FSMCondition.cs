@@ -9,7 +9,7 @@
 
 using System;
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     /// <summary>
     /// 状态机基础条件抽象类

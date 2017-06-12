@@ -6,9 +6,9 @@
 */
 
 using System;
-namespace GameBoxFramework.Runtime.Procedure
+namespace GameBoxFramework.Procedure
 {
-    using GameBoxFramework.Runtime.FSM;
+    using GameBoxFramework.FSM;
     /// <summary>
     /// 流程模块
     /// </summary>

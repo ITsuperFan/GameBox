@@ -8,7 +8,7 @@
 using GameBoxFramework.Algorithms;
 using System;
 
-namespace GameBoxFramework.Runtime.EventPool
+namespace GameBoxFramework.EventPool
 {
     public sealed class EventPoolManagerSLinkedList : IListDataStructure<IEventTopic>
     {

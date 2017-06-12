@@ -7,7 +7,7 @@
 
 using System;
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     /// <summary>
     /// GameBoxFramework层的 状态机

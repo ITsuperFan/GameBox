@@ -28,8 +28,8 @@ namespace GameBox.Editor
             {
                 EditorGUILayout.LabelField("Object Pool Count", t.Count.ToString());
 
-                ObjectPoolBase[] objectPools = t.GetAllObjectPools(true);
-                foreach (ObjectPoolBase objectPool in objectPools)
+                BaseObjectPool[] objectPools = t.GetAllObjectPools(true);
+                foreach (BaseObjectPool objectPool in objectPools)
                 {
                     DrawObjectPool(objectPool);
                 }
@@ -43,7 +43,7 @@ namespace GameBox.Editor
 
         }
 
-        private void DrawObjectPool(ObjectPoolBase objectPool)
+        private void DrawObjectPool(BaseObjectPool objectPool)
         {
             string fullName = TextHelper.GetFullName(objectPool.ObjectType, objectPool.Name);
             bool lastState = m_OpenedItems.Contains(fullName);

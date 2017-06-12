@@ -7,7 +7,7 @@
 
 using System.Collections.Generic;
 
-namespace GameBoxFramework.Runtime.FSM
+namespace GameBoxFramework.FSM
 {
     /// <summary>
     /// 状态机模块

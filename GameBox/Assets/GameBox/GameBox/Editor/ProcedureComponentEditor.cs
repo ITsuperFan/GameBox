@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using GameBoxFramework.Utility;
-using GameBoxFramework.Runtime.Procedure;
+using GameBoxFramework.Procedure;
 using GameBox.Runtime.Component;
 
 namespace GameBox.Editor

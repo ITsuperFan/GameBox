@@ -5,7 +5,7 @@
 * Website: www.0x69h.com
 */
 
-using GameBoxFramework.Runtime.Event;
+using GameBoxFramework.Event;
 using UnityEngine;
 using UnityEngine.UI;
 

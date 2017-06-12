@@ -6,7 +6,7 @@
 */
 
 using GameBoxFramework;
-using GameBoxFramework.Runtime.Event;
+using GameBoxFramework.Event;
 using System;
 using System.Collections.Generic;
 

@@ -6,7 +6,7 @@
 */
 
 using GameBoxFramework;
-using GameBoxFramework.Runtime.EventPool;
+using GameBoxFramework.EventPool;
 using System.Reflection;
 using UnityEngine;
 

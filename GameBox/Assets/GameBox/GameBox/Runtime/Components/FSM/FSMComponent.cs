@@ -7,7 +7,7 @@
 
 
 
-using GameBoxFramework.Runtime.FSM;
+using GameBoxFramework.FSM;
 using GameBoxFramework;
 using UnityEngine;
 

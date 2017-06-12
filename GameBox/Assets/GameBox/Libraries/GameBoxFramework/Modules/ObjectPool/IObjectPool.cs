@@ -13,7 +13,7 @@ namespace GameBoxFramework.ObjectPool
     /// 对象池接口。
     /// </summary>
     /// <typeparam name="T">对象类型。</typeparam>
-    public interface IObjectPool<T> where T : ObjectBase
+    public interface IObjectPool<T> where T : BaseObject
     {
         /// <summary>
         /// 获取对象池名称。

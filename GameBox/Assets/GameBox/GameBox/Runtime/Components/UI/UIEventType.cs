@@ -10,6 +10,7 @@ namespace GameBox.Runtime.Component
 {
     public enum UIEventType
     {
+        EnterEvent,
         HoverEvent,
         ExitEvent,
         DownEvent,
