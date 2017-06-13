@@ -81,6 +81,21 @@ namespace GameBoxFramework.Utility
         }
 
 
+        public static T[] Copy<T>(T[] t_Target)
+        {
+            if (null== t_Target)
+            {
+                return null;
+            }
+            T[] t_NewTarget = new T[t_Target.Length];
+            for (int i = 0; i < t_Target.Length; i++)
+            {
+                t_NewTarget[i] = t_Target[i];
+            }
+            return t_NewTarget;
+        }
+
+
     }
 
 }

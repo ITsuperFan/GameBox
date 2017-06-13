@@ -5,7 +5,7 @@
 * Website: www.0x69h.com
 */
 
-namespace GameBoxFramework.EventPool
+namespace GameBoxFramework
 {
 
     public delegate void EventHandler(object t_Sender, BaseEventArgs t_EventArgs);

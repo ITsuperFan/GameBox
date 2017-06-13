@@ -5,16 +5,16 @@
 * Website: www.0x69h.com
 */
 
-using GameBoxFramework;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using GameBoxFramework.EventPool;
+using System.Reflection;
+using GameBoxFramework;
 
 namespace GameBox.Runtime.Component
 {
-    using GameBoxFramework.EventPool;
-    using System.Reflection;
+
 
     /// <summary>
     /// UIEventComponent组件
