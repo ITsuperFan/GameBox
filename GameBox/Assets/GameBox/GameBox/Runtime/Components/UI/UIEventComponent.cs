@@ -21,7 +21,8 @@ namespace GameBox.Runtime.Component
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("GameBox/UIEvent")]
-    public sealed class UIEventComponent : BaseGameBoxComponent 
+    [RequireComponent(typeof(GameBoxGraphicRaycaster))]
+    public sealed class UIEventComponent : BaseGameBoxComponent
 	{
         [SerializeField]
         private UIEventArgs m_UIEventData = new UIEventArgs();
@@ -29,12 +30,18 @@ namespace GameBox.Runtime.Component
         /// 实时更新的数据
         /// </summary>
         public UIEventArgs UIEventData { get { return m_UIEventData; }}
-        [SerializeField]
+        //[SerializeField]
         private bool hoverOnceControl; //悬停控制
-        [SerializeField] 
+        //[SerializeField] 
         private bool clickOnceControl; //点击控制
-        [SerializeField] 
+        //[SerializeField] 
         private bool dragOnceControl; //滑动处理
+
+#if (UNITY_ANDROID || UNITY_IPHONE)  && !UNITY_EDITOR
+        private int m_OnPressTouchCount; //在移动端按下的时候的触屏数目
+        private float m_PressRealTime; //按下的时候的实时秒数
+#endif
+
 
         public event EventHandler OnEnterEventHandler; //悬停事件
         public event EventHandler OnHoverEventHandler; //悬停事件
@@ -48,6 +55,7 @@ namespace GameBox.Runtime.Component
         public event EventHandler OnBeginDragEventHandler; //开始滑动事件
         public event EventHandler OnDragEventHandler; //滑动事件
         public event EventHandler OnEndDragEventHandler; //结束滑动事件
+
 
 
         /// <summary>
@@ -76,6 +84,8 @@ namespace GameBox.Runtime.Component
         /// <param name="resultAppendList"></param>
         public void UpdateUIEventData(GameBoxGraphicRaycaster t_Raycaster, PointerEventData t_EventData, List<RaycastResult> t_ResultAppendList)
         {
+            //Debug.Log(t_EventData.ToString());
+
             #region 更新事件参数
             UIEventData.pointerEnter = t_EventData.pointerEnter;
             UIEventData.pointerPress = t_EventData.pointerPress;
@@ -131,6 +141,8 @@ namespace GameBox.Runtime.Component
             #endregion
 
             #region 按键处理
+
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR
             if (null != t_EventData.pointerPress && !clickOnceControl) //按下和点击处理
             {
                 //Debug.Log("按下");
@@ -164,6 +176,58 @@ namespace GameBox.Runtime.Component
                 }
                 clickOnceControl = false;
             }
+#endif
+
+#if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
+
+            if (0<Input.touchCount && null != t_EventData.pointerPress && !clickOnceControl) //屏幕有触摸点 && 按下和点击处理
+            {
+                //Debug.Log("按下");
+                if (null != OnDownEventHandler)
+                {
+                    OnDownEventHandler(t_EventData.pointerPress, UIEventData);
+                }
+                //Debug.Log("点击");
+                if (null != OnClickEventHandler)
+                {
+                    OnClickEventHandler(t_EventData.pointerPress, UIEventData);
+                }
+                m_OnPressTouchCount = Input.touchCount; //按下的那一刻的触屏数目
+                clickOnceControl = true;
+                info1 = "按下" + Time.deltaTime;
+            }
+
+            //按下的时候 可以 其他手指 也可以触摸屏幕
+            if (m_OnPressTouchCount <= Input.touchCount && null != t_EventData.pointerPress) //按住处理
+            {
+                //Debug.Log("按住");
+                if (null != OnPressEventHandler)
+                {
+                    OnPressEventHandler(t_EventData.pointerPress, UIEventData);
+                }
+                info2 = "按住"+Time.deltaTime+"  "+(Time.realtimeSinceStartup - m_PressRealTime);
+                m_PressRealTime = Time.realtimeSinceStartup;
+            }
+
+            if (0.01f<(Time.realtimeSinceStartup - m_PressRealTime) && clickOnceControl) //抬起处理
+            {
+                //Debug.Log("抬起");
+                clickOnceControl = false;
+                info3 = "抬起"+Time.deltaTime;
+                if (null != OnUpEventHandler)
+                {
+                    OnUpEventHandler(UIEventData.lastPress, UIEventData);
+                }
+                UIEventData.lastPress = t_EventData.pointerPress; //保存上一次的按下 刷新
+                m_OnPressTouchCount = 0;
+                
+            }
+
+            info4 = t_EventData.ToString()+"   \n"+Time.deltaTime.ToString();
+
+#endif
+
+
             #endregion
 
             #region 滑动处理
@@ -198,6 +262,7 @@ namespace GameBox.Runtime.Component
             }
             #endregion
 
+            
         }
 
         /// <summary>
@@ -263,6 +328,22 @@ namespace GameBox.Runtime.Component
 
         }
 
+        #if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
+        private string info1;
+        private string info2;
+        private string info3;
+        private string info4;
 
+        private void OnGUI()
+        {
+            GUILayout.Label(UIEventData.ToString());
+            GUILayout.Label("系统触摸数目: " + Input.touchCount);
+            GUILayout.Label("记录触摸数目: " + m_OnPressTouchCount);
+            GUILayout.Label("Debug: " + info1);
+            GUILayout.Label("Debug: " + info2);
+            GUILayout.Label("Debug: " + info3);
+            GUILayout.Label("Debug: " + info4);
+        }
+        #endif
     }
 }

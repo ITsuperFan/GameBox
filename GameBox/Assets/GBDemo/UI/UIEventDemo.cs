@@ -15,36 +15,55 @@ namespace Alan
 {
     public class UIEventDemo : MonoBehaviour
 	{
+        [SerializeField]
+        private Text m_Text;
 
         private void Start()
         {
             GameBoxEntry.GetComponent<UIEventComponent>().Register(this);
         }
 
-        [UIEvent(UIEventType.ClickEvent)]
+        [UIEvent(UIEventType.UpEvent)]
+        private void UIEventDemo_OnClickEventHandler00(GameObject arg1, UIEventArgs arg2)
+        {
+            // m_Cube.transform.localScale = Vector3.one*i++;
+            // m_Cube.name = arg2.lastPress.name;
+            //Debug.Log("所有的按钮名字:  " + arg1.name);
+            //arg1.GetComponent<Graphic>().color = Color.yellow;
+
+            m_Text.text = "UpEvent ：" + arg2.lastPress.name;
+
+            arg1.GetComponent<Graphic>().color = Random.Range(1, 10) > 5 ? Color.yellow : Color.red;
+        }
+
+        [UIEvent(UIEventType.PressEvent)]
         private void UIEventDemo_OnClickEventHandler0(GameObject arg1, UIEventArgs arg2)
         {
-            Debug.Log("所有的按钮名字:  " + arg1.name);
+            m_Text.text = "PressEvent ：" + arg2.pointerPress.name;
+
+            //Debug.Log("所有的按钮名字:  " + arg1.name);
+
         }
+
 
         [UIEvent( UIEventType.ClickEvent,"Scene1_Canvas1_Button_Alan")]
         private void UIEventDemo_OnClickEventHandler1(object arg1, UIEventArgs arg2)
         {
-            Debug.Log("private:  " + arg1);
-            (arg1 as GameObject).GetComponent<Graphic>().color = Color.green;
+            //Debug.Log("private:  " + arg1);
+            //(arg1 as GameObject).GetComponent<Graphic>().color = Color.green;
 
         }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 
         [UIEvent(UIEventType.DragEvent)]
         public void UIEventDemo_OnClickEventHandler2(object arg1, UIEventArgs arg2)
         {
-            Debug.Log("public:  " + arg1);
+            //Debug.Log("public:  " + arg1);
         }
 
         //[UIEvent(UIEventType.PressEvent)]
         protected void UIEventDemo_OnClickEventHandler3(object arg1, UIEventArgs arg2)
         {
-            Debug.Log("protected:  " + arg1);
+            //Debug.Log("protected:  " + arg1);
         }
 
         private void Update()
