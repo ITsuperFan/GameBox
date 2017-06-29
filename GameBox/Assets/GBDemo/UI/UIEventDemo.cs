@@ -23,7 +23,7 @@ namespace Alan
             GameBoxEntry.GetComponent<UIEventComponent>().Register(this);
         }
 
-        [UIEvent(UIEventType.UpEvent)]
+        [UIEvent(UIEventType.UpEvent, "Scene1_Canvas1_Button_Alan")]
         private void UIEventDemo_OnClickEventHandler00(GameObject arg1, UIEventArgs arg2)
         {
             // m_Cube.transform.localScale = Vector3.one*i++;
