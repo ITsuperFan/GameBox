@@ -24,33 +24,23 @@ namespace GameBoxFramework
         /// <summary>
         /// 模块管家初始化
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        void Init(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime);
+        void Init();
         /// <summary>
         /// 模块管家启动
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        void Start(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime);
+        void Start();
         /// <summary>
         /// 模块管家轮询
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        void Update(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime);
+        void Update();
         /// <summary>
         /// 模块管家停止
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        void Stop(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime);
+        void Stop();
         /// <summary>
         /// 模块管家销毁
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        void Destroy(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime);
+        void Destroy();
         /// <summary>
         /// 获取管理的模块
         /// </summary>

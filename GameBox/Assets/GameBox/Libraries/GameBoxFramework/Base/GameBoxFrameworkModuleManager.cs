@@ -102,25 +102,15 @@ namespace GameBoxFramework
         /// <summary>
         /// 模块管家初始化
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public void Init(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Init()
         {
-            //TODO: 模块管家的初始化工作
-            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
-            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
+
         }
         /// <summary>
         /// 模块管家启动
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public void Start(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Start()
         {
-            //TODO: 模块管家的被启动的时候
-            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
-            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
-
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)
             {
@@ -131,14 +121,8 @@ namespace GameBoxFramework
         /// <summary>
         /// 模块管家轮询
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
         public void Update(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
         {
-            //TODO: 模块管家的被轮询的时候
-            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
-            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
-
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)
             {
@@ -149,14 +133,8 @@ namespace GameBoxFramework
         /// <summary>
         /// 模块管家停止
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public void Stop(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Stop()
         {
-            //TODO: 模块管家的被停止的时候
-            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
-            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
-
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)
             {
@@ -167,14 +145,8 @@ namespace GameBoxFramework
         /// <summary>
         /// 模块管家销毁
         /// </summary>
-        /// <param name="t_GameWorldElapsedTime">游戏世界的流逝时间</param>
-        /// <param name="t_RealWorldElapsedTime">真实世界的流逝时间</param>
-        public void Destroy(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Destroy()
         {
-            //TODO: 模块管家的被销毁的时候
-            GameBoxFrameworkTime.GameWorldElapsedTime = t_GameWorldElapsedTime;
-            GameBoxFrameworkTime.RealWorldElapsedTime = t_RealWorldElapsedTime;
-
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)
             {
