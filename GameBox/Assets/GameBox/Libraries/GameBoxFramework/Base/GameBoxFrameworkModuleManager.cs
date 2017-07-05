@@ -40,12 +40,7 @@ namespace GameBoxFramework
                 return 0 < t_ModuleArray.Length ? t_ModuleNames : null;
             }
         }
-        /// <summary>
-        /// 默认构造方法
-        /// </summary>
-        public GameBoxFrameworkModuleManager():base()
-        {
-        }
+
         /// <summary>
         /// 初始化 IListDataStructure 接口的构造方法
         /// </summary>
@@ -121,7 +116,7 @@ namespace GameBoxFramework
         /// <summary>
         /// 模块管家轮询
         /// </summary>
-        public void Update(float t_GameWorldElapsedTime, float t_RealWorldElapsedTime)
+        public void Update()
         {
             var t_ModuleArray = IListDataStructure.ToArray();
             for (int i = 0; i < t_ModuleArray.Length; i++)

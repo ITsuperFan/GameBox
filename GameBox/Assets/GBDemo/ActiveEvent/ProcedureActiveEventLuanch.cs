@@ -5,7 +5,7 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
+
 using GameBox.Runtime.Component;
 using GameBoxFramework.FSM;
 using GameBoxFramework.Procedure;
@@ -13,6 +13,8 @@ using GameBoxFramework.Procedure;
 
 namespace Alan
 {
+    using GameBox;
+
     public sealed class ProcedureActiveEventLuanch : BaseProcedure
     {
 
@@ -28,7 +30,7 @@ namespace Alan
         protected override void ProcedureInit(IFSM t_StateOwner)
         {
             UnityEngine.Debug.Log("ProcedureActiveEventLuanch ProcedureInit");
-            GameBoxEntry.GetComponent<ActiveEventComponent>().LoadActiveEventAssembly(typeof(ActiveEventHandler)); //装载有效事件程序集
+            GameBox.GetComponent<ActiveEventComponent>().LoadActiveEventAssembly(typeof(ActiveEventHandler)); //装载有效事件程序集
         }
 
         protected override void ProcedureEnter(IFSM t_StateOwner)

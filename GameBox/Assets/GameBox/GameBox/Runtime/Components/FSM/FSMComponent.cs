@@ -25,7 +25,7 @@ namespace GameBox.Runtime.Component
         {
             base.Awake();
 
-            m_IFSMManager = GameBoxEntry.GetBuiltInModule<IFSMManager>();
+            m_IFSMManager = GameBox.App.Driver.GetModule<IFSMManager>();
             if (null==m_IFSMManager)
             {
                throw new GameBoxFrameworkException("IFSMManager是无效的.");

@@ -109,7 +109,7 @@ namespace GameBox.Editor
         /// </summary>
         private void RefreshTypeNames()
         {
-            m_ProcedureTypeNames = TypeHelper.GetTypeNames(typeof(BaseProcedure));
+            m_ProcedureTypeNames = TypeHelper.GetTypeFullNames(typeof(BaseProcedure));
             ReadAvailableProcedureTypeNames();
 
             int oldCount = m_CurrentAvailableProcedureTypeNames.Count;

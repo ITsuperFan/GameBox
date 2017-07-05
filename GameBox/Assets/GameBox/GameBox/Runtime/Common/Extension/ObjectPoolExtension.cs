@@ -24,7 +24,7 @@ namespace GameBox.Extension
         /// </summary>
         static ObjectPoolExtension()
         {
-            ObjectPoolComponent = GameBoxEntry.GetComponent<ObjectPoolComponent>();
+            ObjectPoolComponent = GameBox.App.ComponentManager.GetComponent<ObjectPoolComponent>();
         }
 
         /// <summary>

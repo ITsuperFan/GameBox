@@ -21,7 +21,7 @@ namespace GameBox.Extension
         /// <returns>BuiltInModule</returns>
         public static T GetBuiltInModule<T>(this GameObject t_T) where T : class
         {
-            return GameBoxEntry.GetBuiltInModule<T>();
+            return GameBox.App.Driver.GetModule<T>();
         }
 
         /// <summary>

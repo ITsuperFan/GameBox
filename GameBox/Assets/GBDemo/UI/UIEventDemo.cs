@@ -5,7 +5,6 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
 using GameBox.Runtime.Component;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,6 +12,7 @@ using UnityEngine.UI;
 
 namespace Alan
 {
+    using GameBox;
     public class UIEventDemo : MonoBehaviour
 	{
         [SerializeField]
@@ -20,7 +20,7 @@ namespace Alan
 
         private void Start()
         {
-            GameBoxEntry.GetComponent<UIEventComponent>().Register(this);
+            GameBox.GetComponent<UIEventComponent>().Register(this);
         }
 
         [UIEvent(UIEventType.UpEvent, "Scene1_Canvas1_Button_Alan")]

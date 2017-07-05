@@ -26,7 +26,7 @@ namespace GameBox.Runtime.Component
         {
             base.Start();
 
-            UIEventComponent[] t_UIEventComponents = GameBoxEntry.GetComponents<UIEventComponent>();
+            UIEventComponent[] t_UIEventComponents = GameBox.App.ComponentManager.GetComponents<UIEventComponent>();
             if (null== t_UIEventComponents)
             {
                 throw new GameBoxFrameworkException("场景必须要有UIEventComponent组件.");

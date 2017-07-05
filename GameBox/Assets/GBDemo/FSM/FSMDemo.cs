@@ -5,15 +5,13 @@
 * Website: www.0x69h.com
 */
 
-using UnityEngine;
-using GameBoxFramework.FSM;
-using GameBoxFramework;
-using GameBox;
 using GameBox.Runtime.Component;
-using System.Collections;
+using GameBoxFramework.FSM;
+using UnityEngine;
 
 namespace Alan
 {
+    using GameBox;
     public class FSMDemo : MonoBehaviour 
 	{
         private FSMComponent m_FSMManager;
@@ -23,7 +21,7 @@ namespace Alan
         {
             //  yield return new WaitForSeconds(2f);
 
-            m_FSMManager = GameBoxEntry.GetComponent<FSMComponent>(); //获取状态机管家组件
+            m_FSMManager = GameBox.GetComponent<FSMComponent>(); //获取状态机管家组件
             m_IFSM = m_FSMManager.CreateFSM("Demo"); //创建一个状态机
             m_IFSM.AddState<StateOne>();
             m_IFSM.AddState(typeof(StateTwo));

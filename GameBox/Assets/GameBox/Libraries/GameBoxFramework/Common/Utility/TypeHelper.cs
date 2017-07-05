@@ -21,7 +21,7 @@ namespace GameBoxFramework.Utility
         /// </summary>
         /// <param name="t_TypeBase">基类类型。</param>
         /// <returns>指定基类的所有子类的名称。</returns>
-        public static string[] GetTypeNames(System.Type t_TypeBase)
+        public static string[] GetTypeFullNames(System.Type t_TypeBase)
         {
             List<string> t_TypeNames = new List<string>();
 
@@ -47,5 +47,43 @@ namespace GameBoxFramework.Utility
 
             return t_TypeNames.ToArray();
         }
+
+        /// <summary>
+        /// 获取指定基类的所有子类的名称
+        /// </summary>
+        /// <typeparam name="T">基类类型</typeparam>
+        /// <returns>指定基类的所有子类的名称</returns>
+        public static string[] GetTypeFullNames<T>()
+        {
+            return GetTypeFullNames(typeof(T));
+        }
+
+        /// <summary>
+        /// 获取指定基类的所有子类的名称。
+        /// </summary>
+        /// <param name="t_TypeBase">基类类型。</param>
+        /// <returns>指定基类的所有子类的名称。</returns>
+        public static string[] GetTypeNames(System.Type t_TypeBase)
+        {
+            var t_FullNames = GetTypeFullNames(t_TypeBase);
+            for (int i = 0; i < t_FullNames.Length; i++)
+            {
+                var t_Splits = t_FullNames[i].Split('.');
+                t_FullNames[i] = t_Splits[t_Splits.Length-1];
+            }
+
+            return t_FullNames;
+        }
+       
+        /// <summary>
+        /// 获取指定基类的所有子类的名称
+        /// </summary>
+        /// <typeparam name="T">基类类型</typeparam>
+        /// <returns>指定基类的所有子类的名称</returns>
+        public static string[] GetTypeNames<T>()
+        {
+            return GetTypeNames(typeof(T));
+        }
+
     }
 }

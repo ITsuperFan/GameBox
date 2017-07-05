@@ -30,7 +30,7 @@ namespace GameBox.Runtime.Component
         {
             base.Awake();
 
-            m_ObjectPoolManager = GameBoxEntry.GetBuiltInModule<IObjectPoolManager>();
+            m_ObjectPoolManager = GameBox.App.Driver.GetModule<IObjectPoolManager>();
             if (m_ObjectPoolManager == null)
             {
                 throw new GameBoxFrameworkException("IObjectPoolManager是无效的.");
@@ -45,7 +45,7 @@ namespace GameBox.Runtime.Component
         {
             get
             {
-                return m_ObjectPoolManager.Count;
+                return null==m_ObjectPoolManager ?0:m_ObjectPoolManager.Count;
             }
         }
 
@@ -106,7 +106,7 @@ namespace GameBox.Runtime.Component
         /// <returns>所有对象池。</returns>
         public BaseObjectPool[] GetAllObjectPools(bool sort)
         {
-            return m_ObjectPoolManager.GetAllObjectPools(sort);
+            return null==m_ObjectPoolManager?null:m_ObjectPoolManager.GetAllObjectPools(sort);
         }
 
         /// <summary>

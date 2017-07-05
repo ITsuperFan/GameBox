@@ -59,7 +59,7 @@ namespace GameBox.Runtime.Component
         {
             base.Awake();
 
-            m_IProcedureManager = GameBoxEntry.GetBuiltInModule<IProcedureManager>();
+            m_IProcedureManager = GameBox.App.Driver.GetModule<IProcedureManager>();
             if (null==m_IProcedureManager)
             {
                 throw new GameBoxFrameworkException("IProcedureManager是无效的.");

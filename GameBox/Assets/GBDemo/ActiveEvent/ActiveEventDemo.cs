@@ -5,25 +5,25 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
+
 using GameBox.Runtime.Component;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameBoxFramework
+namespace Alan
 {
+    using GameBox;
     public class ActiveEventDemo : MonoBehaviour 
 	{
         [SerializeField]
         private Button m_Button;
 
 
-        private void Awake()
+        private void Start()
         {
+            GameBox.GetComponent<ActiveEventComponent>().LoadActiveEventAssembly<ActiveEventHandler>();
             m_Button.onClick.AddListener(()=> {
-
-                GameBoxEntry.GetComponent<ActiveEventComponent>().CallActiveEvent("有效事件方法名",m_Button.gameObject,m_Button.GetComponent<Image>(), m_Button.GetComponentInChildren<Text>());
-
+                GameBox.GetComponent<ActiveEventComponent>().CallActiveEvent("有效事件方法名",m_Button.gameObject,m_Button.GetComponent<Image>(), m_Button.GetComponentInChildren<Text>());
             });
 
         }

@@ -2,15 +2,15 @@
 
 namespace GameBox.Editor
 {
-    [CustomEditor(typeof(GameBoxDriver))]
+    [CustomEditor(typeof(GameBoxMain))]
     internal sealed class GameBoxDriverEditor : BaseGameBoxEditor
     {
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            GameBoxDriver t = (GameBoxDriver)target;
-            EditorGUILayout.LabelField("GameBox Version",GameBoxEntry.Version);
+            GameBoxMain t = (GameBoxMain)target;
+            EditorGUILayout.LabelField("GameBox Version",GameBox.Version);
         }
 
         private void OnEnable()

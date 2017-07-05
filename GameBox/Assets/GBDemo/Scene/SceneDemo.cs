@@ -5,16 +5,14 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
 using GameBox.Runtime.Component;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Alan
 {
-	public class SceneDemo : MonoBehaviour 
+    using GameBox;
+    public class SceneDemo : MonoBehaviour 
 	{
         [SerializeField]
         private Text m_TextProcess;
@@ -24,7 +22,7 @@ namespace Alan
         private void Start()
         {
 
-            m_SceneComponent =  GameBoxEntry.GetComponent<SceneComponent>();
+            m_SceneComponent =  GameBox.GetComponent<SceneComponent>();
             m_SceneComponent.Register(this);
             m_SceneComponent.LoadUpdateEventHandler += (o, e) => { m_TextProcess.text = (e as SceneEventArgs).SceneName + " : " + (e as SceneEventArgs).Process; };
         }

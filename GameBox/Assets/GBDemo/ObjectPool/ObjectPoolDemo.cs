@@ -5,7 +5,6 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
 using GameBox.Extension;
 using GameBox.Runtime.Component;
 using GameBoxFramework.ObjectPool;
@@ -13,6 +12,7 @@ using UnityEngine;
 
 namespace Alan
 {
+    using GameBox;
     public class ObjectPoolDemo : MonoBehaviour 
 	{
         /// <summary>
@@ -36,7 +36,7 @@ namespace Alan
 
         private void Start()
         {
-            m_ObjectPoolComponent = GameBoxEntry.GetComponent<ObjectPoolComponent>();
+            m_ObjectPoolComponent = GameBox.GetComponent<ObjectPoolComponent>();
             m_IObjectPoo01 = m_ObjectPoolComponent.CreateSingleSpawnObjectPool<OPDemo>("对象池01");
             m_IObjectPoo02 = m_ObjectPoolComponent.CreateSingleSpawnObjectPool<OPDemo>("对象池02", 10  , 1);
 

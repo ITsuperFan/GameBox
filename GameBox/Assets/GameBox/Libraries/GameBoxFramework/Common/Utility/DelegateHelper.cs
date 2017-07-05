@@ -30,7 +30,7 @@ namespace GameBoxFramework
                 throw new GameBoxFrameworkException("MethodInfo类型参数为空!");
             Type delegateType;
             var typeArgs = t_MethodInfo.GetParameters().Select(p => p.ParameterType).ToList();
-            // builds a delegate type     
+            // 创建一个Delegate类型   
             if (t_MethodInfo.ReturnType == typeof(void))
             {
                 delegateType = Expression.GetActionType(typeArgs.ToArray());
@@ -40,7 +40,7 @@ namespace GameBoxFramework
                 typeArgs.Add(t_MethodInfo.ReturnType);
                 delegateType = Expression.GetFuncType(typeArgs.ToArray());
             }
-            // creates a binded delegate if target is supplied     
+            // 创建一个Delegate类型，如果目标是可支持的
             var result = (t_Target == null) ?
                 Delegate.CreateDelegate(delegateType, t_MethodInfo) :
                 Delegate.CreateDelegate(delegateType, t_Target, t_MethodInfo);

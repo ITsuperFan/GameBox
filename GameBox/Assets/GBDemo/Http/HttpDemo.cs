@@ -5,23 +5,24 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
+
 using GameBox.Runtime.Component;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace GameBoxFramework
+namespace Alan
 {
-	internal sealed class HttpDemo : MonoBehaviour 
+    using GameBox;
+    internal sealed class HttpDemo : MonoBehaviour 
 	{
         private HttpComponent m_HttpComponent;
 
         private void Start()
         {
 
-            m_HttpComponent = GameBoxEntry.GetComponent<HttpComponent>();
+            m_HttpComponent = GameBox.GetComponent<HttpComponent>();
             m_HttpComponent.Register(this);
 
         }

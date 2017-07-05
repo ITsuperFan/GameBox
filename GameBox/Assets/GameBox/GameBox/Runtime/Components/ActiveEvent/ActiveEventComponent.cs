@@ -9,12 +9,15 @@ using GameBoxFramework;
 using GameBoxFramework.Event;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameBox.Runtime.Component
 {
     /// <summary>
-    /// 有效事件管家
+    /// 有效事件
     /// </summary>
+    [DisallowMultipleComponent]
+    [AddComponentMenu("GameBox/ActiveEvent")]
     public sealed class ActiveEventComponent : BaseGameBoxComponent
     {
         private IActiveEventManager m_ActiveEventManager  = null;
@@ -44,7 +47,7 @@ namespace GameBox.Runtime.Component
         protected override void Awake()
         {
             base.Awake();
-            m_ActiveEventManager = GameBoxEntry.GetBuiltInModule<IActiveEventManager>();
+            m_ActiveEventManager = GameBox.App.Driver.GetModule<IActiveEventManager>();
 
             if (m_ActiveEventManager == null)
             {

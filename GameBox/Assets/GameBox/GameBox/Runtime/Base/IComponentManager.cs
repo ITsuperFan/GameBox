@@ -6,20 +6,19 @@
 */
 using System;
 
-namespace GameBox
+namespace GameBoxFramework
 {
 	public interface IComponentManager
     {
         /// <summary>
         /// 组件被注册事件
         /// </summary>
-        event Action<ComponentRegisteredEventArgs> ComponentRegisteredEventHandler;
+        event EventHandler<ComponentRegisteredEventArgs> ComponentRegisteredEventHandler;
 
         /// <summary>
         /// 组件被销毁事件
         /// </summary>
-        event Action<ComponentDestroyedEventArgs> ComponentDestroyedEventHandler;
-
+        event EventHandler<ComponentDestroyedEventArgs> ComponentDestroyedEventHandler;
 
         /// <summary>
         /// 管理的模块数量
@@ -36,35 +35,35 @@ namespace GameBox
         /// </summary>
         /// <typeparam name="T">GameBox的组件类型</typeparam>
         /// <returns>返回GamBox的组件</returns>
-        T GetComponent<T>()where T:BaseGameBoxComponent;
+        T GetComponent<T>()where T:IComponent;
 
         /// <summary>
         /// 获取GameBox的组件数组
         /// </summary>
         /// <typeparam name="T">GameBox的组件类型</typeparam>
         /// <returns>返回GamBox的组件数组</returns>
-        T[] GetComponents<T>() where T : BaseGameBoxComponent;
+        T[] GetComponents<T>() where T : IComponent;
 
         /// <summary>
         /// 注册GameBox的组件
         /// </summary>
         /// <typeparam name="T">GameBox的组件类型</typeparam>
         /// <returns>返回GamBox的组件</returns>
-        void RegisterComponent(BaseGameBoxComponent t_BaseGameBoxComponent);
+        void RegisterComponent(IComponent t_BaseGameBoxComponent);
 
         /// <summary>
         /// 销毁指定的所有GameBox的组件
         /// </summary>
         /// <typeparam name="T">GameBox的组件类型</typeparam>
         /// <returns>返回GamBox的组件</returns>
-        void DestroyComponents<T>() where T : BaseGameBoxComponent;
+        void DestroyComponents<T>() where T : IComponent;
 
         /// <summary>
         /// 销毁指定的GameBox的组件
         /// </summary>
         /// <typeparam name="T">GameBox的组件类型</typeparam>
         /// <returns>返回GamBox的组件</returns>
-        void DestroyComponent(BaseGameBoxComponent t_BaseGameBoxComponent);
+        void DestroyComponent(IComponent t_BaseGameBoxComponent);
     }
 
 }

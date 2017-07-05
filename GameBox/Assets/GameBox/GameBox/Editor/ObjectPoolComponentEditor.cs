@@ -29,6 +29,7 @@ namespace GameBox.Editor
                 EditorGUILayout.LabelField("Object Pool Count", t.Count.ToString());
 
                 BaseObjectPool[] objectPools = t.GetAllObjectPools(true);
+                if(null!= objectPools)
                 foreach (BaseObjectPool objectPool in objectPools)
                 {
                     DrawObjectPool(objectPool);

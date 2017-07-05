@@ -6,17 +6,16 @@
 */
 
 
-using GameBoxFramework;
 
 
-namespace GameBox
+namespace GameBoxFramework
 {
     /// <summary>
     /// 组件被注册事件参数
     /// </summary>
-	public class ComponentDestroyedEventArgs : BaseEventArgs 
+	public class ComponentRegisteredEventArgs : BaseEventArgs 
 	{
-		public BaseGameBoxComponent GameBoxComponent;
+		public IComponent Component;
 
     }
 }

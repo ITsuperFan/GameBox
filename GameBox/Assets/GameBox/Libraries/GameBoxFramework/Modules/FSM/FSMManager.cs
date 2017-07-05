@@ -12,7 +12,7 @@ namespace GameBoxFramework.FSM
     /// <summary>
     /// 状态机模块
     /// </summary>
-    public sealed class FSMManager : BaseModule, IFSMManager, IFSMOwner
+    internal sealed class FSMManager : BaseModule, IFSMManager, IFSMOwner
     {
         /// <summary>
         /// 抽象数据结构类型

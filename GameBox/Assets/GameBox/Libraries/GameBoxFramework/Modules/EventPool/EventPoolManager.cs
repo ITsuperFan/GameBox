@@ -13,7 +13,7 @@ namespace GameBoxFramework.EventPool
     /// <summary>
     /// 事件池管家
     /// </summary>
-    public sealed class EventPoolManager : BaseModule, IEventPoolManager
+    internal sealed class EventPoolManager : BaseModule, IEventPoolManager
     {
         /// <summary>
         /// 事件池管家

@@ -27,7 +27,7 @@ namespace GameBox.Runtime.Component
         protected override void Awake()
         {
             base.Awake();
-            m_IEventPoolManager = GameBoxEntry.GetBuiltInModule<IEventPoolManager>();
+            m_IEventPoolManager = GameBox.App.Driver.GetModule<IEventPoolManager>();
             if (null==m_IEventPoolManager)
             {
                 throw new GameBoxFrameworkException("IEventPoolManager是无效的！");

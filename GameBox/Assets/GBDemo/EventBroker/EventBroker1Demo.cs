@@ -10,10 +10,12 @@ using GameBox.Runtime.Component;
 using GameBoxFramework;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using GameBox;
+
 
 namespace Alan
 {
+    using GameBox;
+
     public class EventBroker1Demo : MonoBehaviour 
 	{
         [EventPublication("topic://DemoTopic")]
@@ -21,7 +23,7 @@ namespace Alan
 
         private void Start()
         {
-            GameBoxEntry.GetComponent<EventBrokerComponent>().Register(this);
+            GameBox.GetComponent<EventBrokerComponent>().Register(this);
             
         }
 
@@ -37,7 +39,7 @@ namespace Alan
 
             if (GUILayout.Button("Click to Fire the event by EventBrokerComponent."))
             {
-                GameBoxEntry.GetComponent<EventBrokerComponent>().PublishTopicNow("topic://DemoTopic", UnityEngine.GameObject.CreatePrimitive( PrimitiveType.Cube ),null);
+                GameBox.GetComponent<EventBrokerComponent>().PublishTopicNow("topic://DemoTopic", UnityEngine.GameObject.CreatePrimitive( PrimitiveType.Cube ),null);
             }
 
         }

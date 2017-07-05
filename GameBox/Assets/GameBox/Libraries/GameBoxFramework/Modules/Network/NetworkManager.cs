@@ -9,7 +9,10 @@ using System.Net.Sockets;
 
 namespace GameBoxFramework.Network
 {
-    public sealed class NetworkManager : BaseModule,INetworkManager
+    /// <summary>
+    /// 网络模块
+    /// </summary>
+    internal sealed class NetworkManager : BaseModule,INetworkManager
     {
         /// <summary>
         /// 网络消息事件

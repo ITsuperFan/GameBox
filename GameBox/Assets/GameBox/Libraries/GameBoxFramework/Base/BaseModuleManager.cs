@@ -17,12 +17,6 @@ namespace GameBoxFramework
         /// 抽象数据结构类型
         /// </summary>
         protected readonly IListDataStructure<BaseModule> IListDataStructure;
-        /// <summary>
-        /// 默认构造方法
-        /// </summary>
-        public BaseModuleManager():this(new GameBoxFrameworkSLinkedList())
-        {
-        }
 
         /// <summary>
         /// 初始化 IListDataStructure 接口的构造方法

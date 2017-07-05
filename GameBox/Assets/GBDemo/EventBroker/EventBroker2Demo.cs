@@ -5,20 +5,21 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
+
 using GameBox.Runtime.Component;
 using GameBoxFramework;
 using UnityEngine;
 
 namespace Alan
 {
+    using GameBox;
     public class EventBroker2Demo : MonoBehaviour 
 	{
 
 
         private void Start()
         {
-            GameBoxEntry.GetComponent<EventBrokerComponent>().Register(this);
+            GameBox.GetComponent<EventBrokerComponent>().Register(this);
             
         }
 

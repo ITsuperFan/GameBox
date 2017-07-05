@@ -14,7 +14,7 @@ namespace GameBoxFramework.Event
     /// <summary>
     /// 有效事件模块实现类
     /// </summary>
-    public sealed class ActiveEventManager :BaseModule , IActiveEventManager
+    internal sealed class ActiveEventManager :BaseModule , IActiveEventManager
     {
         /// <summary>
         /// 抽象数据结构类型

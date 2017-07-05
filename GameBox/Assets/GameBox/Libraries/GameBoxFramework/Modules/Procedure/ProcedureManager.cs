@@ -12,7 +12,7 @@ namespace GameBoxFramework.Procedure
     /// <summary>
     /// 流程模块
     /// </summary>
-    public sealed class ProcedureManager :BaseModule ,IProcedureManager,IFSMOwner
+    internal sealed class ProcedureManager :BaseModule ,IProcedureManager,IFSMOwner
     {
 
         #region 变量和属性

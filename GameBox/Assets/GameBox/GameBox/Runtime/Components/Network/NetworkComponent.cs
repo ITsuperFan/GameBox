@@ -53,13 +53,13 @@ namespace GameBox.Runtime.Component
         {
             base.Awake();
 
-            m_INetworkManager = GameBoxEntry.GetBuiltInModule<INetworkManager>();
+            m_INetworkManager = GameBox.App.Driver.GetModule<INetworkManager>();
             if (null == m_INetworkManager)
             {
                 throw new GameBoxFrameworkException("INetworkManager是无效的！");
             }
 
-            m_IEventPoolManager = GameBoxEntry.GetBuiltInModule<IEventPoolManager>();
+            m_IEventPoolManager = GameBox.App.Driver.GetModule<IEventPoolManager>();
             if (null == m_IEventPoolManager)
             {
                 throw new GameBoxFrameworkException("IEventPoolManager是无效的！");

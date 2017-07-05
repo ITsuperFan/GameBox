@@ -5,18 +5,19 @@
 * Website: www.0x69h.com
 */
 
-
+using System;
 using GameBoxFramework;
-
 
 namespace GameBox
 {
     /// <summary>
-    /// 组件被注册事件参数
+    /// 自检程序
     /// </summary>
-	public class ComponentRegisteredEventArgs : BaseEventArgs 
-	{
-		public BaseGameBoxComponent GameBoxComponent;
-
+	public sealed class GameBoxInspector : BaseInspector
+    {
+        protected internal override void OnInspector()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

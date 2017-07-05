@@ -5,6 +5,7 @@
 * Website: www.0x69h.com
 */
 using System;
+using GameBoxFramework;
 using UnityEngine;
 
 namespace GameBox
@@ -12,21 +13,21 @@ namespace GameBox
     /// <summary>
     /// GameBox基础组件
     /// </summary>
-	public abstract class BaseGameBoxComponent : MonoBehaviour , IComparable<BaseGameBoxComponent>
+	public abstract class BaseGameBoxComponent : MonoBehaviour , IComponent
     {
         /// <summary>
         /// 模块的权值
         /// </summary>
-        public int Weight { get; protected internal set; }
+        public int Weight { get; set; }
 
         /// <summary>
         /// 比较接口
         /// </summary>
         /// <param name="other">其他的模块</param>
         /// <returns>比较后的结果</returns>
-        public int CompareTo(BaseGameBoxComponent other)
+        public int CompareTo(IComponent other)
         {
-           return this.Weight - other.Weight; //自身模块的权重 - 需要进行比较的模块的权重        
+            return this.Weight - other.Weight; //自身模块的权重 - 需要进行比较的模块的权重  
         }
 
 
@@ -38,7 +39,7 @@ namespace GameBox
         protected virtual void Awake()
         {
             //基础组件初始化时的操作
-            GameBoxEntry.RegisterComponent(this);
+            GameBox.App.ComponentManager.RegisterComponent(this);
 
         }
 
@@ -48,7 +49,7 @@ namespace GameBox
         protected virtual void OnDestroy()
         {
             //基础组件销毁时的操作
-            GameBoxEntry.DestroyComponent(this);
+            GameBox.App.ComponentManager.DestroyComponent(this);
         }
 
         #endregion

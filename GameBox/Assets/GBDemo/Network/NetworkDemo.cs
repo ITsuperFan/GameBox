@@ -5,7 +5,6 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
 using GameBox.Runtime.Component;
 using GameBoxFramework.Network;
 using System.Text;
@@ -14,6 +13,7 @@ using UnityEngine;
 
 namespace Alan
 {
+    using GameBox;
     public sealed class NetworkDemo : MonoBehaviour 
 	{
         private NetworkComponent m_NetworkComponent; //网络组件
@@ -24,7 +24,7 @@ namespace Alan
 
         private void Start()
         {
-            m_NetworkComponent = GameBoxEntry.GetComponent<NetworkComponent>();
+            m_NetworkComponent = GameBox.GetComponent<NetworkComponent>();
             m_UDPServer = m_NetworkComponent.CreateNetwork<UDPServer>("服务端", "127.0.0.1", 6666);
             m_UDPClient01 = m_NetworkComponent.CreateNetwork<UDPClient>("客户端01", "127.0.0.1", 6666);
             m_UDPClient02 = m_NetworkComponent.CreateNetwork<UDPClient>("客户端02", "127.0.0.1", 6666);

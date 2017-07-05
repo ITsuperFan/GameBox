@@ -15,21 +15,13 @@ namespace GameBox
         /// <summary>
         /// 抽象数据结构类型
         /// </summary>
-        protected readonly IListDataStructure<BaseGameBoxComponent> IListDataStructure;
-
-        /// <summary>
-        /// 默认构造方法
-        /// </summary>
-        public BaseComponentManager():this(new ComponentManagerSLinkedList())
-        {
-
-        }
+        protected readonly IListDataStructure<IComponent> IListDataStructure;
 
         /// <summary>
         /// 初始化数据结构类型的构造方法
         /// </summary>
         /// <param name="t_IListDataStructure"></param>
-        public BaseComponentManager(IListDataStructure<BaseGameBoxComponent> t_IListDataStructure)
+        public BaseComponentManager(IListDataStructure<IComponent> t_IListDataStructure)
         {
             IListDataStructure = t_IListDataStructure;
         }

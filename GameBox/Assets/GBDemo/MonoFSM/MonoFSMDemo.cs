@@ -5,14 +5,14 @@
 * Website: www.0x69h.com
 */
 
-using GameBox;
+
 using GameBox.Runtime.Component;
 using UnityEngine;
 
 
 namespace Alan
 {
-
+    using GameBox;
     public enum MonoFSMDemoState
     {
 
@@ -31,7 +31,7 @@ namespace Alan
         private void Start()
         {
 
-            m_IMonoFSM =   GameBoxEntry.GetComponent<MonoFSMComponent>().CreateMonoFSM<MonoFSMDemoState>(this);
+            m_IMonoFSM =   GameBox.GetComponent<MonoFSMComponent>().CreateMonoFSM<MonoFSMDemoState>(this);
 
         }
 
