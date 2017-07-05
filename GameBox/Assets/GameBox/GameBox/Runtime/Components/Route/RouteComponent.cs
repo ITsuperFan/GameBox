@@ -15,7 +15,7 @@ using GameBoxFramework.Route;
 namespace GameBox.Runtime.Component
 {
     /// <summary>
-    /// 流程管家组件
+    /// 路由组件
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("GameBox/Route")]
@@ -25,41 +25,30 @@ namespace GameBox.Runtime.Component
         /// <summary>
         /// 流程管家接口
         /// </summary>
-        private IRouteManager m_IProcedureManager;
+        private IRouteManager m_IRouteManager;
 
-
-        public void AddProcedure<T>() where T : BaseProcedure
+        /// <summary>
+        /// 路由
+        /// </summary>
+        /// <param name="t_Action">路由动作</param>
+        /// <param name="t_Request">路由请求</param>
+        /// <param name="t_Handler">路由响应回调</param>
+        public void Route(string t_Action, BaseEventArgs t_Request = null, Action<object> t_Handler = null)
         {
-            if (null!= m_IProcedureManager)
-            {
-                m_IProcedureManager.AddProcedure<T>();
-            }
+            m_IRouteManager.Route(t_Action,t_Request,t_Handler);
         }
 
-        public void RemoveProcedure<T>() where T : BaseProcedure
-        {
-            if (null != m_IProcedureManager)
-            {
-                m_IProcedureManager.RemoveProcedure<T>();
-            }
-        }
-
+        //初始化组件
         protected override void Awake()
         {
             base.Awake();
 
-            m_IProcedureManager = GameBox.App.Driver.GetModule<IProcedureManager>();
-            if (null==m_IProcedureManager)
+            m_IRouteManager = GameBox.App.Driver.GetModule<IRouteManager>();
+            if (null== m_IRouteManager)
             {
-                throw new GameBoxFrameworkException("IProcedureManager是无效的.");
+                throw new GameBoxFrameworkException("IRouteManager是无效的.");
             }
 
-            for (int i = 0; i < m_AvailableProcedureTypeNames.Length; i++)
-            {
-                m_IProcedureManager.AddProcedure(Type.GetType(m_AvailableProcedureTypeNames[i]));
-            }
-            
-            m_IProcedureManager.BootProcedure = m_IProcedureManager.GetProcedure(Type.GetType(m_BootProcedureTypeName));
         }
 
       

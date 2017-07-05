@@ -17,58 +17,69 @@ namespace GameBoxFramework.Route
     /// </summary>
 	internal sealed class RouteManager : BaseModule, IRouteManager
     {
-        private readonly RouteTrieMap<string, Delegate> m_RouteTrieMap = new RouteTrieMap<string, Delegate>();
 
+        #region 变量和属性
+        /// <summary>
+        /// 路由管理数据结构
+        /// </summary>
+        private readonly RouteTrieMap<string, Delegate> RouteIListDataStructure = new RouteTrieMap<string, Delegate>();
+
+
+
+        /// <summary>
+        /// 控制器类和控制器具体方法的分割符
+        /// </summary>
         private const string m_RouteSeparator = "@";
+        #endregion
 
         #region 私有方法
-                /// <summary>
-                /// 注册路由
-                /// </summary>
-                /// <param name="t_Action"></param>
-                /// <param name="t_Delegate"></param>
-                private void RegisterRoute(string t_Action , Delegate t_Delegate)
+        /// <summary>
+        /// 注册路由
+        /// </summary>
+        /// <param name="t_Action"></param>
+        /// <param name="t_Delegate"></param>
+        private void RegisterRoute(string t_Action , Delegate t_Delegate)
+        {
+            if (!RouteIListDataStructure.ContainsKey(t_Action))
+            {
+                RouteIListDataStructure.Add(t_Action,t_Delegate);
+            }
+        }
+
+        private void RegisterRoute(string t_TypeName, object t_Target)
+        {
+            if (null == t_Target) return; //如果为空，那么直接返回
+
+            var t_Type = t_Target.GetType();
+            var t_TypeCustomAttributes = t_Type.GetCustomAttributes(false);
+            for (int i = 0; i < t_TypeCustomAttributes.Length; i++)
+            {
+                if (t_TypeCustomAttributes[i] is RouteInvalidAttribute) return; //如果这个类也标记了无效路由，那么将直接退出，不反射它
+            }
+
+            var t_Methods = t_Type.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public| BindingFlags.DeclaredOnly);
+            for (int i = 0; i < t_Methods.Length; i++)
+            {
+                var t_MethodCustomAttributes = t_Methods[i].GetCustomAttributes(false);
+                bool t_IsRouteInvalidA=false;
+                for (int j = 0; j < t_MethodCustomAttributes.Length; j++)
                 {
-                    if (!m_RouteTrieMap.ContainsKey(t_Action))
+                    if (t_MethodCustomAttributes[j] is RouteInvalidAttribute)
                     {
-                        m_RouteTrieMap.Add(t_Action,t_Delegate);
-                    }
+                        t_IsRouteInvalidA = true;
+                        break; //如果标记了无效路由，那么就不注册此记录
+                    } 
                 }
-
-                private void RegisterRoute(string t_TypeName, object t_Target)
-                {
-                    var t_Type = t_Target.GetType();
-                    var t_TypeCustomAttributes = t_Type.GetCustomAttributes(false);
-                    for (int i = 0; i < t_TypeCustomAttributes.Length; i++)
-                    {
-                        if (t_TypeCustomAttributes[i] is RouteInvalidAttribute) return; //如果这个类也标记了无效路由，那么将直接退出，不反射它
-                    }
-
-                    var t_Methods = t_Type.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public| BindingFlags.DeclaredOnly);
-                    for (int i = 0; i < t_Methods.Length; i++)
-                    {
-                        var t_MethodCustomAttributes = t_Methods[i].GetCustomAttributes(false);
-                        bool t_IsRouteInvalidA=false;
-                        for (int j = 0; j < t_MethodCustomAttributes.Length; j++)
-                        {
-                            if (t_MethodCustomAttributes[j] is RouteInvalidAttribute)
-                            {
-                                t_IsRouteInvalidA = true;
-                                break; //如果标记了无效路由，那么就不注册此记录
-                            } 
-                        }
 
                 if (!t_IsRouteInvalidA) //如果没有无效路由标记 ， 那么添加此路由记录
                 {
                     //UnityEngine.Debug.Log(t_TypeName + m_RouteSeparator + t_Methods[i].Name);
                     RegisterRoute(t_TypeName + m_RouteSeparator + t_Methods[i].Name, DelegateHelper.CreateDelegate(t_Methods[i], t_Target));
                 }
+             }
+        }
 
-
-            }
-                }
-
-                #endregion
+        #endregion
 
         #region 公开方法
         /// <summary>
@@ -88,6 +99,7 @@ namespace GameBoxFramework.Route
         {
             RegisterRoute(t_Target.GetType().Name, t_Target);
         }
+
         /// <summary>
         /// 路由
         /// </summary>
@@ -96,10 +108,10 @@ namespace GameBoxFramework.Route
         /// <param name="t_Handler">路由响应回调</param>
         public void Route(string t_Action, BaseEventArgs t_Request = null, Action<object> t_Handler = null)
         {
-            if (m_RouteTrieMap.ContainsKey(t_Action))
+            if (RouteIListDataStructure.ContainsKey(t_Action))
             {
                 Delegate t_Delegate;
-                m_RouteTrieMap.TryGetValue(t_Action,out t_Delegate);
+                RouteIListDataStructure.TryGetValue(t_Action,out t_Delegate);
                 var t_Parameters = t_Delegate.Method.GetParameters();
                 if (null != t_Delegate)
                 if (1== t_Parameters.Length)
@@ -129,7 +141,6 @@ namespace GameBoxFramework.Route
 
         }
         #endregion
-
 
         #region 模块生命周期
 
@@ -163,5 +174,6 @@ namespace GameBoxFramework.Route
         }
 
         #endregion
+
     }
 }

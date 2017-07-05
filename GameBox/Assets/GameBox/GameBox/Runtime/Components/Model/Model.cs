@@ -5,15 +5,17 @@
 * Website: www.0x69h.com
 */
 
+using GameBoxFramework.Model;
 
-namespace GameBoxFramework.Route
+
+namespace GameBox.Runtime.Component
 {
     /// <summary>
-    /// 路由
+    ///  抽象基础数据模型类
     /// </summary>
-	public sealed class Route : BaseEventArgs
+    public abstract class Model : BaseModel 
 	{
-
+		
 
 	}
 }

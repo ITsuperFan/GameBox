@@ -16,7 +16,7 @@ namespace GameBox.Runtime.Component
     /// <summary>
     /// 有效事件
     /// </summary>
-    [DisallowMultipleComponent]
+    //[DisallowMultipleComponent]
     [AddComponentMenu("GameBox/ActiveEvent")]
     public sealed class ActiveEventComponent : BaseGameBoxComponent
     {

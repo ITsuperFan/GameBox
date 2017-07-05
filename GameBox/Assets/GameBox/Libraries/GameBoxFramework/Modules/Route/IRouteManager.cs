@@ -26,9 +26,15 @@ namespace GameBoxFramework.Route
         /// <summary>
         /// 注册某个类型的有效路由
         /// </summary>
-        /// <param name="t_Action"></param>
-        /// <param name="t_Type"></param>
+        /// <param name="t_Type">路由目标类Type类型</param>
         void RegisterRoute(Type t_Type);
+
+        /// <summary>
+        /// 注册某个类型的有效路由
+        /// </summary>
+        /// <param name="t_Target">路由目标类基础实例引用</param>
         void RegisterRoute(object t_Target);
+
+     
     }
 }
