@@ -18,18 +18,18 @@ namespace GameBox
 	{
         #region Components
 
-        public static UIEventComponent UIEventComponent = GetComponent<UIEventComponent>();
-        public static ActiveEventComponent ActiveEventComponent = GetComponent<ActiveEventComponent>();
-        public static EventBrokerComponent EventBrokerComponent = GetComponent<EventBrokerComponent>();
-        public static FSMComponent FSMComponent = GetComponent<FSMComponent>();
-        public static HttpComponent HttpComponent = GetComponent<HttpComponent>();
-        public static ModelComponent ModelComponent = GetComponent<ModelComponent>();
-        public static MonoFSMComponent MonoFSMComponent = GetComponent<MonoFSMComponent>();
-        public static NetworkComponent NetworkComponent = GetComponent<NetworkComponent>();
-        public static ObjectPoolComponent ObjectPoolComponent = GetComponent<ObjectPoolComponent>();
-        public static ProcedureComponent ProcedureComponent = GetComponent<ProcedureComponent>();
-        public static RouteComponent RouteComponent = GetComponent<RouteComponent>();
-        public static SceneComponent SceneComponent = GetComponent<SceneComponent>();
+        public static UIEventComponent UIEventComponent { get; private set; }
+        public static ActiveEventComponent ActiveEventComponent { get; private set; }
+        public static EventBrokerComponent EventBrokerComponent { get; private set; }
+        public static FSMComponent FSMComponent { get; private set; }
+        public static HttpComponent HttpComponent { get; private set; }
+        public static ModelComponent ModelComponent { get; private set; }
+        public static MonoFSMComponent MonoFSMComponent { get; private set; }
+        public static NetworkComponent NetworkComponent { get; private set; }
+        public static ObjectPoolComponent ObjectPoolComponent { get; private set; }
+        public static ProcedureComponent ProcedureComponent { get; private set; }
+        public static RouteComponent RouteComponent { get; private set; }
+        public static SceneComponent SceneComponent { get; private set; }
 
         #endregion
 
@@ -41,7 +41,7 @@ namespace GameBox
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-            public static T GetBuiltInModule<T>() where T : class
+        public static T GetBuiltInModule<T>() where T : class
             {
                 return null == App ? default(T) : App.Driver.GetModule<T>();
             }
@@ -76,6 +76,8 @@ namespace GameBox
             {
                 if (null != RouteComponent)
                     RouteComponent.Route(t_Action,t_Request,t_Handler);
+                else
+                    RouteComponent = GetComponent<RouteComponent>();
             }
 
         #endregion
