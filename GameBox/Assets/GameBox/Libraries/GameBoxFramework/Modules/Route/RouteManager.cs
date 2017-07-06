@@ -30,6 +30,31 @@ namespace GameBoxFramework.Route
         /// 控制器类和控制器具体方法的分割符
         /// </summary>
         private const string m_RouteSeparator = "@";
+
+        /// <summary>
+        /// 路由数目
+        /// </summary>
+        public int RoutesCount
+        {
+            get
+            {
+                return RouteIListDataStructure.Count;
+            }
+        }
+
+        /// <summary>
+        /// 路由数组
+        /// </summary>
+        public string[] RouteNames { get {
+                if (0 == RouteIListDataStructure.Count) return null;
+                var t_RouteKeyValue = RouteIListDataStructure.ToArray();
+                string[] t_RouteNames = new string[t_RouteKeyValue.Length];
+                for (int i = 0; i < t_RouteKeyValue.Length; i++)
+                {
+                    t_RouteNames[i] = t_RouteKeyValue[i].Key;
+                }
+                return t_RouteNames;
+            } }
         #endregion
 
         #region 私有方法

@@ -16,6 +16,16 @@ namespace GameBoxFramework.Route
 	public interface IRouteManager 
 	{
         /// <summary>
+        /// 路由数目
+        /// </summary>
+        int RoutesCount { get; }
+
+        /// <summary>
+        /// 路由名字数组
+        /// </summary>
+        string[] RouteNames { get; }
+
+        /// <summary>
         /// 路由
         /// </summary>
         /// <param name="t_Action">路由动作</param>

@@ -67,6 +67,9 @@ namespace Alan
         }
     }
 
+    [ModelInvalid]
+    internal class MyModelForBoxLook : Model { }
+
     internal class MyController : Controller
     {
         private int DDD(BaseEventArgs a)
@@ -126,6 +129,17 @@ namespace Alan
 
                     });
             }
+
+            if (GUILayout.Button("移除MyModel模型"))
+            {
+                GameBox.GetBuiltInModule<IModelManager>().RemoveModel<MyModel>();
+            }
+
+            if (GUILayout.Button("添加MyModel模型"))
+            {
+                GameBox.GetBuiltInModule<IModelManager>().GetModel<MyModel>();
+            }
+
         }
     }
 }

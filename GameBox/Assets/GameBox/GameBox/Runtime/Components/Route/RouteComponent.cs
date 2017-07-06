@@ -6,18 +6,16 @@
 */
 
 
-using System;
 using GameBoxFramework;
-using GameBoxFramework.Procedure;
-using UnityEngine;
 using GameBoxFramework.Route;
+using System;
+using UnityEngine;
 
 namespace GameBox.Runtime.Component
 {
     /// <summary>
     /// 路由组件
     /// </summary>
-    [DisallowMultipleComponent]
     [AddComponentMenu("GameBox/Route")]
     public sealed class RouteComponent : BaseGameBoxComponent
     {
@@ -26,6 +24,22 @@ namespace GameBox.Runtime.Component
         /// 流程管家接口
         /// </summary>
         private IRouteManager m_IRouteManager;
+
+        /// <summary>
+        /// 路由数目
+        /// </summary>
+        public int RoutesCount
+        {
+            get
+            {
+                return null == m_IRouteManager ? 0 : m_IRouteManager.RoutesCount;
+            }
+        }
+
+        /// <summary>
+        /// 路由数组
+        /// </summary>
+        public string[] RouteNames { get { return null == m_IRouteManager ? null : m_IRouteManager.RouteNames; } }
 
         /// <summary>
         /// 路由

@@ -490,7 +490,6 @@ namespace GameBoxFramework.FSM
             IConditionMapDataStructure.Foreach((key,value)=> {
                 if (value.OnConditionLoop(this))
                 {
-                    UnityEngine.Debug.Log(value.StateType);
                     if(null!= value.StateType)
                         ChangeState(value.StateType);
                 }

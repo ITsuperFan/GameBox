@@ -12,6 +12,10 @@ using UnityEngine;
 
 namespace GameBox.Runtime.Component
 {
+    /// <summary>
+    /// 场景管家组件
+    /// </summary>
+    [AddComponentMenu("GameBox/Scene")]
     public sealed class SceneComponent : BaseGameBoxComponent
     {
         [SerializeField]
